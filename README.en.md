@@ -8,7 +8,7 @@
 >
 > 🌐 **Live site:** [ai-rank.org](https://ai-rank.org) (2-minute diagnostic, free)
 
-![THE AI RANK OG Image](./og-image.png)
+![THE AI RANK OG Image](./assets/og-image.png)
 
 ![License](https://img.shields.io/badge/license-MIT-8B2514)
 ![Status](https://img.shields.io/badge/status-live-brightgreen)
@@ -61,9 +61,9 @@ From bottom to top:
 | **III**  | **THE BOT BUILDER**    | Bakes own workflow into GPTs / Gems / Projects | GPTs / Gems / Claude Projects |
 | **IV**   | **THE ARTIFACTOR**     | Ships shareable mini-apps ★ **First goal for non-engineers** | Claude Artifacts / Canvas / Lovable / v0 |
 | **V**    | **THE VIBE CODER**     | Builds internal tools & small external apps in natural language | Cursor / Claude Code / Lovable / Bolt |
-| **VI**   | **THE AUTOMATOR**      | Runs 24/7 automated workflows ★ **Realistic ceiling for non-engineers** | Dify / n8n / Make / Zapier / MCP |
+| **VI**   | **THE AUTOMATOR**      | Runs 24/7 automated workflows ★ **Realistic ceiling for non-engineers** | Dify / n8n / Make / Zapier / Claude Code / MCP |
 | **VII**  | **THE AGENT MASTER**   | Delegates business-scale tasks to agent fleets | Claude Code / Codex / Managed Agents / MCP |
-| **VIII** | **THE AI ALCHEMIST**   | Converts AI into actual revenue ★ **Commercial summit** | Stripe / Vercel / custom LLM APIs |
+| **VIII** | **THE AI ALCHEMIST**   | Converts AI into actual revenue ★ **Commercial summit** | AWS / GCP / Azure / Stripe / Vercel / custom LLM APIs / fine-tuning |
 | **IX**   | **THE SINGULARIAN**    | AI runs the company itself, including revenue | AGI-class models / custom inference stack |
 
 Full descriptions are also at [ai-rank.org](https://ai-rank.org).
@@ -259,11 +259,13 @@ Full descriptions are also at [ai-rank.org](https://ai-rank.org).
 
 **Concrete tasks**
 - Ship your own AI-native SaaS with Stripe — **real paying users**
+- Design and operate production infrastructure on **AWS / GCP / Azure** (IAM, VPC, cost optimization all owned end-to-end)
+- Run custom-model inference in production on **Bedrock / Vertex AI / Azure OpenAI** or private fine-tuning platforms
 - Build the **core business system** of your company in an AI-driven way — employees / customers use it daily
 - Run a small **AI Lab** (human + AI hybrid) — launch multiple products concurrently
 - Own the full **branding / UX / customer support** of the product
 
-**Deliverables:** AI-native SaaS with standing MRR ($1k–$100k+/month) / AI systems running as internal core infrastructure / portfolio of products (total followers, downloads, revenue) / products chosen because they're **valuable**, not because they're "AI" / industry presence (talks, media, inbound work)
+**Deliverables:** AI-native SaaS with standing MRR ($1k–$100k+/month) / AI systems running as internal core infrastructure on hyperscaler clouds with real SLAs / portfolio of products (total followers, downloads, revenue) / products chosen because they're **valuable**, not because they're "AI" / industry presence (talks, media, inbound work)
 
 **What's required**
 - The will to **"finish the thing and put it into the world"** — translating Lv.VII technical muscle into actual product
@@ -406,10 +408,12 @@ the-ai-rank/
 ├── robots.txt
 ├── sitemap.xml
 ├── site.webmanifest
-├── og-image.png           # Default OG / Twitter card (1200×630)
-├── favicon.ico / .svg / -32.png
-├── apple-touch-icon.png
-├── icon-192.png / -512.png / -512-maskable.png
+│
+├── assets/                # Image assets (all consolidated here)
+│   ├── og-image.png       #   Default OG / Twitter card (1200×630)
+│   ├── favicon.ico / .svg / -32.png
+│   ├── apple-touch-icon.png
+│   └── icon-192.png / -512.png / -512-maskable.png
 │
 ├── api/                   # Vercel Serverless Functions
 │   ├── _supabase.js       #   Supabase client (service_role key)

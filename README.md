@@ -8,7 +8,7 @@
 >
 > 🌐 **Live site:** [ai-rank.org](https://ai-rank.org) （約 2 分で診断・無料）
 
-![THE AI RANK OG Image](./og-image.png)
+![THE AI RANK OG Image](./assets/og-image.png)
 
 ![License](https://img.shields.io/badge/license-MIT-8B2514)
 ![Status](https://img.shields.io/badge/status-live-brightgreen)
@@ -65,9 +65,9 @@ THE AI RANK は、この **"AI 熟達度"** を誰でも共通言語で語れる
 | **III** | **ボットビルダー** / Bot Builder          | GPTs 等で自分の業務を固定化 | GPTs / Gems / Claude Projects |
 | **IV**  | **アーティファクター** / Artifactor       | Claude Artifacts 等で公開アプリを作る ★**非エンジニアの第一ゴール** | Claude Artifacts / Canvas / Lovable / v0 |
 | **V**   | **バイブコーダー** / Vibe Coder           | 社内本番ツールを自然言語で作る | Cursor / Claude Code / Lovable / Bolt |
-| **VI**  | **オートメーター** / Automator            | 業務を 24 時間自動稼働させる ★**非エンジニアの到達ライン** | Dify / n8n / Make / Zapier / MCP |
+| **VI**  | **オートメーター** / Automator            | 業務を 24 時間自動稼働させる ★**非エンジニアの到達ライン** | Dify / n8n / Make / Zapier / Claude Code / MCP |
 | **VII** | **エージェントマスター** / Agent Master    | 事業タスクを AI に委譲 | Claude Code / Codex / Managed Agents / MCP |
-| **VIII**| **AI アルケミスト** / AI Alchemist        | AI プロダクトで現実に収益化 ★**商業的本丸** | Stripe / Vercel / 独自 LLM API |
+| **VIII**| **AI アルケミスト** / AI Alchemist        | AI プロダクトで現実に収益化 ★**商業的本丸** | AWS / GCP / Azure / Stripe / Vercel / 各社 LLM API・Fine-tuning |
 | **IX**  | **シンギュラリアン** / Singularian         | AI が会社そのものを運営 | AGI 級モデル / 独自推論基盤 |
 
 各段階の詳細は [ai-rank.org](https://ai-rank.org) でも読めます。
@@ -263,11 +263,13 @@ THE AI RANK は、この **"AI 熟達度"** を誰でも共通言語で語れる
 
 **具体的なタスク**
 - 独自 AI-native SaaS をローンチし、**Stripe 等で決済、有料ユーザーを獲得**
+- **AWS / GCP / Azure** 等のハイパースケーラー上で本番環境を設計・運用（IAM・VPC・コスト最適化まで掌握）
+- **Bedrock / Vertex AI / Azure OpenAI** や各社 Fine-tuning 基盤で独自モデル推論を本番稼働
 - 自社の**基幹業務システム**を AI 駆動で構築、社員／顧客が日常利用
 - AI Lab（小規模・人間＋ AI ハイブリッド）で**複数プロダクトを並行ローンチ**
 - プロダクトの**ブランディング・UX・カスタマーサポート**までを設計
 
-**成果物**：MRR が立っている AI-native SaaS（月商 10 万〜数千万円）／社内基幹として稼働する AI システム／複数プロダクトのポートフォリオ／「AI だから」ではなく「価値があるから」選ばれる完成度のプロダクト
+**成果物**：MRR が立っている AI-native SaaS（月商 10 万〜数千万円）／社内基幹として稼働する AI システム（クラウド上で SLA 担保）／複数プロダクトのポートフォリオ／「AI だから」ではなく「価値があるから」選ばれる完成度のプロダクト
 
 **求められるもの**
 - 「完成させて世に出す」意志（Lv.VII までの技術力を、プロダクトに翻訳する）
@@ -412,10 +414,12 @@ the-ai-rank/
 ├── robots.txt
 ├── sitemap.xml
 ├── site.webmanifest
-├── og-image.png           # デフォルト OG 画像（1200×630）
-├── favicon.ico / .svg / -32.png
-├── apple-touch-icon.png
-├── icon-192.png / -512.png / -512-maskable.png
+│
+├── assets/                # 画像アセット（すべてここに集約）
+│   ├── og-image.png       #   デフォルト OG 画像（1200×630）
+│   ├── favicon.ico / .svg / -32.png
+│   ├── apple-touch-icon.png
+│   └── icon-192.png / -512.png / -512-maskable.png
 │
 ├── api/                   # Vercel Serverless Functions
 │   ├── _supabase.js       #   Supabase クライアント（service_role キー利用）

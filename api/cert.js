@@ -68,7 +68,7 @@ export default function handler(req, res) {
 <meta name="twitter:description" content="${escapeHtml(pageDesc)}" />
 <meta name="twitter:image" content="${ogImage}" />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 
 <style>
   body {

@@ -4,7 +4,15 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/c", "destination": "/api/cert" },
-    { "source": "/c/:rank", "destination": "/api/cert?rank=:rank" }
+    { "source": "/c/:rank", "destination": "/api/cert?rank=:rank" },
+    { "source": "/favicon.ico", "destination": "/assets/favicon.ico" },
+    { "source": "/favicon.svg", "destination": "/assets/favicon.svg" },
+    { "source": "/favicon-32.png", "destination": "/assets/favicon-32.png" },
+    { "source": "/apple-touch-icon.png", "destination": "/assets/apple-touch-icon.png" },
+    { "source": "/icon-192.png", "destination": "/assets/icon-192.png" },
+    { "source": "/icon-512.png", "destination": "/assets/icon-512.png" },
+    { "source": "/icon-512-maskable.png", "destination": "/assets/icon-512-maskable.png" },
+    { "source": "/og-image.png", "destination": "/assets/og-image.png" }
   ],
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
@@ -41,10 +49,16 @@
       ]
     },
     {
-      "source": "/og-image.png",
+      "source": "/assets/og-image.png",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=604800" },
         { "key": "Cross-Origin-Resource-Policy", "value": "cross-origin" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)\\.(png|svg|ico)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=604800" }
       ]
     },
     {
