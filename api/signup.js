@@ -122,13 +122,40 @@ export default async function handler(req, res) {
     if (name.length > MAX_NAME) return res.status(400).json({ error: "name too long" });
     if (!EMAIL_RE.test(email)) return res.status(400).json({ error: "valid email is required" });
     if (email.length > MAX_EMAIL) return res.status(400).json({ error: "email too long" });
+    if (!company) return res.status(400).json({ error: "company is required" });
     if (company.length > MAX_COMPANY) return res.status(400).json({ error: "company too long" });
 
-    // Reject suspicious email domains (e.g. tempmail common sites)
+    // Reject disposable / throwaway email domains.
+    // Expanded list covering common providers + their common subdomain variants.
     const lowerEmail = email.toLowerCase();
-    const suspiciousDomains = ["mailinator.com", "10minutemail.com", "guerrillamail.com", "tempmail.com", "throwaway.email"];
-    if (suspiciousDomains.some((d) => lowerEmail.endsWith("@" + d))) {
-      console.warn("[AIRANK:temp_mail]", email);
+    const emailDomainPart = lowerEmail.split("@")[1] || "";
+    const disposableDomains = new Set([
+      // mailinator family
+      "mailinator.com", "mailinator.net", "mailinator2.com", "mailinator2.net",
+      // 10minutemail family
+      "10minutemail.com", "10minutemail.net", "20minutemail.com",
+      // tempmail family
+      "tempmail.com", "tempmail.net", "tempmail.org", "tempmail.plus", "temp-mail.org", "temp-mail.io",
+      // guerrilla
+      "guerrillamail.com", "guerrillamail.net", "guerrillamail.org", "grr.la", "sharklasers.com",
+      // yopmail
+      "yopmail.com", "yopmail.net", "yopmail.fr", "cool.fr.nf", "jetable.fr.nf",
+      // throwaway
+      "throwaway.email", "trashmail.com", "throwawaymail.com", "fakeinbox.com",
+      // getnada
+      "getnada.com", "nada.email", "inboxbear.com",
+      // dropmail / others
+      "dropmail.me", "emailondeck.com", "maildrop.cc", "moakt.com",
+      "mailcatch.com", "mailnesia.com", "harakirimail.com",
+      "mohmal.com", "emailfake.com", "mintemail.com", "mytemp.email",
+      "spambox.us", "trbvm.com", "spambog.com",
+      // burner / disposable
+      "burnermail.io", "anonaddy.me", "simplelogin.co",
+      // mail.tm
+      "mail.tm", "linuxmail.org",
+    ]);
+    if (disposableDomains.has(emailDomainPart)) {
+      console.warn("[AIRANK:temp_mail]", emailDomainPart);
       return res.status(400).json({ error: "disposable email addresses are not allowed" });
     }
 

@@ -441,7 +441,12 @@ function el(tag, attrs = {}, ...children) {
     setActive(QUESTIONS.length);
   });
 
-  function isAuthed() { return !!localStorage.getItem("airank:auth"); }
+  function isAuthed() {
+    try {
+      const s = JSON.parse(localStorage.getItem("airank:auth") || "null");
+      return !!(s && s.name && s.email && s.company);
+    } catch (e) { return false; }
+  }
   function doShareX() {
     const lvlEn = $("#certTitleEn")?.textContent || "";
     const lvlJa = $("#certTitleJa")?.textContent || "";
@@ -525,7 +530,7 @@ function closeModal() {
     if (saved.company && companyI) companyI.value = saved.company;
   } catch (e) {}
 
-  function completeAuth(data) {
+  async function completeAuth(data) {
     // Strip hp (honeypot) from persisted payload — we only send it to the API
     const { hp, ...rest } = data;
     const payload = {
@@ -537,18 +542,42 @@ function closeModal() {
       url: location.href,
       ua: navigator.userAgent,
     };
-    // 1) Local storage (always)
-    localStorage.setItem("airank:auth", JSON.stringify(payload));
-    // 2) Remote webhook (if configured)
+
+    // 1) Submit to backend first — do NOT set auth until the server confirms.
     if (SIGNUP_WEBHOOK) {
-      fetch(SIGNUP_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        mode: "cors",
-        keepalive: true,
-      }).catch(() => {});
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        const resp = await fetch(SIGNUP_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          mode: "cors",
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          if (resp.status === 429) {
+            toast("しばらくお待ちください");
+          } else if (err.error) {
+            toast(err.error);
+          } else {
+            toast("登録に失敗しました。再度お試しください");
+          }
+          return false;
+        }
+      } catch (e) {
+        toast(e.name === "AbortError" ? "タイムアウトしました" : "通信エラーが発生しました");
+        return false;
+      }
     }
+
+    // 2) Persist locally (strip hp — honeypot never touches storage)
+    const { hp: _hp, ua: _ua, referrer: _ref, ...persistable } = payload;
+    localStorage.setItem("airank:auth", JSON.stringify(persistable));
+
+    // 3) Proceed with the intended action
     const intent = modal.dataset.intent;
     closeModal();
     toast(`ようこそ · ${data.name || data.email}`);
@@ -557,9 +586,10 @@ function closeModal() {
       else if (intent === "share-li") window.__airank_share.doShareLinkedIn();
       else if (intent === "download") window.__airank_share.doDownload();
     }, 500);
+    return true;
   }
 
-  form?.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = (nameI?.value || "").trim();
     const email = (emailI?.value || "").trim();
@@ -567,7 +597,93 @@ function closeModal() {
     const hp = (document.getElementById("hp")?.value || "").trim();
     if (!name) { toast("氏名を入力してください"); nameI?.focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { toast("有効なメールアドレスを入力してください"); emailI?.focus(); return; }
-    completeAuth({ name, email, company, hp });
+    if (!company) { toast("会社名を入力してください"); companyI?.focus(); return; }
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      await completeAuth({ name, email, company, hp });
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   5b. ENTERPRISE INQUIRY MODAL
+   ═══════════════════════════════════════════ */
+(function enterpriseWiring() {
+  const modal = document.getElementById("enterpriseModal");
+  if (!modal) return;
+
+  function openEnt() {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => modal.querySelector("#entCompany")?.focus(), 80);
+  }
+  function closeEnt() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("openEnterpriseForm")?.addEventListener("click", openEnt);
+  modal.addEventListener("click", (e) => { if (e.target.closest("[data-close-ent]")) closeEnt(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeEnt(); });
+
+  const form = document.getElementById("enterpriseForm");
+  const $$ = (id) => document.getElementById(id);
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const company = ($$("entCompany")?.value || "").trim();
+    const contact_name = ($$("entContactName")?.value || "").trim();
+    const email = ($$("entEmail")?.value || "").trim();
+    const employee_count = $$("entEmployeeCount")?.value || "";
+    const budget_range = $$("entBudget")?.value || "";
+    const timeline = $$("entTimeline")?.value || "";
+    const message = ($$("entMessage")?.value || "").trim();
+    const hp = ($$("entHp")?.value || "").trim();
+
+    if (!company) { toast("会社名を入力してください"); $$("entCompany")?.focus(); return; }
+    if (!contact_name) { toast("担当者名を入力してください"); $$("entContactName")?.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { toast("有効なメールアドレスを入力してください"); $$("entEmail")?.focus(); return; }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "送信中..."; }
+
+    const payload = {
+      company, contact_name, email,
+      employee_count: employee_count || null,
+      budget_range: budget_range || null,
+      timeline: timeline || null,
+      message: message || null,
+      hp,
+      at: Date.now(),
+      url: location.href,
+      referrer: document.referrer || "",
+      ua: navigator.userAgent,
+    };
+
+    try {
+      const resp = await fetch("/api/enterprise", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (!resp.ok) {
+        toast(data.error === "Too many requests" ? "しばらくお待ちください" : "送信に失敗しました。再度お試しください");
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<span>送信する</span><span class="mono">→</span>'; }
+        return;
+      }
+      closeEnt();
+      toast("お問い合わせを受け付けました。3営業日以内にご連絡します。");
+      form.reset();
+    } catch (err) {
+      toast("通信エラーが発生しました");
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<span>送信する</span><span class="mono">→</span>'; }
+    }
   });
 })();
 

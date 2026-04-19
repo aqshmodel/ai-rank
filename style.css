@@ -1472,6 +1472,33 @@ strong { font-weight: 600; color: var(--ink); }
 .auth-form input:focus { border-color: var(--accent); background: var(--highlight); }
 .auth-form .auth-btn { margin-top: 6px; }
 
+/* Required asterisk + select + textarea + two-column row for enterprise form */
+.auth-field .req { color: var(--accent); margin-left: 4px; }
+.auth-form select,
+.auth-form textarea {
+  display: block; width: 100%; padding: 12px 14px;
+  border: 1px solid var(--ink); background: var(--paper);
+  font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  outline: none; border-radius: 0;
+  transition: border-color 0.3s, background 0.3s;
+  appearance: none; -webkit-appearance: none;
+}
+.auth-form select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+.auth-form textarea { resize: vertical; min-height: 84px; font-family: var(--font-body); }
+.auth-form select:focus,
+.auth-form textarea:focus { border-color: var(--accent); background: var(--highlight); }
+
+.auth-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .auth-row-2 { grid-template-columns: 1fr; } }
+
+.modal-panel-wide { max-width: 640px; }
+
 .modal-legal { margin-top: 24px; line-height: 1.7; text-align: left; }
 
 /* ═══════════════════════════════════════════════════════════
