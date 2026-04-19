@@ -441,8 +441,21 @@ strong { font-weight: 600; color: var(--ink); }
 .tier-name, .tier-ja { white-space: nowrap; }
 
 /* Hide Japanese on narrowest tiers to keep single-line layout */
+.tier[data-rank="7"] .tier-ja,
 .tier[data-rank="8"] .tier-ja,
 .tier[data-rank="9"] .tier-ja { display: none; }
+
+/* Tight layout for narrow top tiers so English always fits */
+.tier[data-rank="7"],
+.tier[data-rank="8"],
+.tier[data-rank="9"] { padding: 12px 14px; }
+.tier[data-rank="7"] .tier-num,
+.tier[data-rank="8"] .tier-num,
+.tier[data-rank="9"] .tier-num { min-width: 36px; }
+.tier[data-rank="7"] .tier-inner,
+.tier[data-rank="8"] .tier-inner,
+.tier[data-rank="9"] .tier-inner { gap: 10px; }
+.tier[data-rank="9"] .tier-name { font-size: clamp(12px, 1.25vw, 16px); }
 .tier:hover::before { transform: translateX(0); }
 .tier:hover .tier-inner { color: var(--paper); }
 .tier:hover .tier-ja { color: var(--brass-soft); }
