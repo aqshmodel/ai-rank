@@ -16,7 +16,7 @@
 
 THE AI RANK は、この **"AI 熟達度"** を誰でも共通言語で語れるように設計した、9 段階の格付けシステムです。
 
-- **発案・監修**：[茶圓 将裕 (Masahiro Chaen)](https://x.com/masahirochaen) / [DigiRise, Inc.](https://digirise.ai)
+- **発案・監修**：[CHAEN](https://x.com/masahirochaen)（個人プロジェクト）
 - **リリース**：2026 年 4 月
 - **ライセンス**：MIT（格付け思想・コード共に）
 - **ゴール**：このリポジトリで議論を集め、**「最強の世界共通 AI 格付けランク」** へ育てる
@@ -157,7 +157,7 @@ vercel --prod
 - 個別研修プログラム
 - 役員向けエグゼクティブサマリー
 
-先行お問い合わせ：[contact@ai-rank.jp](mailto:contact@ai-rank.jp)
+先行お問い合わせ：[X の @masahirochaen](https://x.com/masahirochaen) へ DM でご連絡ください。
 
 ---
 
@@ -173,17 +173,14 @@ MIT License — コピー・改変・商用利用すべて自由。
 
 - 🌐 **ウェブサイト**：https://ai-rank.org
 - 🐦 **X (Twitter)**：[@masahirochaen](https://x.com/masahirochaen)
-- 🏢 **運営**：[DigiRise, Inc.](https://digirise.ai)
+- 👤 **発案**：CHAEN（個人プロジェクト）
 
 ---
 
 ## 🙏 謝辞
 
-- デジライズ社内 AI 評価基準
-- DeNA「DARS」AI 人材評価指標
-- 岸アンナ氏「AK LINE」クリエイター格付け
-
-これらの先達に学びながら、2026 年の AI 時代に合わせて再設計しました。
+AI 時代の 2026 年に合わせて、個人の視点から再設計しました。
+既存の AI 関連スキル評価指標やクリエイター格付けなどの概念にインスパイアされています。
 
 ---
 
