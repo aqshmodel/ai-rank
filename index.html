@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300..700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=20260419-6" />
+  <link rel="stylesheet" href="style.css?v=20260419-7" />
 </head>
 <body data-current-level="00">
 
@@ -50,7 +50,7 @@
   <!-- ─── running masthead ─── -->
   <header class="masthead" role="banner">
     <div class="masthead-col left">
-      <span class="mono small">AI 格付けランク · by CHAEN</span>
+      <span class="mono small" data-i18n="masthead.brand">AI 格付けランク · by CHAEN</span>
     </div>
     <div class="masthead-col center">
       <span class="mono small">THE · AI · RANK</span>
@@ -58,10 +58,21 @@
       <span class="mono small">MMXXVI EDITION</span>
     </div>
     <div class="masthead-col right">
-      <span class="mono small dim">CURRENT FOLIO</span>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="ja" aria-pressed="true">JP</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
       <span class="mono small folio" id="folioDisplay">00 / IX</span>
     </div>
   </header>
+
+  <!-- Persistent language toggle (floating on hero / mobile) -->
+  <div class="lang-switch-float" role="group" aria-label="Language">
+    <button type="button" class="lang-btn" data-lang="ja" aria-pressed="true">JP</button>
+    <span class="lang-sep">/</span>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+  </div>
 
   <!-- ─── HERO ─── -->
   <section class="hero" id="hero">
@@ -71,9 +82,9 @@
     </div>
 
     <div class="hero-top-meta">
-      <span class="mono">AN OFFICIAL CLASSIFICATION</span>
+      <span class="mono" data-i18n="hero.kicker1">AN OFFICIAL CLASSIFICATION</span>
       <span class="hairline"></span>
-      <span class="mono">EST. TOKYO / 2026</span>
+      <span class="mono" data-i18n="hero.kicker2">EST. TOKYO / 2026</span>
     </div>
 
     <h1 class="masthead-title" aria-label="THE AI RANK">
@@ -83,55 +94,55 @@
     </h1>
 
     <div class="hero-sub">
-      <p class="sub-ja">— <em>AI 格付けランク</em> · by CHAEN —</p>
-      <p class="sub-en mono">THE AI RANK — A 9-LEVEL CLASSIFICATION BY CHAEN</p>
+      <p class="sub-ja" data-i18n-html="hero.sub1">— <em>AI 格付けランク</em> · by CHAEN —</p>
+      <p class="sub-en mono" data-i18n="hero.sub2">THE AI RANK — A 9-LEVEL CLASSIFICATION BY CHAEN</p>
     </div>
 
     <div class="hero-stat">
       <div class="stat-col">
         <span class="stat-big">IX</span>
-        <span class="stat-label mono">LEVELS</span>
+        <span class="stat-label mono" data-i18n="stat.levels">LEVELS</span>
       </div>
       <div class="stat-col">
         <span class="stat-big">I → IX</span>
-        <span class="stat-label mono">BEGINNER → SINGULARIAN</span>
+        <span class="stat-label mono" data-i18n="stat.range">BEGINNER → SINGULARIAN</span>
       </div>
       <div class="stat-col">
         <span class="stat-big">01</span>
-        <span class="stat-label mono">VOLUME · EDITION</span>
+        <span class="stat-label mono" data-i18n="stat.vol">VOLUME · EDITION</span>
       </div>
     </div>
 
     <div class="hero-ctas">
       <a href="#diagnosis" class="hero-cta primary">
         <span class="mono">▸</span>
-        <span>診 断 を 始 め る</span>
-        <span class="hero-cta-sub mono small">START DIAGNOSIS — FREE</span>
+        <span data-i18n="cta.diagnose">診 断 を 始 め る</span>
+        <span class="hero-cta-sub mono small" data-i18n="cta.diagnose.sub">START DIAGNOSIS — FREE</span>
       </a>
       <a href="#pyramid" class="hero-cta ghost">
         <span class="mono">▾</span>
-        <span>全 体 像 を 見 る</span>
-        <span class="hero-cta-sub mono small">SEE THE PYRAMID</span>
+        <span data-i18n="cta.pyramid">全 体 像 を 見 る</span>
+        <span class="hero-cta-sub mono small" data-i18n="cta.pyramid.sub">SEE THE PYRAMID</span>
       </a>
     </div>
 
     <nav class="hero-scroll">
-      <span class="mono">SCROLL TO ENTER</span>
+      <span class="mono" data-i18n="hero.scroll">SCROLL TO ENTER</span>
       <span class="vertical-line"></span>
-      <span class="mono small dim">09 CHAPTERS · 1 PYRAMID · 10 QUESTIONS</span>
+      <span class="mono small dim" data-i18n="hero.scroll.sub">09 CHAPTERS · 1 PYRAMID · 10 QUESTIONS</span>
     </nav>
   </section>
 
   <!-- ─── PYRAMID / OVERVIEW ─── -->
   <section class="pyramid-section" id="pyramid">
     <div class="chapter-marker">
-      <span class="mono">—— THE PYRAMID ——</span>
-      <span class="mono dim">全 体 像</span>
+      <span class="mono" data-i18n="pyr.marker1">—— THE PYRAMID ——</span>
+      <span class="mono dim" data-i18n="pyr.marker2">全 体 像</span>
     </div>
 
     <div class="pyramid-head">
-      <h2 class="section-title">NINE LEVELS,<br/><em>ONE ASCENT.</em></h2>
-      <p class="section-sub">
+      <h2 class="section-title"><span data-i18n="pyr.title1">NINE LEVELS,</span><br/><em data-i18n="pyr.title2">ONE ASCENT.</em></h2>
+      <p class="section-sub" data-i18n-html="pyr.sub">
         AI活用の熟達は <em>階段</em> ではなく <em>ピラミッド</em>。下層が広く、上層に近づくほど狭く、険しい。<br/>
         各層をクリックすると、その段階の詳細へ移動します。
       </p>
@@ -204,16 +215,16 @@
     </figure>
 
     <div class="pyramid-legend">
-      <div class="legend-item"><span class="swatch primary"></span><span class="mono small">★ 非エンジニアの到達ライン (IV / VI)</span></div>
-      <div class="legend-item"><span class="swatch gold"></span><span class="mono small">★ 商業的本丸 (VIII)</span></div>
-      <div class="legend-item"><span class="swatch"></span><span class="mono small">通常段階</span></div>
+      <div class="legend-item"><span class="swatch primary"></span><span class="mono small" data-i18n="pyr.leg1">★ 非エンジニアの到達ライン (IV / VI)</span></div>
+      <div class="legend-item"><span class="swatch gold"></span><span class="mono small" data-i18n="pyr.leg2">★ 商業的本丸 (VIII)</span></div>
+      <div class="legend-item"><span class="swatch"></span><span class="mono small" data-i18n="pyr.leg3">通常段階</span></div>
     </div>
 
     <div class="pyramid-cta">
       <a href="#diagnosis" class="pyramid-cta-btn">
         <span class="mono">▸</span>
-        <span>自分のランクを診断する</span>
-        <span class="mono small dim">— 10問 · 約2分 · 無料 —</span>
+        <span data-i18n="pyr.cta">自分のランクを診断する</span>
+        <span class="mono small dim" data-i18n="pyr.cta.sub">— 10問 · 約2分 · 無料 —</span>
       </a>
     </div>
   </section>
@@ -807,11 +818,11 @@
   <!-- ─── CROSSROADS ─── -->
   <section class="crossroads" id="crossroads">
     <div class="chapter-marker">
-      <span class="mono">—— CROSSROADS ——</span>
-      <span class="mono dim">分 岐 点</span>
+      <span class="mono" data-i18n="cr.marker1">—— CROSSROADS ——</span>
+      <span class="mono dim" data-i18n="cr.marker2">分 岐 点</span>
     </div>
-    <h2 class="section-title">TWO PATHS,<br/><em>ONE SUMMIT.</em></h2>
-    <p class="section-sub">エンジニア／非エンジニアで、現実的な到達ラインは異なる。<br/>だが、最終地点は一つ。</p>
+    <h2 class="section-title"><span data-i18n="cr.title1">TWO PATHS,</span><br/><em data-i18n="cr.title2">ONE SUMMIT.</em></h2>
+    <p class="section-sub" data-i18n-html="cr.sub">エンジニア／非エンジニアで、現実的な到達ラインは異なる。<br/>だが、最終地点は一つ。</p>
 
     <div class="crossroads-table">
       <div class="cr-row cr-head">
@@ -832,11 +843,11 @@
   <!-- ─── DIAGNOSIS (Multi-step) ─── -->
   <section class="diagnosis" id="diagnosis">
     <div class="chapter-marker">
-      <span class="mono">—— DIAGNOSIS ——</span>
-      <span class="mono dim">自 己 診 断</span>
+      <span class="mono" data-i18n="diag.marker1">—— DIAGNOSIS ——</span>
+      <span class="mono dim" data-i18n="diag.marker2">自 己 診 断</span>
     </div>
-    <h2 class="section-title">WHAT IS<br/><em>YOUR RANK?</em></h2>
-    <p class="section-sub">10問の質問で、あなたのAIランクを判定します（約2分）。<br/><span class="mono small dim">── 診断・証明書は完全無料。SNSシェア／PNG保存のみ、無料登録をお願いします。</span></p>
+    <h2 class="section-title"><span data-i18n="diag.title1">WHAT IS</span><br/><em data-i18n="diag.title2">YOUR RANK?</em></h2>
+    <p class="section-sub" data-i18n-html="diag.sub">10問の質問で、あなたのAIランクを判定します（約2分）。<br/><span class="mono small dim">── 診断・証明書は完全無料。SNSシェア／PNG保存のみ、無料登録をお願いします。</span></p>
 
     <!-- Quiz wrapper -->
     <div class="diag-wrapper" id="diagWrapper">
@@ -979,11 +990,11 @@
   <!-- ─── FOR ENTERPRISE ─── -->
   <section class="enterprise" id="enterprise">
     <div class="chapter-marker">
-      <span class="mono">—— FOR ENTERPRISE ——</span>
-      <span class="mono dim">法 人 向 け</span>
+      <span class="mono" data-i18n="ent.marker1">—— FOR ENTERPRISE ——</span>
+      <span class="mono dim" data-i18n="ent.marker2">法 人 向 け</span>
     </div>
-    <h2 class="section-title">BRING THE AI RANK<br/><em>TO YOUR ORGANIZATION.</em></h2>
-    <p class="section-sub">THE AI RANK を <em>法人向け診断ツール</em> として提供予定。<br/>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を診断します。</p>
+    <h2 class="section-title"><span data-i18n="ent.title1">BRING THE AI RANK</span><br/><em data-i18n="ent.title2">TO YOUR ORGANIZATION.</em></h2>
+    <p class="section-sub" data-i18n-html="ent.sub">THE AI RANK を <em>法人向け診断ツール</em> として提供予定。<br/>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を診断します。</p>
 
     <div class="ent-grid">
       <div class="ent-card">
@@ -1045,10 +1056,10 @@
   <!-- ─── PRINCIPLES ─── -->
   <section class="principles" id="principles">
     <div class="chapter-marker">
-      <span class="mono">—— PRINCIPLES ——</span>
-      <span class="mono dim">四 原 則</span>
+      <span class="mono" data-i18n="pr.marker1">—— PRINCIPLES ——</span>
+      <span class="mono dim" data-i18n="pr.marker2">四 原 則</span>
     </div>
-    <h2 class="section-title">THE FOUR<br/><em>CANONS.</em></h2>
+    <h2 class="section-title"><span data-i18n="pr.title1">THE FOUR</span><br/><em data-i18n="pr.title2">CANONS.</em></h2>
 
     <ol class="principles-list">
       <li>
@@ -1198,6 +1209,7 @@
   <!-- ─── TOAST ─── -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js?v=20260419-6"></script>
+  <script src="i18n.js?v=20260419-7"></script>
+  <script src="script.js?v=20260419-7"></script>
 </body>
 </html>

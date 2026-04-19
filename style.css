@@ -138,6 +138,43 @@ body.cursor-press .cursor-outer { scale: 0.8; background: rgba(139, 37, 20, 0.18
 .masthead .dim { color: var(--ink-muted); opacity: 0.7; }
 .folio { font-weight: 500; color: var(--accent); }
 
+/* ─── Language switcher ─── */
+.lang-switch, .lang-switch-float {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.lang-switch-float {
+  position: fixed; top: 14px; right: 14px; z-index: 10005;
+  background: rgba(241, 236, 224, 0.92);
+  backdrop-filter: blur(6px);
+  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+}
+.masthead .lang-switch { margin-right: 14px; }
+.masthead.visible ~ .lang-switch-float { display: none; }
+
+.lang-btn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink-muted);
+  padding: 3px 6px;
+  border: none;
+  background: transparent;
+  cursor: none;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+.lang-btn:hover { color: var(--ink); }
+.lang-btn.active {
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom: 1px solid var(--accent);
+}
+.lang-sep { color: var(--ink-ghost); font-family: var(--font-mono); font-size: 10px; }
+@media (max-width: 780px) {
+  .lang-btn { cursor: auto; }
+}
+
 /* ─── Typography utilities ─── */
 .mono { font-family: var(--font-mono); letter-spacing: 0.08em; font-weight: 400; }
 .mono.small { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
