@@ -8,7 +8,7 @@
 2. **Vercel Serverless Function のログ**（`console.log` — **PII をマスクした最小情報のみ**、7〜30日で自動削除）
 3. **ユーザーのブラウザ**（`localStorage` — 再訪時のオートフィル用のみ）
 
-セットアップ手順は [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md)、テーブル定義は [`SUPABASE_SCHEMA.sql`](./SUPABASE_SCHEMA.sql) を参照。
+セットアップ手順は [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md)、テーブル定義は [`supabase/schema.sql`](../supabase/schema.sql) を参照。
 
 ---
 

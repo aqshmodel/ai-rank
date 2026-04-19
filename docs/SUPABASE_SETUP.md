@@ -19,7 +19,7 @@
 ## 2. テーブル作成（SQLエディタ）
 
 1. 左サイドバー → **SQL Editor** → **New query**
-2. このリポジトリの [`SUPABASE_SCHEMA.sql`](./SUPABASE_SCHEMA.sql) の中身を丸ごと貼り付け
+2. このリポジトリの [`supabase/schema.sql`](../supabase/schema.sql) の中身を丸ごと貼り付け（`supabase/migrations/` 配下と同内容）
 3. 右下 **Run** をクリック
 4. エラーが出なければOK
 
