@@ -122,22 +122,67 @@ function el(tag, attrs = {}, ...children) {
    1. CURSOR
    ═══════════════════════════════════════════ */
 (function cursor() {
+  // Skip on touch / small viewports / reduced-motion.
   if (matchMedia("(max-width: 900px)").matches) return;
+  if (matchMedia("(pointer: coarse)").matches) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const outer = $("#cursorOuter");
   const inner = $("#cursorInner");
   if (!outer || !inner) return;
-  let mx = innerWidth / 2, my = innerHeight / 2, ox = mx, oy = my;
-  document.addEventListener("mousemove", (e) => {
-    mx = e.clientX; my = e.clientY;
-    inner.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-  });
-  (function raf() {
-    ox += (mx - ox) * 0.18;
-    oy += (my - oy) * 0.18;
-    outer.style.transform = `translate(${ox}px, ${oy}px) translate(-50%, -50%)`;
-    requestAnimationFrame(raf);
-  })();
-  const hoverables = "a, button, input, label, .type-card, .cr-row, .ent-card, .share-btn, .cta-button, .tier, .diag-option, .step-btn, .hero-cta";
+
+  let mx = 0, my = 0, ox = 0, oy = 0;
+  let ready = false;
+  let rafId = 0;
+
+  const EASE = 0.32; // higher = snappier catch-up (was 0.18, felt floaty)
+  const EPSILON = 0.05;
+
+  function setInner(x, y) {
+    inner.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  }
+  function setOuter(x, y) {
+    outer.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+  }
+
+  function tick() {
+    const dx = mx - ox;
+    const dy = my - oy;
+    if (Math.abs(dx) < EPSILON && Math.abs(dy) < EPSILON) {
+      // Snap to final position and stop rAF to save battery.
+      ox = mx; oy = my;
+      setOuter(ox, oy);
+      rafId = 0;
+      return;
+    }
+    ox += dx * EASE;
+    oy += dy * EASE;
+    setOuter(ox, oy);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function onMove(e) {
+    mx = e.clientX;
+    my = e.clientY;
+    setInner(mx, my);
+    if (!ready) {
+      // First-move: place outer at the same point so no "fly-in" from origin.
+      ox = mx; oy = my;
+      setOuter(ox, oy);
+      document.body.classList.add("cursor-ready");
+      ready = true;
+    }
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener("mousemove", onMove, { passive: true });
+  document.addEventListener("mouseenter", () => document.body.classList.remove("cursor-out"));
+  document.addEventListener("mouseleave", () => document.body.classList.add("cursor-out"));
+  // When window loses focus, hide too (e.g., cmd-tab)
+  window.addEventListener("blur", () => document.body.classList.add("cursor-out"));
+  window.addEventListener("focus", () => document.body.classList.remove("cursor-out"));
+
+  const hoverables = "a, button, input, select, textarea, label, .type-card, .cr-row, .ent-card, .share-btn, .cta-button, .tier, .diag-option, .step-btn, .hero-cta, .chk-item, .rad-item";
   document.addEventListener("mouseover", (e) => {
     if (e.target.closest(hoverables)) document.body.classList.add("cursor-hover");
   });
@@ -160,8 +205,8 @@ function el(tag, attrs = {}, ...children) {
     const pct = Math.min(100, (scrollY / max) * 100);
     if (bar) bar.style.width = pct + "%";
     if (masthead) {
-      if (scrollY > innerHeight * 0.4) masthead.classList.add("visible");
-      else masthead.classList.remove("visible");
+      // Masthead always visible — user needs 無料診断 / お問い合わせ accessible at all times
+      masthead.classList.add("visible");
     }
     if (folio) {
       const levels = $$(".level");
@@ -860,6 +905,12 @@ function closeModal() {
   }
 
   document.getElementById("openEnterpriseForm")?.addEventListener("click", openEnt);
+  // Header shortcut: scroll to enterprise section + open form
+  document.getElementById("openEnterpriseFromHeader")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("enterprise")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(openEnt, 450);
+  });
   modal.addEventListener("click", (e) => { if (e.target.closest("[data-close-ent]")) closeEnt(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeEnt(); });
 

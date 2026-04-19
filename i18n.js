@@ -6,6 +6,8 @@
 const I18N = {
   ja: {
     "masthead.brand": "AI 格付けランク · by CHAEN",
+    "nav.diag": "無 料 診 断",
+    "nav.contact": "お 問 い 合 わ せ",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
@@ -60,6 +62,8 @@ const I18N = {
 
   en: {
     "masthead.brand": "THE AI RANK · by CHAEN",
+    "nav.diag": "D I A G N O S E",
+    "nav.contact": "C O N T A C T",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
