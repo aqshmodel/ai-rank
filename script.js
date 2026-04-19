@@ -386,7 +386,26 @@ function el(tag, attrs = {}, ...children) {
   }
 
   function persist() {
-    try { localStorage.setItem("airank:v2", JSON.stringify({ name: nameInput.value, current, answers })); } catch (e) {}
+    try {
+      // Compute rank on-the-fly so it's available even before renderResult fires.
+      // Mirrors calcRank() — kept inline so persist works standalone.
+      let rank = null;
+      if (answers.some((a) => a != null)) {
+        let r = 0;
+        for (let i = 0; i < 9; i++) {
+          if (answers[i] != null && answers[i] >= 2) r = Math.max(r, QUESTIONS[i].gatesRank);
+        }
+        rank = r;
+      }
+      const bonus = answers[9] ?? null;
+      localStorage.setItem("airank:v2", JSON.stringify({
+        name: nameInput.value,
+        current,
+        answers,
+        rank,
+        bonus,
+      }));
+    } catch (e) {}
   }
 
   function setActive(which) {
@@ -837,11 +856,35 @@ function closeModal() {
   async function completeAuth(data) {
     // Strip hp (honeypot) from persisted payload — we only send it to the API
     const { hp, ...rest } = data;
+
+    // Resolve rank: prefer stored value, fall back to computing from answers,
+    // then fall back to DOM-rendered certificate numeral (covers older storage shapes).
+    const resolveRank = () => {
+      try {
+        const state = JSON.parse(localStorage.getItem("airank:v2") || "{}");
+        if (Number.isFinite(state.rank)) return state.rank;
+        const ans = Array.isArray(state.answers) ? state.answers : null;
+        if (ans && ans.length >= 9) {
+          const QRANK = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+          let r = 0;
+          for (let i = 0; i < 9; i++) {
+            if (ans[i] != null && ans[i] >= 2) r = Math.max(r, QRANK[i]);
+          }
+          return r;
+        }
+      } catch (e) {}
+      // DOM fallback: read the certificate numeral rendered on screen
+      const n = document.getElementById("certNumeral")?.textContent?.trim() || "";
+      const ROMAN = { "0":0,"I":1,"II":2,"III":3,"IV":4,"V":5,"VI":6,"VII":7,"VIII":8,"IX":9 };
+      if (n in ROMAN) return ROMAN[n];
+      return null;
+    };
+
     const payload = {
       ...rest,
       hp,
       at: Date.now(),
-      rank: (() => { try { return JSON.parse(localStorage.getItem("airank:v2") || "{}").rank; } catch(e){ return null; } })(),
+      rank: resolveRank(),
       referrer: document.referrer || "",
       url: location.href,
       ua: navigator.userAgent,
