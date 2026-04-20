@@ -804,12 +804,18 @@ strong { font-weight: 600; color: var(--ink); }
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.45s var(--easing-out);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: opacity 0.45s var(--easing-out), visibility 0s linear 0.45s;
 }
 .diag-step[data-active="true"] {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+  position: relative;
+  transition-delay: 0s;
 }
 
 .step-inner {
