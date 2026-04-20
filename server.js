@@ -12,6 +12,7 @@ import { pool, dbEnabled } from './api/_db.js';
 import signupHandler from './api/signup.js';
 import enterpriseHandler from './api/enterprise.js';
 import certHandler from './api/cert.js';
+import ogImageHandler from './api/og-image.js';
 
 // Author Master configurations for E-E-A-T
 const authorMaster = {
@@ -52,6 +53,7 @@ const createExpressHandler = (vercelHandler) => async (req, res) => {
 app.post('/api/signup', createExpressHandler(signupHandler));
 app.post('/api/enterprise', createExpressHandler(enterpriseHandler));
 app.get('/api/cert', createExpressHandler(certHandler));
+app.get('/api/og-image', createExpressHandler(ogImageHandler));
 
 // 動的ルート群が確実に優先されるよう、ここではstaticの宣言を行わない
 

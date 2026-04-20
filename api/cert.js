@@ -33,8 +33,7 @@ export default function handler(req, res) {
 
   const rawName = String(req.query?.name || "").slice(0, 40).trim();
   const name = escapeHtml(rawName);
-
-  const ogImage = `https://ai-rank.aqsh.co.jp/og/rank-${rankNum}.png`;
+  const ogImage = `https://ai-rank.aqsh.co.jp/api/og-image?rank=${rankNum}&name=${encodeURIComponent(rawName)}`;
 
   const titlePrefix = name ? `${name} · ` : "";
   const pageTitle = `${titlePrefix}Lv.${numeral} ${level.en} — THE AI RANK いわて`;
