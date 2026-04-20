@@ -188,7 +188,7 @@ strong { font-weight: 600; color: var(--ink); }
    ═══════════════════════════════════════════════════════════ */
 .hero {
   position: relative; min-height: 100vh;
-  padding: clamp(100px, 12vh, 160px) var(--gutter) 40px;
+  padding: clamp(60px, 8vh, 100px) var(--gutter) 40px;
   display: flex; flex-direction: column; justify-content: center;
   z-index: 2;
 }
@@ -1642,7 +1642,7 @@ strong { font-weight: 600; color: var(--ink); }
   .masthead-nav { gap: 8px; }
   .masthead-link { font-size: 9px; letter-spacing: 0.12em; }
   .masthead .folio { display: none; }
-  .hero { padding: 100px 20px 40px; }
+  .hero { padding: 60px 20px 20px; }
   .hero-stat { grid-template-columns: 1fr; gap: 20px; text-align: left; }
   .hero-ctas { flex-direction: column; }
   .hero-cta { width: 100%; }

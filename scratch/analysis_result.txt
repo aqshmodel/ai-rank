@@ -1,0 +1,557 @@
+Total existing files to analyze: 85
+
+--- ai-alignment.md ---
+AI Keyword Count: 17
+Headers:
+  ## AIアライメントとは
+  ## なぜ非常に重要なのか
+
+--- chatgpt.md ---
+AI Keyword Count: 10
+Headers:
+  ## ChatGPTとは
+  ## なぜ世界中で使われているのか
+  ## 企業での活用
+
+--- agent.md ---
+AI Keyword Count: 10
+Headers:
+  ## AIエージェントとは
+  ## チャット型AIとの違い
+  ## AIの次なる形
+
+--- sovereign-ai.md ---
+AI Keyword Count: 14
+Headers:
+  ## ソブリンAI（Sovereign AI）とは
+  ## なぜ注目されているのか
+
+--- ai-act.md ---
+AI Keyword Count: 13
+Headers:
+  ## 欧州AI法（AI Act）とは
+  ## ビジネスへの影響
+
+--- rag.md ---
+AI Keyword Count: 4
+Headers:
+  ## RAGとは
+  ## なぜビジネスで必須なのか
+
+--- coze.md ---
+AI Keyword Count: 4
+Headers:
+  ## Cozeとは
+  ## 圧倒的な多機能と手軽さ
+
+--- trust.md ---
+AI Keyword Count: 4
+Headers:
+  ## ビジネスにおける「トラスト」とは
+  ## AIのもたらす「合理化」の限界
+
+--- reasoning.md ---
+AI Keyword Count: 5
+Headers:
+  ## 推論能力とは
+  ## なぜ推論が必要なのか
+  ## ビジネスへの応用
+
+--- psychological-safety.md ---
+AI Keyword Count: 2
+Headers:
+  ## 心理的安全性とは
+  ## イノベーションの土台
+  ## 属人化の打破にも不可欠
+
+--- shadow-ai.md ---
+AI Keyword Count: 17
+Headers:
+  ## シャドーAIとは
+  ## もたらす深刻なリスク
+
+--- claude-code.md ---
+AI Keyword Count: 5
+Headers:
+  ## Claude Codeとは
+  ## なぜ強力なのか
+
+--- nlp.md ---
+AI Keyword Count: 3
+Headers:
+  ## NLP（自然言語処理）とは
+  ## なぜAIに必要なのか
+  ## 企業での活用例
+
+--- ai-orchestration.md ---
+AI Keyword Count: 12
+Headers:
+  ## AIオーケストレーションとは
+  ## 1つのAIでは限界がある
+
+--- agi.md ---
+AI Keyword Count: 8
+Headers:
+  ## AGI（汎用人工知能）とは
+  ## 「現在のAI」との違い
+  ## 実現の時期と影響
+
+--- api.md ---
+AI Keyword Count: 5
+Headers:
+  ## APIとは
+  ## AI導入にどう関わるか
+  ## 注意点
+
+--- mcp.md ---
+AI Keyword Count: 11
+Headers:
+  ## MCPとは
+  ## 俗称は「AIのUSB-C」
+  ## ビジネスへの恩恵
+
+--- midjourney.md ---
+AI Keyword Count: 3
+Headers:
+  ## Midjourneyとは
+  ## DALL-E 3との違い
+  ## 利用環境と注意点
+
+--- poc.md ---
+AI Keyword Count: 5
+Headers:
+  ## PoCとは
+  ## AIにおける「PoC死」
+
+--- figma-ai.md ---
+AI Keyword Count: 5
+Headers:
+  ## Figma AIとは
+  ## 主な機能と強み
+  ## ビジネスインパクト
+
+--- notion-ai.md ---
+AI Keyword Count: 7
+Headers:
+  ## Notion AIとは
+  ## 社内ナレッジの即時活用
+
+--- claude-design.md ---
+AI Keyword Count: 3
+Headers:
+  ## Claude Designとは
+  ## 「デザインシステム」を読み込む力
+
+--- deep-learning.md ---
+AI Keyword Count: 2
+Headers:
+  ## ディープラーニングとは
+  ## なぜブレイクスルーになったのか
+  ## 活用領域
+
+--- devin.md ---
+AI Keyword Count: 8
+Headers:
+  ## Devinとは
+  ## 従来のAIとの違い
+
+--- person-dependent.md ---
+AI Keyword Count: 5
+Headers:
+  ## 属人化とは
+  ## The AI Rankが闘う課題
+  ## AIによる打破
+
+--- deepfake-detection.md ---
+AI Keyword Count: 10
+Headers:
+  ## ディープフェイク検知とは
+  ## 電子透かし（ウォーターマーク）による根本対策
+
+--- engagement.md ---
+AI Keyword Count: 4
+Headers:
+  ## エンゲージメントとは
+  ## 単なる「社員満足度」との違い
+  ## 組織診断の要
+  ## AI導入・活用にどう関わるか（時代背景）
+
+--- gpt.md ---
+AI Keyword Count: 5
+Headers:
+  ## GPTとは
+  ## GPTの仕組み
+  ## ChatGPTとの違い
+
+--- dall-e-3.md ---
+AI Keyword Count: 4
+Headers:
+  ## DALL-E 3とは
+  ## 最大の特徴：ChatGPTとの統合
+  ## 企業での活用例
+
+--- dx.md ---
+AI Keyword Count: 3
+Headers:
+  ## DXとは
+  ## 「IT化」との違い
+  ## 生き残るための必須条件
+
+--- antigravity.md ---
+AI Keyword Count: 6
+Headers:
+  ## Antigravityとは
+  ## 「ファイル群を股にかけた」高度な修正
+
+--- hallucination.md ---
+AI Keyword Count: 6
+Headers:
+  ## ハルシネーションとは
+  ## なぜ嘘をつくのか？
+  ## 企業が取るべき対策
+
+--- aaas.md ---
+AI Keyword Count: 3
+Headers:
+  ## AaaS（Agent-as-a-Service）とは
+  ## 解決できるビジネス課題
+
+--- team-building.md ---
+AI Keyword Count: 4
+Headers:
+  ## チームビルディングとは
+  ## The AI Rankにおける重要性
+
+--- langchain.md ---
+AI Keyword Count: 11
+Headers:
+  ## LangChainとは
+  ## AIを鎖（チェーン）でつなぐ
+
+--- gpu.md ---
+AI Keyword Count: 7
+Headers:
+  ## GPUとは
+  ## CPUとGPUの違い
+  ## ビジネスへの影響
+
+--- no-code.md ---
+AI Keyword Count: 4
+Headers:
+  ## ノーコード・ローコードとは
+  ## 現場が自らシステムを作る時代（市民開発）
+  ## AIとの強力な親和性
+
+--- bolt-new.md ---
+AI Keyword Count: 5
+Headers:
+  ## Bolt.new とは
+  ## 最大の衝撃：環境構築が不要
+  ## 中小企業へのインパクト
+
+--- grounding.md ---
+AI Keyword Count: 6
+Headers:
+  ## グラウンディングとは
+  ## 具体的な仕組み
+  ## なぜ重要か？
+
+--- moe.md ---
+AI Keyword Count: 6
+Headers:
+  ## MoEとは
+  ## どのような仕組みか
+  ## メリット
+
+--- graph-rag.md ---
+AI Keyword Count: 3
+Headers:
+  ## GraphRAGとは
+  ## 虫の目から、鳥の目へ
+  ## AI導入・活用にどう関わるか（注意点）
+
+--- agentic-rag.md ---
+AI Keyword Count: 4
+Headers:
+  ## Agentic RAGとは
+  ## 従来のRAGとの決定的な違い
+
+--- slm.md ---
+AI Keyword Count: 4
+Headers:
+  ## SLMとは
+  ## なぜ「小さい」ことが強みなのか
+  ## エンタープライズでの活用
+
+--- ai-roi.md ---
+AI Keyword Count: 12
+Headers:
+  ## AI ROIとは
+  ## フェーズの変化における重要性
+
+--- token.md ---
+AI Keyword Count: 5
+Headers:
+  ## トークンとは
+  ## 「文字」や「単語」との違い
+  ## ビジネス上の注意点
+
+--- prompt-engineering.md ---
+AI Keyword Count: 6
+Headers:
+  ## プロンプトエンジニアリングとは
+  ## なぜ必要なのか
+  ## ビジネスの必須スキルへ
+
+--- vertical-ai.md ---
+AI Keyword Count: 14
+Headers:
+  ## バーティカルAIとは
+  ## 解決できるビジネス課題
+
+--- google-veo.md ---
+AI Keyword Count: 4
+Headers:
+  ## Google Veo（ヴィオ）とは
+  ## 従来の動画生成との違い
+  ## ビジネスへの応用
+
+--- edge-ai.md ---
+AI Keyword Count: 13
+Headers:
+  ## エッジAIとは
+  ## 解決できるビジネス課題
+
+--- cloud.md ---
+AI Keyword Count: 5
+Headers:
+  ## クラウドとは
+  ## オンプレミス（自社保有）とは
+  ## AI導入のジレンマ
+
+--- codex.md ---
+AI Keyword Count: 6
+Headers:
+  ## Codexとは
+  ## 開発現場への影響
+
+--- physical-ai.md ---
+AI Keyword Count: 11
+Headers:
+  ## フィジカルAIとは
+  ## 解決できるビジネス課題
+
+--- test-time-compute.md ---
+AI Keyword Count: 9
+Headers:
+  ## 推論時計算量（Test-Time Compute）とは
+  ## 解決できるビジネス課題
+
+--- notebooklm.md ---
+AI Keyword Count: 3
+Headers:
+  ## NotebookLMとは
+  ## 完全に「ハルシネーション（嘘）」を防ぐ
+  ## 話題のポッドキャスト生成機能
+
+--- v0.md ---
+AI Keyword Count: 4
+Headers:
+  ## v0とは
+  ## 従来の「コード生成」との決定的な違い
+  ## 開発プロセスの激変
+
+--- agile.md ---
+AI Keyword Count: 5
+Headers:
+  ## ウォーターフォール（従来の手法）
+  ## アジャイル開発（現代の手法）
+  ## AI開発にはアジャイルが必須
+
+--- ai-governance.md ---
+AI Keyword Count: 13
+Headers:
+  ## AIガバナンスとは
+  ## 主なリスクと対策
+
+--- fine-tuning.md ---
+AI Keyword Count: 4
+Headers:
+  ## ファインチューニングとは
+  ## 例えるなら
+  ## RAGとの違い
+
+--- prompt-injection.md ---
+AI Keyword Count: 8
+Headers:
+  ## プロンプト・インジェクションとは
+  ## どのような被害が起こるか
+  ## AI導入の経営リスク
+
+--- ai-literacy.md ---
+AI Keyword Count: 13
+Headers:
+  ## AIリテラシーとは
+  ## なぜ今、企業に一番必要なのか
+  ## The AI Rankの使命
+
+--- shadow-it.md ---
+AI Keyword Count: 7
+Headers:
+  ## シャドーITとは
+  ## 生成AI時代の脅威
+  ## 解決策
+
+--- gemini.md ---
+AI Keyword Count: 6
+Headers:
+  ## Geminiとは
+  ## Googleエコシステムとの強烈な連携
+  ## マルチモーダルの威力
+
+--- llm.md ---
+AI Keyword Count: 5
+Headers:
+  ## LLM（大規模言語モデル）とは
+  ## 中小企業での活用イメージ
+  ## 注意点（デメリット）
+
+--- genspark.md ---
+AI Keyword Count: 7
+Headers:
+  ## Gensparkとは
+  ## 「調べるAI」から「実務を終わらせるAI」へ
+  ## ビジネスでの活用イメージ
+
+--- singularian.md ---
+AI Keyword Count: 9
+Headers:
+  ## シンギュラリアンとは
+  ## 概念の背景
+  ## AIリテラシーとの関係
+
+--- unlearning.md ---
+AI Keyword Count: 3
+Headers:
+  ## アンラーニングとは
+  ## なぜAI時代に必須か
+
+--- perplexity.md ---
+AI Keyword Count: 4
+Headers:
+  ## Perplexityとは
+  ## Google検索との違い
+  ## 最強のリサーチツール
+
+--- claude-cowork.md ---
+AI Keyword Count: 3
+Headers:
+  ## Claude Coworkとは
+  ## パソコンを自動操縦する
+
+--- multi-agent-system.md ---
+AI Keyword Count: 7
+Headers:
+  ## マルチエージェントシステムとは
+  ## 解決できるビジネス課題
+
+--- digital-sovereignty.md ---
+AI Keyword Count: 7
+Headers:
+  ## デジタル主権とは
+  ## なぜ注目されているのか
+
+--- machine-learning.md ---
+AI Keyword Count: 2
+Headers:
+  ## 機械学習とは
+  ## 従来のプログラミングとの違い
+  ## ビジネスでの活用例
+
+--- dify.md ---
+AI Keyword Count: 6
+Headers:
+  ## Difyとは
+  ## 解決できるビジネス課題
+
+--- world-model.md ---
+AI Keyword Count: 7
+Headers:
+  ## ワールドモデルとは
+  ## なぜ注目されているのか
+
+--- claude.md ---
+AI Keyword Count: 7
+Headers:
+  ## Claudeとは
+  ## 最大の強み
+  ## The AI Rankの裏側でも活躍
+
+--- rpa.md ---
+AI Keyword Count: 4
+Headers:
+  ## RPAとは
+  ## 得意なこと
+  ## AI＋RPAの進化（次世代自動化）
+
+--- multimodal.md ---
+AI Keyword Count: 5
+Headers:
+  ## マルチモーダルとは
+  ## なぜ革新的なのか
+  ## 企業でのインパクト
+
+--- github-copilot.md ---
+AI Keyword Count: 2
+Headers:
+  ## GitHub Copilotとは
+  ## 開発をどう変えたか
+
+--- digital-divide.md ---
+AI Keyword Count: 4
+Headers:
+  ## 情報格差（デジタルディバイド）とは
+  ## 生死を分けるほどの差へ
+  ## なぜ導入が進まないのか
+
+--- copilot.md ---
+AI Keyword Count: 5
+Headers:
+  ## Copilotとは
+  ## なぜビジネス革命なのか
+
+--- rlhf.md ---
+AI Keyword Count: 7
+Headers:
+  ## RLHFとは
+  ## なぜ必要なのか
+
+--- n8n.md ---
+AI Keyword Count: 5
+Headers:
+  ## n8nとは
+  ## AI時代の心臓部となる理由
+
+--- context-engineering.md ---
+AI Keyword Count: 7
+Headers:
+  ## コンテキストエンジニアリングとは
+  ## なぜ注目されているのか
+
+--- saas.md ---
+AI Keyword Count: 3
+Headers:
+  ## SaaSとは
+  ## なぜSaaSが主流なのか
+
+--- ai-native-development.md ---
+AI Keyword Count: 10
+Headers:
+  ## AIネイティブ開発とは
+  ## 従来システムとの違いと重要性
+
+--- compound-ai-system.md ---
+AI Keyword Count: 13
+Headers:
+  ## コンパウンドAIシステムとは
+  ## なぜ注目されているのか

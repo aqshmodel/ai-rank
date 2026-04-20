@@ -10,7 +10,7 @@ const I18N = {
     "nav.contact": "お 問 い 合 わ せ",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
-    "hero.kicker2": "EST. TOKYO / 2026",
+    "hero.kicker2": "EST. Iwate / 2026",
     "hero.sub1": "— <em>AI 格付けランク</em> · by Aqsh株式会社 —",
     "hero.sub2": "THE AI RANK いわて — A 9-LEVEL CLASSIFICATION BY AQSH",
 
@@ -67,7 +67,7 @@ const I18N = {
     "nav.contact": "C O N T A C T",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
-    "hero.kicker2": "EST. TOKYO / 2026",
+    "hero.kicker2": "EST. Iwate / 2026",
     "hero.sub1": "— <em>THE AI RANK いわて</em> · by Aqsh株式会社 —",
     "hero.sub2": "A 9-LEVEL GLOBAL STANDARD FOR AI LITERACY",
 

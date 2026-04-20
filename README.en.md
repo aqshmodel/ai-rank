@@ -77,7 +77,7 @@ Full descriptions are also at [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp).
 **Definition:** Uses the **free tier** of general-purpose AI as an extension of search engines and note apps.
 
 **Concrete tasks**
-- Ask ChatGPT Free "where to go on a rainy date in Tokyo"
+- Ask ChatGPT Free "where to go on a rainy date in Iwate"
 - Ask Gemini to translate an English email
 - Use Copilot to tweak the tone of a document
 - Reformat meeting notes into bullet points
@@ -318,7 +318,7 @@ Full descriptions are also at [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp).
 
 ### Why "universal"?
 
-AI literacy transcends borders. This repo targets a **shared cross-country language** for AI mastery — usable by HR teams in Tokyo, engineers in SF, and students in Berlin alike.
+AI literacy transcends borders. This repo targets a **shared cross-country language** for AI mastery — usable by HR teams in Iwate, engineers in SF, and students in Berlin alike.
 
 ### The four canons
 
