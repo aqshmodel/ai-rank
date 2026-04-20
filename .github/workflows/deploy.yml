@@ -30,6 +30,7 @@ jobs:
       - name: Restart PM2 on VPS
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+            rm -f ~/app/the-ai-rank/sitemap.xml && \
             cd ~/app/the-ai-rank && \
             npm install --production && \
             pm2 restart the-ai-rank"

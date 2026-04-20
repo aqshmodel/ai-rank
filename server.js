@@ -41,8 +41,7 @@ app.post('/api/signup', createExpressHandler(signupHandler));
 app.post('/api/enterprise', createExpressHandler(enterpriseHandler));
 app.get('/api/cert', createExpressHandler(certHandler));
 
-// Serve static files from root directory (index.html, style.css, assets/, scripts.js etc)
-app.use(express.static(__dirname));
+// 動的ルート群が確実に優先されるよう、ここではstaticの宣言を行わない
 
 // Dynamic Sitemap Route
 app.get('/sitemap.xml', (req, res) => {
@@ -131,6 +130,9 @@ app.get('/privacy', (req, res) => {
 // Explicit route for cert share page wrapper (optional, handled by static if named correctly, 
 // but X usually requests /c?rank=N...)
 app.get('/c', createExpressHandler(certHandler));
+
+// Serve static files from root directory (index.html, style.css, assets/, scripts.js etc)
+app.use(express.static(__dirname));
 
 // Fallback
 app.get('*', (req, res) => {
