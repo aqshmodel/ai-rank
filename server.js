@@ -114,7 +114,8 @@ app.get('/api/articles', (req, res) => {
           title: data.title || 'No Title',
           description: data.description || '',
           coverImage: data.coverImage || '/assets/og-image.png',
-          date: data.date || ''
+          date: data.date || '',
+          tags: data.tags || []
         });
       }
     });
@@ -164,12 +165,19 @@ app.get('/articles/:slug', (req, res) => {
     
     let template = fs.readFileSync(path.join(__dirname, 'views', 'article-template.html'), 'utf-8');
     
+    // Build tags HTML
+    const tagsArr = data.tags || [];
+    const tagsHtml = tagsArr.length > 0 
+      ? tagsArr.map(t => `<span class="article-tag">#${t}</span>`).join('') 
+      : '';
+
     // Replace markers
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK Article');
     template = template.replace(/\{\{description\}\}/g, data.description || '');
     template = template.replace(/\{\{ogImage\}\}/g, data.coverImage || 'https://ai-rank.aqsh.co.jp/assets/og-image.png');
     template = template.replace(/\{\{date\}\}/g, data.date || '');
+    template = template.replace(/\{\{tags\}\}/g, tagsHtml);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);

@@ -1,8 +1,9 @@
 ---
-title: "地方企業がAI導入で確実に爆死する3つのパターンと、たった1つの成功法則"
-description: "流行りの生成AIを導入したのに誰も使わない…。DXの推進で失敗する地方企業が陥る「よくある3つの罠」と、確実に現場へ定着させるための伴走型AIエージェント開発のエッセンスを解説します。"
-coverImage: "/assets/og_manga_failure.webp"
-date: "2026.04.20"
+title: "地方企業が生成AI導入で失敗する3つのパターンの考察"
+description: "「とりあえずSaaSを契約した」だけのDXがなぜ地方で通用しないのか。THE AI RANKのデータから見えてきた、属人化解消のための本当に必要なアプローチ。"
+coverImage: "https://ai-rank.aqsh.co.jp/assets/og-image.png"
+date: "2026.04.19"
+tags: ["DX", "考察", "地方企業"]
 ---
 
 流行病のように生成AIという言葉が日本中を駆け巡ってから数年が経過した。

@@ -53,6 +53,10 @@
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
       </div>
+      
+      <div id="tagsFilter" class="tags-filter-container">
+        <!-- Tags will be dynamically injected here -->
+      </div>
     </header>
 
     <div class="articles-grid" id="articlesGrid">
@@ -101,34 +105,83 @@
       const grid = document.getElementById('articlesGrid');
       const searchInput = document.getElementById('articleSearch');
       const noResults = document.getElementById('noResults');
+      const tagsFilter = document.getElementById('tagsFilter');
+      
       let allArticles = [];
+      let activeTag = null;
 
       // Fetch articles from API
       try {
         const response = await fetch('/api/articles');
         allArticles = await response.json();
-        renderArticles(allArticles);
+        
+        initTags(allArticles);
+        filterAndRender();
       } catch (err) {
         console.error('Failed to load articles:', err);
         grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:red;">記事の読み込みに失敗しました。</div>';
       }
 
-      // Realtime Live Search
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
+      function initTags(articles) {
+        const tagSet = new Set();
+        articles.forEach(a => {
+          if (a.tags && Array.isArray(a.tags)) {
+            a.tags.forEach(t => tagSet.add(t));
+          }
+        });
         
-        if (!query) {
-          renderArticles(allArticles);
-          return;
-        }
+        const tags = Array.from(tagSet).sort();
+        if (tags.length === 0) return;
 
+        // Add 'All' button
+        const allBtn = document.createElement('button');
+        allBtn.className = 'filter-tag active';
+        allBtn.textContent = 'All';
+        allBtn.onclick = () => selectTag(null, allBtn);
+        tagsFilter.appendChild(allBtn);
+
+        tags.forEach(tag => {
+          const btn = document.createElement('button');
+          btn.className = 'filter-tag';
+          btn.textContent = '#' + tag;
+          btn.onclick = () => selectTag(tag, btn);
+          tagsFilter.appendChild(btn);
+        });
+      }
+
+      function selectTag(tag, btnElement) {
+        activeTag = tag;
+        
+        // Update active class
+        const buttons = tagsFilter.querySelectorAll('button');
+        buttons.forEach(b => b.classList.remove('active'));
+        btnElement.classList.add('active');
+        
+        filterAndRender();
+      }
+
+      // Realtime Live Search
+      searchInput.addEventListener('input', () => {
+        filterAndRender();
+      });
+      
+      function filterAndRender() {
+        const query = searchInput.value.toLowerCase().trim();
+        
         const filtered = allArticles.filter(article => {
-          return (article.title && article.title.toLowerCase().includes(query)) ||
-                 (article.description && article.description.toLowerCase().includes(query));
+          // Check text query
+          const matchQuery = !query || 
+                             (article.title && article.title.toLowerCase().includes(query)) ||
+                             (article.description && article.description.toLowerCase().includes(query));
+          
+          // Check active tag
+          const matchTag = !activeTag || (article.tags && article.tags.includes(activeTag));
+          
+          return matchQuery && matchTag;
         });
 
         renderArticles(filtered);
-      });
+      }
 
       // Render Function
       function renderArticles(articles) {
@@ -157,6 +210,11 @@
                 <div class="card-date mono small">${article.date}</div>
                 <h2 class="card-title">${displayTitle}</h2>
                 <p class="card-excerpt">${displayDesc}</p>
+                ${article.tags && article.tags.length ? `
+                  <div class="card-tags">
+                    ${article.tags.map(t => `<span class="card-tag">#${t}</span>`).join('')}
+                  </div>
+                ` : ''}
               </div>
             `;
             grid.appendChild(card);

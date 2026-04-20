@@ -117,23 +117,35 @@
       gap: 20px;
     }
     .hero-stat-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      padding: 32px 40px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-top: 3px solid var(--accent);
+      padding: clamp(24px, 3vw, 32px) clamp(32px, 4vw, 40px);
       border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+      box-shadow: 0 12px 32px rgba(139, 37, 20, 0.05);
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .hero-stat-card:hover { transform: translateY(-4px); }
+    .hero-stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(139, 37, 20, 0.12);
+    }
     .stat-val {
-      font-family: var(--font-en); font-size: clamp(3rem, 4vw, 4rem); font-weight: 800; color: var(--ink); line-height: 1;
-      margin-bottom: 8px; letter-spacing: -0.03em;
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: -0.04em;
+      font-variation-settings: "opsz" 72, "wdth" 85; 
     }
-    .stat-val span { font-size: 1.8rem; color: var(--ink-muted); margin-left: 4px; }
-    .stat-desc { font-size: 1rem; color: var(--ink-soft); font-weight: 700; }
-    .stat-sub { font-size: 0.85rem; color: var(--ink-muted); margin-top: 6px; line-height: 1.5; }
+    .stat-val span { font-size: 2rem; color: var(--accent-hover); margin-left: 4px; font-weight: 700; opacity: 0.8; }
+    .stat-desc { font-size: 1.05rem; color: var(--ink); font-weight: 700; }
+    .stat-sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.6; }
     
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
@@ -382,7 +394,7 @@
       <li>人手不足への対策としてDXやAIを推進したいが、社内にリードできる人材・IT担当者がいない。</li>
       <li>汎用的なAIツールを契約したものの、自社特有のルールや商材に即していないため結局誰も使わなくなった。</li>
       <li>一部の若手社員は使いこなしているが、経営陣やベテラン層との間で「AIリテラシーの格差」が生じている。</li>
-      <li>首都圏のコンサルタントに依頼しても、現場の泥臭い実態に合わず、高額なレポートだけで終わってしまった。</li>
+      <li>首都圏のコンサルタントに依頼しても、現場のアナログな運用から脱却できず、高額なレポートだけで終わってしまった。</li>
     </ul>
   </section>
 
@@ -418,7 +430,7 @@
       <span class="sub">Why Aqsh</span>
       <h2>世界共通のAIスキル基準を開発する技術力</h2>
       <p style="color:var(--ink-soft); max-width:800px; margin:0 auto; line-height:2;">
-        Aqshはただのコンサルティング会社ではありません。世界中の数万人が受験するAIスキル測定システム「THE AI RANK」を自社開発・運営しているテクノロジー集団です。<br/>
+        Aqshはただのコンサルティング会社ではありません。標準化されたAIスキル測定システム「THE AI RANK」を活用し、様々ななAIXを推進しているテクノロジー集団です。<br/>
         そこで得られた膨大なスキルデータと最新技術の知見を、岩手を中心とした地域企業へ直接還元しています。
       </p>
     </div>
