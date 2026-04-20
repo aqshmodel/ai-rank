@@ -168,7 +168,7 @@ app.get('/articles/:slug', (req, res) => {
     // Build tags HTML
     const tagsArr = data.tags || [];
     const tagsHtml = tagsArr.length > 0 
-      ? tagsArr.map(t => `<span class="article-tag">#${t}</span>`).join('') 
+      ? tagsArr.map(t => `<span class="article-tag">${t}</span>`).join('') 
       : '';
 
     // Replace markers

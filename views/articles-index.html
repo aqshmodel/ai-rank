@@ -143,7 +143,7 @@
         tags.forEach(tag => {
           const btn = document.createElement('button');
           btn.className = 'filter-tag';
-          btn.textContent = '#' + tag;
+          btn.textContent = tag;
           btn.onclick = () => selectTag(tag, btn);
           tagsFilter.appendChild(btn);
         });
@@ -212,7 +212,7 @@
                 <p class="card-excerpt">${displayDesc}</p>
                 ${article.tags && article.tags.length ? `
                   <div class="card-tags">
-                    ${article.tags.map(t => `<span class="card-tag">#${t}</span>`).join('')}
+                    ${article.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
                   </div>
                 ` : ''}
               </div>
