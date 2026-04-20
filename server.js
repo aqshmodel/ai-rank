@@ -197,6 +197,64 @@ app.get('/articles/:slug', (req, res) => {
       `;
     }
 
+    // Build JSON-LD (Schema.org) for E-E-A-T and SEO
+    const articleUrl = `https://ai-rank.aqsh.co.jp/articles/${slug}`;
+    const defaultImage = 'https://ai-rank.aqsh.co.jp/assets/og-image.png';
+    const finalImage = data.coverImage ? (data.coverImage.startsWith('http') ? data.coverImage : `https://ai-rank.aqsh.co.jp${data.coverImage}`) : defaultImage;
+
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": data.title || 'THE AI RANK Article',
+      "image": [finalImage],
+      "datePublished": data.date ? new Date(data.date.replace(/\./g, '-')).toISOString() : new Date().toISOString(),
+      "description": data.description || '',
+      "author": {
+        "@type": "Organization",
+        "name": "Aqsh株式会社",
+        "url": "https://aqsh.co.jp"
+      }
+    };
+
+    if (data.author && authorMaster[data.author]) {
+      const author = authorMaster[data.author];
+      schemaData.author = {
+        "@type": "Person",
+        "name": author.name,
+        "jobTitle": author.title,
+        "description": author.description,
+        "url": "https://aqsh.co.jp",
+        "image": `https://ai-rank.aqsh.co.jp${author.avatar}`
+      };
+    }
+    
+    // Breadcrumb Schema
+    const breadcrumbSchema = {
+       "@context": "https://schema.org",
+       "@type": "BreadcrumbList",
+       "itemListElement": [{
+         "@type": "ListItem",
+         "position": 1,
+         "name": "THE AI RANK",
+         "item": "https://ai-rank.aqsh.co.jp/"
+       },{
+         "@type": "ListItem",
+         "position": 2,
+         "name": "ブログ・事例",
+         "item": "https://ai-rank.aqsh.co.jp/articles"
+       },{
+         "@type": "ListItem",
+         "position": 3,
+         "name": data.title || 'Article',
+         "item": articleUrl
+       }]
+    };
+
+    const jsonLdScript = `
+      <script type="application/ld+json">${JSON.stringify(schemaData)}</script>
+      <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
+    `;
+
     // Replace markers
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK Article');
@@ -205,6 +263,7 @@ app.get('/articles/:slug', (req, res) => {
     template = template.replace(/\{\{date\}\}/g, data.date || '');
     template = template.replace(/\{\{tags\}\}/g, tagsHtml);
     template = template.replace(/\{\{authorProfile\}\}/g, authorHtml);
+    template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);
@@ -217,6 +276,54 @@ app.get('/articles/:slug', (req, res) => {
 // Explicit route for privacy policy
 app.get('/privacy', (req, res) => {
   res.sendFile(path.join(__dirname, 'privacy.html'));
+});
+
+// Dynamic XML Sitemap Generator
+app.get('/sitemap.xml', (req, res) => {
+  try {
+    const baseUrl = 'https://ai-rank.aqsh.co.jp';
+    const postsDir = path.join(__dirname, 'posts');
+    const files = fs.existsSync(postsDir) ? fs.readdirSync(postsDir).filter(f => f.endsWith('.md')) : [];
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    
+    // Core pages
+    const corePages = [
+      { url: '/', priority: '1.0' },
+      { url: '/iwate.html', priority: '0.9' },
+      { url: '/articles', priority: '0.8' },
+      { url: '/privacy', priority: '0.5' }
+    ];
+    
+    corePages.forEach(p => {
+      xml += `  <url>\n    <loc>${baseUrl}${p.url}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>\n`;
+    });
+
+    // Dynamic blog articles
+    files.forEach(file => {
+      const filePath = path.join(postsDir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const { data } = matter(content);
+      const slug = file.replace('.md', '');
+      let lastmod = '';
+      if (data.date) {
+         try {
+           const d = new Date(data.date.replace(/\\./g, '-'));
+           if (!isNaN(d)) lastmod = `<lastmod>${d.toISOString().split('T')[0]}</lastmod>`;
+         } catch(e){}
+      }
+      xml += `  <url>\n    <loc>${baseUrl}/articles/${slug}</loc>\n    ${lastmod}\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+    });
+    
+    xml += `</urlset>`;
+    
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  } catch(err) {
+    console.error('[AIRANK:sitemap_error]', err);
+    res.status(500).end();
+  }
 });
 
 // Explicit route for cert share page wrapper (optional, handled by static if named correctly, 

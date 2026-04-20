@@ -28,6 +28,8 @@
   <meta name="twitter:description" content="{{description}}" />
   <meta name="twitter:image" content="{{ogImage}}" />
 
+  {{jsonLd}}
+
   <link rel="canonical" href="https://ai-rank.aqsh.co.jp/articles/{{slug}}" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <link rel="stylesheet" href="/style.css" />
@@ -133,6 +135,13 @@
 
   <!-- Article Container -->
   <main class="article-layout">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">THE AI RANK</a></li>
+        <li><a href="/articles">ブログ・事例</a></li>
+        <li aria-current="page">{{title}}</li>
+      </ol>
+    </nav>
     <article>
       <header class="article-header">
         <h1 class="article-title">{{title}}</h1>
