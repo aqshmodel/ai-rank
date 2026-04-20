@@ -44,6 +44,54 @@ app.get('/api/cert', createExpressHandler(certHandler));
 // Serve static files from root directory (index.html, style.css, assets/, scripts.js etc)
 app.use(express.static(__dirname));
 
+// Dynamic Sitemap Route
+app.get('/sitemap.xml', (req, res) => {
+  try {
+    const baseUrl = 'https://ai-rank.aqsh.co.jp';
+    
+    const staticPages = [
+      { url: '/', priority: 1.0, changefreq: 'weekly' },
+      { url: '/iwate.html', priority: 0.9, changefreq: 'weekly' },
+      { url: '/privacy', priority: 0.3, changefreq: 'yearly' },
+    ];
+
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+    staticPages.forEach(page => {
+      xml += `\n  <url>\n    <loc>${baseUrl}${page.url}</loc>\n    <changefreq>${page.changefreq}</changefreq>\n    <priority>${page.priority}</priority>\n  </url>`;
+    });
+
+    const postsDir = path.join(__dirname, 'posts');
+    if (fs.existsSync(postsDir)) {
+      const files = fs.readdirSync(postsDir);
+      files.forEach(file => {
+        if (file.endsWith('.md')) {
+          const slug = file.replace('.md', '');
+          const filePath = path.join(postsDir, file);
+          const fileContent = fs.readFileSync(filePath, 'utf-8');
+          const { data } = matter(fileContent);
+          
+          let lastmod = '';
+          if (data && data.date) {
+            const parsedDate = data.date.replace(/\./g, '-');
+            lastmod = `\n    <lastmod>${parsedDate}</lastmod>`;
+          }
+          
+          xml += `\n  <url>\n    <loc>${baseUrl}/articles/${slug}</loc>${lastmod}\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
+        }
+      });
+    }
+
+    xml += `\n</urlset>`;
+    
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  } catch (err) {
+    console.error('[AIRANK:sitemap_error]', err);
+    res.status(500).send('Error generating sitemap.');
+  }
+});
+
 // Markdown Blog SSR Route
 app.get('/articles/:slug', (req, res) => {
   const { slug } = req.params;
