@@ -91,7 +91,64 @@ app.get('/sitemap.xml', (req, res) => {
   }
 });
 
-// Markdown Blog SSR Route
+// API Route for Blog Articles
+app.get('/api/articles', (req, res) => {
+  try {
+    const postsDir = path.join(__dirname, 'posts');
+    if (!fs.existsSync(postsDir)) {
+      return res.json([]);
+    }
+    
+    const files = fs.readdirSync(postsDir);
+    const articles = [];
+    
+    files.forEach(file => {
+      if (file.endsWith('.md')) {
+        const slug = file.replace('.md', '');
+        const filePath = path.join(postsDir, file);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const { data } = matter(fileContent);
+        
+        articles.push({
+          slug,
+          title: data.title || 'No Title',
+          description: data.description || '',
+          coverImage: data.coverImage || '/assets/og-image.png',
+          date: data.date || ''
+        });
+      }
+    });
+
+    // Sort by date (descending)
+    articles.sort((a, b) => {
+      const dateA = new Date(a.date.replace(/\./g, '-'));
+      const dateB = new Date(b.date.replace(/\./g, '-'));
+      return dateB - dateA;
+    });
+
+    res.json(articles);
+  } catch (err) {
+    console.error('[AIRANK:api_articles_error]', err);
+    res.status(500).json({ error: 'Failed to load articles' });
+  }
+});
+
+// Blog TOP (Index) Route
+app.get('/articles', (req, res) => {
+  try {
+    const filePath = path.join(__dirname, 'views', 'articles-index.html');
+    if (fs.existsSync(filePath)) {
+      res.sendFile(filePath);
+    } else {
+      res.status(404).send('Blog index template not found.');
+    }
+  } catch (err) {
+    console.error('[AIRANK:blog_index_error]', err);
+    res.status(500).send('Error rendering blog index.');
+  }
+});
+
+// Markdown Blog SSR Route (Individual Article)
 app.get('/articles/:slug', (req, res) => {
   const { slug } = req.params;
   const filePath = path.join(__dirname, 'posts', `${slug}.md`);
