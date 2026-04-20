@@ -273,6 +273,128 @@ app.get('/articles/:slug', (req, res) => {
   }
 });
 
+// --- Glossary (Terms) Routes ---
+app.get('/terms', (req, res) => {
+  const termsDir = path.join(__dirname, 'terms');
+  if (!fs.existsSync(termsDir)) return res.send('Terms directory not found');
+  
+  const files = fs.readdirSync(termsDir).filter(f => f.endsWith('.md'));
+  const terms = [];
+  
+  files.forEach(file => {
+    const content = fs.readFileSync(path.join(termsDir, file), 'utf-8');
+    const { data } = matter(content);
+    terms.push({
+      slug: file.replace('.md', ''),
+      title: data.title || '',
+      furigana: data.furigana || '',
+      category: data.category || 'その他',
+      description: data.description || ''
+    });
+  });
+  
+  // Group by category
+  const grouped = {};
+  terms.forEach(t => {
+    if (!grouped[t.category]) grouped[t.category] = [];
+    grouped[t.category].push(t);
+  });
+  
+  // Build HTML
+  let contentHtml = '';
+  const sortedCategories = Object.keys(grouped).sort();
+  sortedCategories.forEach(cat => {
+    contentHtml += `<div class="term-category-block" id="${cat}">`;
+    contentHtml += `<h2 class="category-title">${cat}</h2>`;
+    contentHtml += `<div class="terms-grid">`;
+    
+    // Sort term by furigana or title
+    grouped[cat].sort((a,b) => (a.furigana || a.title).localeCompare(b.furigana || b.title));
+    
+    grouped[cat].forEach(t => {
+      contentHtml += `
+        <a href="/terms/${t.slug}" class="term-card">
+          <span class="term-card-furigana">${t.furigana}</span>
+          <h3 class="term-card-title">${t.title}</h3>
+          <p class="term-card-desc">${t.description}</p>
+        </a>
+      `;
+    });
+    
+    contentHtml += `</div></div>`;
+  });
+  
+  let template = fs.readFileSync(path.join(__dirname, 'views', 'terms-index.html'), 'utf-8');
+  template = template.replace(/\{\{content\}\}/g, contentHtml || '<p>用語がありません。</p>');
+  res.send(template);
+});
+
+app.get('/terms/:slug', (req, res) => {
+  const { slug } = req.params;
+  const filePath = path.join(__dirname, 'terms', `${slug}.md`);
+  
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send('Term not found.');
+  }
+
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const { data, content } = matter(fileContent);
+    const htmlContent = marked.parse(content);
+    
+    let template = fs.readFileSync(path.join(__dirname, 'views', 'term-template.html'), 'utf-8');
+    
+    // JSON-LD (DefinedTerm)
+    const termUrl = `https://ai-rank.aqsh.co.jp/terms/${slug}`;
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "DefinedTerm",
+      "name": data.title,
+      "description": data.description,
+      "url": termUrl
+    };
+
+    const breadcrumbSchema = {
+       "@context": "https://schema.org",
+       "@type": "BreadcrumbList",
+       "itemListElement": [{
+         "@type": "ListItem",
+         "position": 1,
+         "name": "THE AI RANK",
+         "item": "https://ai-rank.aqsh.co.jp/"
+       },{
+         "@type": "ListItem",
+         "position": 2,
+         "name": "AI用語辞典",
+         "item": "https://ai-rank.aqsh.co.jp/terms"
+       },{
+         "@type": "ListItem",
+         "position": 3,
+         "name": data.title,
+         "item": termUrl
+       }]
+    };
+
+    const jsonLdScript = `
+      <script type="application/ld+json">${JSON.stringify(schemaData)}</script>
+      <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
+    `;
+
+    template = template.replace(/\{\{slug\}\}/g, slug);
+    template = template.replace(/\{\{title\}\}/g, data.title || '');
+    template = template.replace(/\{\{description\}\}/g, data.description || '');
+    template = template.replace(/\{\{furigana\}\}/g, data.furigana || '');
+    template = template.replace(/\{\{category\}\}/g, data.category || '');
+    template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
+    template = template.replace(/\{\{content\}\}/g, htmlContent);
+
+    res.send(template);
+  } catch (err) {
+    console.error('[AIRANK:term_render_error]', err);
+    res.status(500).send('Error rendering term.');
+  }
+});
+
 // Explicit route for privacy policy
 app.get('/privacy', (req, res) => {
   res.sendFile(path.join(__dirname, 'privacy.html'));
@@ -293,6 +415,7 @@ app.get('/sitemap.xml', (req, res) => {
       { url: '/', priority: '1.0' },
       { url: '/iwate.html', priority: '0.9' },
       { url: '/articles', priority: '0.8' },
+      { url: '/terms', priority: '0.8' },
       { url: '/privacy', priority: '0.5' }
     ];
     
@@ -309,11 +432,29 @@ app.get('/sitemap.xml', (req, res) => {
       let lastmod = '';
       if (data.date) {
          try {
-           const d = new Date(data.date.replace(/\\./g, '-'));
+           const d = new Date(data.date.replace(/\./g, '-'));
            if (!isNaN(d)) lastmod = `<lastmod>${d.toISOString().split('T')[0]}</lastmod>`;
          } catch(e){}
       }
       xml += `  <url>\n    <loc>${baseUrl}/articles/${slug}</loc>\n    ${lastmod}\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+    });
+
+    // Dynamic terms (Glossary)
+    const termsDir = path.join(__dirname, 'terms');
+    const termFiles = fs.existsSync(termsDir) ? fs.readdirSync(termsDir).filter(f => f.endsWith('.md')) : [];
+    termFiles.forEach(file => {
+      const filePath = path.join(termsDir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const { data } = matter(content);
+      const slug = file.replace('.md', '');
+      let lastmod = '';
+      if (data.date) {
+         try {
+           const d = new Date(data.date.replace(/\./g, '-'));
+           if (!isNaN(d)) lastmod = `<lastmod>${d.toISOString().split('T')[0]}</lastmod>`;
+         } catch(e){}
+      }
+      xml += `  <url>\n    <loc>${baseUrl}/terms/${slug}</loc>\n    ${lastmod}\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
     });
     
     xml += `</urlset>`;

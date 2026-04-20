@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZPE2MPLRX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2ZPE2MPLRX');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>{{title}} とは？意味と活用例 — THE AI RANK AI用語辞典</title>
+  <meta name="description" content="{{description}}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{title}} とは？意味と活用例 — THE AI RANK AI用語辞典" />
+  <meta property="og:description" content="{{description}}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://ai-rank.aqsh.co.jp/terms/{{slug}}" />
+  <meta property="og:image" content="https://ai-rank.aqsh.co.jp/assets/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  {{jsonLd}}
+
+  <link rel="canonical" href="https://ai-rank.aqsh.co.jp/terms/{{slug}}" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  
+  <style>
+    /* Term Layout Typography */
+    .term-layout {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 140px 24px 100px;
+    }
+    .term-header {
+      margin-bottom: 48px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 32px;
+    }
+    .term-category {
+      display: inline-block;
+      background: var(--surface-float);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: var(--font-en);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .term-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .term-furigana {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Navigation / CTA */
+    .term-footer-nav {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Global Header -->
+  <header class="global-header">
+    <div class="gh-container">
+      <div class="gh-left">
+        <a href="/" class="gh-logo">THE AI RANK</a>
+      </div>
+      <nav class="gh-right">
+        <a href="/#diagnosis" class="gh-link">AIスキル診断</a>
+        <a href="/articles" class="gh-link">ブログ・事例</a>
+        <a href="/terms" class="gh-link">AI用語辞典</a>
+        <a href="/iwate.html" class="gh-link">岩手・法人向け</a>
+        <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="gh-btn">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Term Container -->
+  <main class="term-layout">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">THE AI RANK</a></li>
+        <li><a href="/terms">AI用語辞典</a></li>
+        <li aria-current="page">{{title}}</li>
+      </ol>
+    </nav>
+
+    <article>
+      <header class="term-header">
+        <div class="term-category">{{category}}</div>
+        <h1 class="term-title">{{title}}</h1>
+        <div class="term-furigana">{{furigana}}</div>
+      </header>
+      
+      <div class="md-body">
+        {{content}}
+      </div>
+    </article>
+    
+    <!-- CTA Area -->
+    <div style="margin-top:80px; padding:60px 40px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; text-align:center;">
+      <p class="mono small dim" style="margin-bottom:12px;">CONSULTATION</p>
+      <h3 style="font-family:var(--font-ja); font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight:700; margin-bottom:16px;">自社専用AI（エージェント）の構築について相談する</h3>
+      <p style="color:var(--ink-soft); font-size:1rem; margin-bottom:32px; line-height:1.6;">RAG技術やLLMを活用した法人向けの実用的なエージェント構築、<br>および組織定着のための伴走型研修を提供しています。</p>
+      <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="hero-cta primary" style="display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; width:auto; text-decoration:none;">
+        <span class="mono" style="margin:0; font-size:16px;">▸</span>
+        <span style="font-size:1.1rem; line-height:1;">Aqsh株式会社にお問い合わせ</span>
+      </a>
+    </div>
+
+    <div class="term-footer-nav">
+      <a href="/terms" class="back-btn">← 用語辞典一覧へ戻る</a>
+    </div>
+
+  </main>
+
+  <style>
+    /* md-body styles for terms */
+    .md-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink); }
+    .md-body p { margin-bottom: 24px; }
+    .md-body h2 { font-size: 1.5rem; margin: 48px 0 24px; font-weight: 700; border-left: 4px solid var(--accent); padding-left: 16px; }
+    .md-body h3 { font-size: 1.25rem; margin: 32px 0 16px; font-weight: 600; }
+    .md-body ul, .md-body ol { margin-bottom: 24px; padding-left: 24px; }
+    .md-body li { margin-bottom: 8px; }
+    .md-body strong { font-weight: 700; color: var(--ink); background: linear-gradient(transparent 60%, rgba(200,80,60,0.15) 60%); }
+  </style>
+</body>
+</html>

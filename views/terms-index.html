@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZPE2MPLRX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2ZPE2MPLRX');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>AI用語辞典 — THE AI RANK</title>
+  <meta name="description" content="AI導入や生成AIに関する専門用語を初心者向けにわかりやすく解説する用語辞典です。" />
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/style.css" />
+
+  <style>
+    .terms-hero {
+      padding: 180px 24px 80px;
+      text-align: center;
+      background: var(--surface);
+    }
+    .terms-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .terms-hero p {
+      color: var(--ink-soft);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .terms-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 120px;
+    }
+
+    /* Index Nav (A-Z / あ-わ) */
+    .terms-index-nav {
+      position: sticky;
+      top: 80px;
+      background: rgba(248, 247, 246, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+      margin-bottom: 60px;
+    }
+    .index-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .index-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--lp-surface);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .index-link:hover {
+      background: var(--accent);
+      color: var(--surface);
+      border-color: var(--accent);
+    }
+
+    /* Term Category Blocks */
+    .term-category-block {
+      margin-bottom: 80px;
+    }
+    .category-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* Term Cards Grid */
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .term-card {
+      background: var(--lp-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .term-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+      border-color: var(--accent);
+    }
+    .term-card-furigana {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+    .term-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .term-card-desc {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Global Header -->
+  <header class="global-header" style="background:var(--surface);">
+    <div class="gh-container">
+      <div class="gh-left">
+        <a href="/" class="gh-logo">THE AI RANK</a>
+      </div>
+      <nav class="gh-right">
+        <a href="/#diagnosis" class="gh-link">AIスキル診断</a>
+        <a href="/articles" class="gh-link">ブログ・事例</a>
+        <a href="/terms" class="gh-link active">AI用語辞典</a>
+        <a href="/iwate.html" class="gh-link">岩手・法人向け</a>
+        <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="gh-btn">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="terms-hero">
+    <h1>Glossary</h1>
+    <p>AIやシステム導入に関する専門用語を、ビジネスパーソン向けにわかりやすく解説します。</p>
+  </div>
+
+  <div class="terms-container">
+    <nav class="terms-index-nav">
+      <div class="index-group">
+        <a href="#A-Z" class="index-link">A-Z</a>
+        <a href="#あ" class="index-link">あ</a>
+        <a href="#か" class="index-link">か</a>
+        <a href="#さ" class="index-link">さ</a>
+        <a href="#た" class="index-link">た</a>
+        <a href="#な" class="index-link">な</a>
+        <a href="#は" class="index-link">は</a>
+        <a href="#ま" class="index-link">ま</a>
+        <a href="#や" class="index-link">や</a>
+        <a href="#ら" class="index-link">ら</a>
+        <a href="#わ" class="index-link">わ</a>
+      </div>
+    </nav>
+
+    {{content}}
+
+  </div>
+</body>
+</html>
