@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - THE AI RANK いわて</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --text: #111827;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --primary: #2563EB;
+      --primary-hover: #1D4ED8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    .tab {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .tab.active {
+      color: var(--primary);
+      background-color: #EFF6FF;
+    }
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    th {
+      background-color: #F3F4F6;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:hover {
+      background-color: #F9FAFB;
+    }
+    .date-col {
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #E5E7EB;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Admin Dashboard 📊</h1>
+    <a href="/" class="btn" style="background:#4B5563;">サイトへ戻る</a>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('signups')">個人診断 登録者</button>
+      <button class="tab" onclick="switchTab('enterprise')">法人お問い合わせ</button>
+    </div>
+
+    <!-- Signups Section -->
+    <div id="signups-section">
+      <div class="section-header">
+        <h2>個人診断 登録リスト</h2>
+        <a href="/api/admin/csv/signups" class="btn">⬇ CSVダウンロード</a>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>登録日時</th>
+              <th>企業名</th>
+              <th>氏名</th>
+              <th>メールアドレス</th>
+              <th>診断ランク</th>
+            </tr>
+          </thead>
+          <tbody id="signups-tbody">
+            <tr><td colspan="5">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Enterprise Section -->
+    <div id="enterprise-section" style="display:none;">
+      <div class="section-header">
+        <h2>法人お問い合わせ リスト</h2>
+        <a href="/api/admin/csv/enterprise" class="btn">⬇ CSVダウンロード</a>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>送信日時</th>
+              <th>企業名</th>
+              <th>担当者名</th>
+              <th>メールアドレス</th>
+              <th>従業員規模</th>
+              <th>要望・メッセージ</th>
+            </tr>
+          </thead>
+          <tbody id="enterprise-tbody">
+            <tr><td colspan="6">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadData() {
+      try {
+        const [resSignups, resEnt] = await Promise.all([
+          fetch('/api/admin/signups'),
+          fetch('/api/admin/enterprise')
+        ]);
+        
+        if(resSignups.ok) {
+          const signups = await resSignups.json();
+          renderSignups(signups);
+        } else {
+          document.getElementById('signups-tbody').innerHTML = '<tr><td colspan="5">Failed to load data</td></tr>';
+        }
+        
+        if(resEnt.ok) {
+          const enterprises = await resEnt.json();
+          renderEnterprise(enterprises);
+        } else {
+          document.getElementById('enterprise-tbody').innerHTML = '<tr><td colspan="6">Failed to load data</td></tr>';
+        }
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    function formatDate(dateString) {
+      if(!dateString) return '-';
+      const d = new Date(dateString);
+      return d.toLocaleString('ja-JP', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+    }
+
+    function renderSignups(data) {
+      const tbody = document.getElementById('signups-tbody');
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">データがありません。</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.map(row => `
+        <tr>
+          <td class="date-col">${formatDate(row.created_at)}</td>
+          <td><b>${escapeHtml(row.company)}</b></td>
+          <td>${escapeHtml(row.name)}</td>
+          <td><a href="mailto:${escapeHtml(row.email)}" style="color:var(--primary);">${escapeHtml(row.email)}</a></td>
+          <td><span class="badge">Level ${row.rank ?? '-'}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderEnterprise(data) {
+      const tbody = document.getElementById('enterprise-tbody');
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">データがありません。</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.map(row => `
+        <tr>
+          <td class="date-col">${formatDate(row.created_at)}</td>
+          <td><b>${escapeHtml(row.company)}</b></td>
+          <td>${escapeHtml(row.contact_name)}<br><small style="color:gray;">${escapeHtml(row.job_title||'')}</small></td>
+          <td><a href="mailto:${escapeHtml(row.email)}" style="color:var(--primary);">${escapeHtml(row.email)}</a></td>
+          <td>${escapeHtml(row.employee_count || '-')}</td>
+          <td style="max-width:300px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${escapeHtml(row.message || '')}">${escapeHtml(row.message || '-')}</td>
+        </tr>
+      `).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      document.getElementById('signups-section').style.display = 'none';
+      document.getElementById('enterprise-section').style.display = 'none';
+
+      if (tab === 'signups') {
+        document.querySelector('.tab:nth-child(1)').classList.add('active');
+        document.getElementById('signups-section').style.display = 'block';
+      } else {
+        document.querySelector('.tab:nth-child(2)').classList.add('active');
+        document.getElementById('enterprise-section').style.display = 'block';
+      }
+    }
+
+    // Load data on page load
+    window.addEventListener('DOMContentLoaded', loadData);
+  </script>
+</body>
+</html>

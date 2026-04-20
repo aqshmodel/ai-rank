@@ -1,0 +1,30 @@
+# 新規用語作成タスクリスト
+
+- [ ] `/terms/ide.md` (IDE) の作成
+- [ ] `/terms/vscode.md` (VSCode) の作成
+- [ ] `/terms/devcontainer.md` (開発コンテナ) の作成
+- [ ] `/terms/environment-variables.md` (環境変数) の作成
+- [ ] `/terms/env-file.md` (.env) の作成
+- [ ] `/terms/mkdir.md` (mkdir) の作成
+- [ ] `/terms/rm.md` (rm) の作成
+- [ ] `/terms/gitignore.md` (.gitignore) の作成
+- [ ] `/terms/git.md` (Git) の作成
+- [ ] `/terms/github.md` (GitHub) の作成
+- [ ] `/terms/frontend.md` (フロントエンド) の作成
+- [ ] `/terms/backend.md` (バックエンド) の作成
+- [ ] `/terms/framework.md` (フレームワーク) の作成
+- [ ] `/terms/database.md` (データベース) の作成
+- [ ] `/terms/cache.md` (キャッシュ) の作成
+- [ ] `/terms/cookie.md` (Cookie) の作成
+- [ ] `/terms/ip-address.md` (IPアドレス) の作成
+- [ ] `/terms/dns.md` (DNS) の作成
+- [ ] `/terms/encryption.md` (暗号化) の作成
+- [ ] `/terms/private-key.md` (秘密鍵) の作成
+- [ ] `/terms/ssh.md` (SSH) の作成
+- [ ] `/terms/ftp.md` (FTP) の作成
+- [ ] `/terms/docker.md` (Docker) の作成
+- [ ] `/terms/deploy.md` (デプロイ) の作成
+- [ ] `/terms/debug.md` (デバッグ) の作成
+- [ ] `/terms/log.md` (ログ) の作成
+- [ ] ビルドおよびMarkdownパースエラーの検証
+- [ ] `walkthrough.md` の作成（作業完了報告）

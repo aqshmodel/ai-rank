@@ -1,6 +1,3 @@
-import sys
-from PIL import Image
-
 import os
 import sys
 from PIL import Image

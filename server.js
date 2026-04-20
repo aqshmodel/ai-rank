@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { marked } from 'marked';
 import matter from 'gray-matter';
+import basicAuth from 'express-basic-auth';
+import { pool, dbEnabled } from './api/_db.js';
 
 // Import API handlers
 import signupHandler from './api/signup.js';
@@ -52,6 +54,80 @@ app.post('/api/enterprise', createExpressHandler(enterpriseHandler));
 app.get('/api/cert', createExpressHandler(certHandler));
 
 // 動的ルート群が確実に優先されるよう、ここではstaticの宣言を行わない
+
+// Admin Basic Auth configuration
+const adminPassword = process.env.ADMIN_PASSWORD;
+const authMiddleware = basicAuth({
+  users: { 'tsukada-t@aqsh.co.jp': adminPassword || 'changeme' },
+  challenge: true,
+  realm: 'Aqsh Admin Area'
+});
+
+// Admin View Route
+app.get('/admin', authMiddleware, (req, res) => {
+  const filePath = path.join(__dirname, 'views', 'admin.html');
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send('Admin template not found. Please create views/admin.html');
+  }
+});
+
+// Admin API Route (Signups)
+app.get('/api/admin/signups', authMiddleware, async (req, res) => {
+  if (!dbEnabled) return res.status(500).json({ error: 'DB not configured' });
+  try {
+    const result = await pool.query('SELECT * FROM signups ORDER BY created_at DESC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('[AIRANK:admin_api_error]', err);
+    res.status(500).json({ error: 'Failed to fetch signups' });
+  }
+});
+
+// Admin API Route (Enterprise)
+app.get('/api/admin/enterprise', authMiddleware, async (req, res) => {
+  if (!dbEnabled) return res.status(500).json({ error: 'DB not configured' });
+  try {
+    const result = await pool.query('SELECT * FROM enterprise_inquiries ORDER BY created_at DESC');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('[AIRANK:admin_api_error]', err);
+    res.status(500).json({ error: 'Failed to fetch enterprise inquiries' });
+  }
+});
+
+// Admin CSV Download
+app.get('/api/admin/csv/:type', authMiddleware, async (req, res) => {
+  if (!dbEnabled) return res.status(500).send('DB not configured');
+  try {
+    const table = req.params.type === 'enterprise' ? 'enterprise_inquiries' : 'signups';
+    const result = await pool.query(`SELECT * FROM ${table} ORDER BY created_at DESC`);
+    if (result.rows.length === 0) return res.send('No data available');
+    
+    const fields = Object.keys(result.rows[0]);
+    const csvRows = [];
+    csvRows.push(fields.join(','));
+    
+    for (const row of result.rows) {
+      const values = fields.map(f => {
+        let val = row[f];
+        if (val === null || val === undefined) val = '';
+        if (typeof val === 'object') val = JSON.stringify(val);
+        val = String(val).replace(/"/g, '""'); // Escape double quotes
+        return `"${val}"`;
+      });
+      csvRows.push(values.join(','));
+    }
+    
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${table}_${new Date().toISOString().split('T')[0]}.csv"`);
+    res.send('\uFEFF' + csvRows.join('\n')); // BOM for Excel
+  } catch (err) {
+    console.error('[AIRANK:admin_csv_error]', err);
+    res.status(500).send('Failed to generate CSV');
+  }
+});
 
 
 

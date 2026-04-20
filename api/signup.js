@@ -207,54 +207,7 @@ export default async function handler(req, res) {
       console.warn("[AIRANK:db_not_configured] set PostgreSQL connection variables");
     }
 
-    // 3) Optional external forwarding (Slack / Google Sheets / Notion etc.)
-    //    SSRF guard: require https and a non-private host. Accidental/malicious
-    //    misconfiguration should not be able to point this at internal metadata.
-    const FORWARD_URL = process.env.SIGNUP_FORWARD_URL || "";
-    if (FORWARD_URL) {
-      let parsed = null;
-      try { parsed = new URL(FORWARD_URL); } catch (e) { /* ignore */ }
-      const rawHost = parsed?.hostname || "";
-      // Node keeps brackets on IPv6 literals (`[::1]`). Strip them so we can
-      // match exact addresses, and detect IPv6 separately from DNS names so
-      // that e.g. `fc2.com` isn't mistaken for an `fc00::/7` ULA literal.
-      const isIpv6Literal = rawHost.startsWith("[") && rawHost.endsWith("]");
-      const host = isIpv6Literal ? rawHost.slice(1, -1).toLowerCase() : rawHost.toLowerCase();
-      const isPrivateIpv4 =
-        /^127\./.test(host) ||
-        /^169\.254\./.test(host) ||
-        /^10\./.test(host) ||
-        /^192\.168\./.test(host) ||
-        /^172\.(1[6-9]|2\d|3[0-1])\./.test(host);
-      const isPrivateIpv6 = isIpv6Literal && (
-        host === "::1" ||
-        host === "::" ||
-        /^fe[89ab][0-9a-f]?:/.test(host) ||   // fe80::/10 link-local
-        /^f[cd][0-9a-f]{0,2}:/.test(host)      // fc00::/7 ULA
-      );
-      const isPrivate =
-        host === "localhost" ||
-        host === "metadata.google.internal" ||
-        host.endsWith(".local") ||
-        host.endsWith(".internal") ||
-        isPrivateIpv4 ||
-        isPrivateIpv6;
-
-      if (!parsed || parsed.protocol !== "https:" || isPrivate) {
-        console.error("[AIRANK:forward_blocked]", parsed?.protocol || "invalid", rawHost || "(none)");
-      } else {
-        try {
-          const resp = await fetch(parsed.toString(), {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(record),
-          });
-          if (!resp.ok) console.error("[AIRANK:forward_non2xx]", resp.status, resp.statusText);
-        } catch (e) {
-          console.error("[AIRANK:forward_failed]", e?.message || e);
-        }
-      }
-    }
+    // Webhook forwarding logic removed as per requirements.
 
     return res.status(200).json({ ok: true });
   } catch (err) {

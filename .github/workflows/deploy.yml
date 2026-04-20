@@ -27,6 +27,13 @@ jobs:
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.github' ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:~/app/the-ai-rank/
 
+      - name: Configure .env on VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
+            echo 'DATABASE_URL=postgresql://airank_user:airank_pass@localhost:5432/airank' > ~/app/the-ai-rank/.env && \
+            echo 'ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}' >> ~/app/the-ai-rank/.env \
+          "
+
       - name: Restart PM2 on VPS
         run: |
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
