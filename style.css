@@ -2085,3 +2085,20 @@ body { padding-top: 70px; }
 @media (max-width: 600px) {
   .breadcrumbs li[aria-current="page"] { max-width: 120px; }
 }
+
+/* ─── Company Info Footer ─── */
+ .gf-col-company { grid-column: span 2; }
+ .company-info-dl {
+   display: grid;
+   grid-template-columns: 70px 1fr;
+   gap: 8px 12px;
+   font-size: 13px;
+   color: rgba(255,255,255,0.7);
+   line-height: 1.5;
+   margin-top: 16px;
+ }
+ .company-info-dl dt { color: var(--brass-soft); font-weight: 500; }
+ .company-info-dl dd { margin: 0; }
+ @media (max-width: 780px) {
+   .gf-col-company { grid-column: 1 / -1; }
+ }

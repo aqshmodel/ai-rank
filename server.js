@@ -255,6 +255,53 @@ app.get('/articles/:slug', (req, res) => {
       <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
     `;
 
+    // Build Related Articles
+    const postsDir = path.join(__dirname, 'posts');
+    let relatedHtml = '';
+    if (fs.existsSync(postsDir)) {
+      const allFiles = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') && f !== `${slug}.md`);
+      let candidates = [];
+      allFiles.forEach(f => {
+        const c = fs.readFileSync(path.join(postsDir, f), 'utf-8');
+        const m = matter(c);
+        candidates.push({ slug: f.replace('.md', ''), data: m.data });
+      });
+      
+      const currentTags = data.tags || [];
+      candidates.forEach(c => {
+        let score = 0;
+        const cTags = c.data.tags || [];
+        cTags.forEach(t => { if (currentTags.includes(t)) score++; });
+        c.score = score;
+      });
+      
+      candidates.sort((a,b) => {
+        if(b.score !== a.score) return b.score - a.score;
+        const dA = new Date((a.data.date || '').replace(/\./g, '-'));
+        const dB = new Date((b.data.date || '').replace(/\./g, '-'));
+        return dB - dA;
+      });
+      
+      const selected = candidates.slice(0, 3);
+      if(selected.length > 0) {
+        relatedHtml = `<div class="related-section" style="margin-top: 80px;">
+          <h3 class="related-title" style="font-size:1.5rem; font-family:var(--font-ja); font-weight:700; margin-bottom:24px; border-bottom:2px solid var(--border); padding-bottom:12px;">関連記事</h3>
+          <div class="related-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">`;
+        selected.forEach(s => {
+          const cover = s.data.coverImage ? (s.data.coverImage.startsWith('http') ? s.data.coverImage : `https://ai-rank.aqsh.co.jp${s.data.coverImage}`) : '/assets/og-image.png';
+          relatedHtml += `
+            <a href="/articles/${s.slug}" class="related-card" style="display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--lp-surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;">
+              <div style="width:100%; height:160px; background:url('${cover}') center/cover no-repeat; border-bottom: 1px solid var(--border);"></div>
+              <div style="padding:16px;">
+                <h4 style="font-size:1.1rem; margin-bottom:8px; line-height:1.5; font-weight:700;">${s.data.title}</h4>
+                <p style="font-size:0.85rem; color:var(--ink-muted);">${s.data.date || ''}</p>
+              </div>
+            </a>`;
+        });
+        relatedHtml += `</div></div>`;
+      }
+    }
+
     // Replace markers
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK Article');
@@ -264,6 +311,7 @@ app.get('/articles/:slug', (req, res) => {
     template = template.replace(/\{\{tags\}\}/g, tagsHtml);
     template = template.replace(/\{\{authorProfile\}\}/g, authorHtml);
     template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
+    template = template.replace(/\{\{relatedArticles\}\}/g, relatedHtml);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);
@@ -384,12 +432,48 @@ app.get('/terms/:slug', (req, res) => {
       <script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>
     `;
 
+    // Build Related Terms
+    const termsDir = path.join(__dirname, 'terms');
+    let relatedTermsHtml = '';
+    if (fs.existsSync(termsDir)) {
+      const allTermFiles = fs.readdirSync(termsDir).filter(f => f.endsWith('.md') && f !== `${slug}.md`);
+      let tCandidates = [];
+      const currentCat = data.category || '';
+      if(currentCat !== '') {
+        allTermFiles.forEach(f => {
+          const c = fs.readFileSync(path.join(termsDir, f), 'utf-8');
+          const m = matter(c);
+          if (m.data.category === currentCat) {
+            tCandidates.push({ slug: f.replace('.md', ''), data: m.data });
+          }
+        });
+        
+        tCandidates.sort(() => 0.5 - Math.random());
+        const tSelected = tCandidates.slice(0, 4);
+        
+        if(tSelected.length > 0) {
+          relatedTermsHtml = `<div class="related-section" style="margin-top: 80px;">
+            <h3 class="related-title" style="font-size:1.3rem; font-weight:700; color:var(--accent); margin-bottom:24px; border-bottom:2px solid var(--border); padding-bottom:12px;">同じ「${currentCat}」の関連用語</h3>
+            <div class="related-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">`;
+          tSelected.forEach(s => {
+            relatedTermsHtml += `
+              <a href="/terms/${s.slug}" class="related-term-card" style="display:flex; flex-direction:column; text-decoration:none; color:inherit; background:var(--lp-surface); border:1px solid var(--border); border-radius:8px; padding:16px; transition:all 0.2s;">
+                <span style="font-size:0.75rem; color:var(--ink-muted); margin-bottom:4px;">${s.data.furigana || ''}</span>
+                <h4 style="font-size:1.1rem; font-weight:700; line-height:1.4; color:var(--ink);">${s.data.title}</h4>
+              </a>`;
+          });
+          relatedTermsHtml += `</div></div>`;
+        }
+      }
+    }
+
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || '');
     template = template.replace(/\{\{description\}\}/g, data.description || '');
     template = template.replace(/\{\{furigana\}\}/g, data.furigana || '');
     template = template.replace(/\{\{category\}\}/g, data.category || '');
     template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
+    template = template.replace(/\{\{relatedTerms\}\}/g, relatedTermsHtml);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);

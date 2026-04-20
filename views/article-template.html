@@ -111,6 +111,16 @@
       text-decoration: underline;
       text-underline-offset: 4px;
     }
+    
+    /* Related Cards Hover */
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-color: var(--accent);
+    }
+    .related-card:hover h4 {
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
@@ -163,6 +173,8 @@
     
     {{authorProfile}}
 
+    {{relatedArticles}}
+
     <div style="margin-top:80px; padding:60px 40px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; text-align:center;">
       <p class="mono small dim" style="margin-bottom:12px;">CONSULTATION</p>
       <h3 style="font-family:var(--font-ja); font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight:700; margin-bottom:16px;">AIに関する経営課題のご相談はこちらから</h3>
@@ -195,6 +207,18 @@
           <a href="https://aqsh.co.jp" target="_blank" rel="noopener">運営会社 (Aqsh株式会社)</a>
           <a href="/privacy">プライバシーポリシー</a>
         </nav>
+      </div>
+      <div class="gf-col gf-col-company">
+        <h4>会社概要</h4>
+        <dl class="company-info-dl">
+          <dt>会社名</dt><dd>Aqsh株式会社</dd>
+          <dt>設立</dt><dd>2021年4月1日</dd>
+          <dt>資本金</dt><dd>5,000千円</dd>
+          <dt>代表者</dt><dd>代表取締役 塚田 崇博</dd>
+          <dt>事業所</dt><dd>〒028-7111<br>岩手県八幡平市大更25地割113番地 起業家支援センター2F</dd>
+          <dt>連絡先</dt><dd>TEL: 0195-78-8045<br>Mail: info@aqsh.co.jp</dd>
+          <dt>主要事業</dt><dd>ブランディング事業・マーケティング事業・HRコンサルティング事業・ビジュアルデザイン事業・Webサイト制作/Webアプリ開発事業・AIソリューション事業</dd>
+        </dl>
       </div>
     </div>
     <div class="gf-bottom">
