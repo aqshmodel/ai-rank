@@ -309,21 +309,45 @@
 
     /* Bottom CTA */
     .cta-section {
-      padding: clamp(80px, 12vw, 160px) 24px;
+      position: relative;
+      padding: clamp(100px, 15vw, 200px) 24px;
       text-align: center;
-      background: var(--lp-surface);
+      background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2000');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #FFFFFF;
     }
-    .cta-section h2 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 24px;
+    .cta-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(31,31,31,0.85) 0%, rgba(31,31,31,0.95) 100%);
+      z-index: 1;
     }
     .cta-box {
-      max-width: 600px;
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
       margin: 0 auto;
     }
-    .cta-box p {
-      text-align: left;
+    .cta-box h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 32px;
+      color: #FFFFFF;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      text-wrap: balance;
     }
+    .cta-box p {
+      text-align: center;
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0;
+      text-wrap: balance;
+    }
+    .cta-box .opacity-70 { opacity: 0.7; }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -467,17 +491,18 @@
 
   <!-- CTA Section -->
   <section class="cta-section" id="contact">
+    <div class="cta-overlay"></div>
     <div class="cta-box">
       <h2>まずは、現状の課題をお聞かせください。</h2>
-      <p style="color:var(--ink-soft); margin-bottom: 40px; line-height:1.8;">
+      <p>
         「何から手を付ければいいかわからない」という段階で構いません。<br/>
         オンライン、または岩手県内であれば直接お伺いしての無料相談を承っております。
       </p>
-      <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="cta-button" style="text-decoration:none;">
-        <span class="mono">▸</span>
-        <span>無料相談フォームへ進む</span>
+      <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="hero-cta primary" style="display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; width:auto; text-decoration:none; margin-top: 40px;">
+        <span class="mono" style="margin:0; font-size:16px;">▸</span>
+        <span style="font-size:1.1rem; line-height:1;">無料相談フォームへ進む</span>
       </a>
-      <p style="margin-top:24px; font-size:0.875rem;" class="mono dim">※別タブでAqsh株式会社のお問い合わせページが開きます</p>
+      <p style="margin-top:24px; font-size:0.875rem; letter-spacing:0.05em;" class="mono opacity-70">※別タブでAqsh株式会社のお問い合わせページが開きます</p>
     </div>
   </section>
 
