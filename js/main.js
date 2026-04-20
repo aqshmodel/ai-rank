@@ -1,4 +1,4 @@
-import { LEVELS, QUESTIONS } from './js/data/diagnosisData.js';
+import { LEVELS, QUESTIONS } from './data/diagnosisData.js';
 
 /* ═══════════════════════════════════════════════════════════
    THE AI RANK いわて · Interactive Layer
