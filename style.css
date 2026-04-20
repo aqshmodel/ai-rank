@@ -1707,10 +1707,30 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .gh-btn:hover { background: var(--accent); }
 
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 30px; height: 30px; background: transparent; border: none; cursor: pointer; z-index: 10006; }
+.hamburger span { width: 100%; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; }
+.hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-active span:nth-child(2) { opacity: 0; }
+.hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 800px) {
-  .gh-right { gap: 12px; }
-  .gh-link { display: none; } /* モバイル時はCTAボタンのみ表示等の簡略化 */
+  .hamburger { display: flex; margin-left: 16px; }
+  .gh-right {
+    position: fixed; top: 0; left: 0; right: 0; padding: 100px 24px 40px;
+    background: var(--paper); border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 24px;
+    transform: translateY(-100%); opacity: 0; pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .gh-right.is-active {
+    transform: translateY(0); opacity: 1; pointer-events: auto;
+  }
+  .gh-link { font-size: 18px; width: 100%; text-align: center; }
+  .gh-btn { width: 100%; text-align: center; font-size: 16px; padding: 16px; }
+  /* 言語切り替え用要素強制非表示 */
 }
+.lang-switch-float, .lang-switch { display: none !important; }
 
 /* Base adjustment for fixed header */
 body { padding-top: 70px; }
