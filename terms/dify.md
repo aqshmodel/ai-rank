@@ -2,7 +2,7 @@
 title: "Dify"
 description: "企業が自社専用のAIシステムを構築するための最強のノーコード基盤「Dify」を解説します。"
 date: "2026.04.20"
-furigana: "でぃふぁい"
+furigana: "でぃふぃー"
 category: "開発・ノーコード基盤"
 ---
 

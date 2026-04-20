@@ -46,7 +46,7 @@
       padding: 0 24px 120px;
     }
 
-    /* Index Nav (A-Z / あ-わ) */
+    /* Index Nav & Search */
     .terms-index-nav {
       position: sticky;
       top: 80px;
@@ -56,6 +56,40 @@
       border-bottom: 1px solid var(--border);
       z-index: 10;
       margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+    .term-search-input {
+      width: 100%;
+      padding: 16px 20px 16px 48px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      font-size: 1.1rem;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .term-search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(201, 161, 74, 0.1);
+    }
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: var(--ink-muted);
     }
     .index-group {
       display: flex;
@@ -63,21 +97,19 @@
       justify-content: center;
       gap: 12px;
     }
-    .index-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .index-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 100px;
       background: var(--lp-surface);
       border: 1px solid var(--border);
       color: var(--ink);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
     }
-    .index-link:hover {
+    .index-badge:hover {
       background: var(--accent);
       color: var(--surface);
       border-color: var(--accent);
@@ -171,23 +203,94 @@
 
   <div class="terms-container">
     <nav class="terms-index-nav">
-      <div class="index-group">
-        <a href="#A-Z" class="index-link">A-Z</a>
-        <a href="#あ" class="index-link">あ</a>
-        <a href="#か" class="index-link">か</a>
-        <a href="#さ" class="index-link">さ</a>
-        <a href="#た" class="index-link">た</a>
-        <a href="#な" class="index-link">な</a>
-        <a href="#は" class="index-link">は</a>
-        <a href="#ま" class="index-link">ま</a>
-        <a href="#や" class="index-link">や</a>
-        <a href="#ら" class="index-link">ら</a>
-        <a href="#わ" class="index-link">わ</a>
+      <div class="search-wrapper">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="termSearch" class="term-search-input" placeholder="キーワードで用語を探す..." autocomplete="off">
       </div>
+      {{categoryNav}}
     </nav>
+    <div id="noResultsMsg" style="display:none; text-align:center; padding: 60px 20px; color: var(--ink-soft); font-size: 1.1rem;">
+      一致する用語が見つかりませんでした。
+    </div>
 
     {{content}}
 
   </div>
+
+  <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="gf-container">
+      <div class="gf-col">
+        <h4>THE AI RANK</h4>
+        <p>AIスキル測定システム</p>
+      </div>
+      <div class="gf-col">
+        <h4>Menu</h4>
+        <nav>
+          <a href="/">診断トップ</a>
+          <a href="/iwate.html">法人向け（岩手特化）</a>
+          <a href="/articles">ブログ・導入事例</a>
+        </nav>
+      </div>
+      <div class="gf-col">
+        <h4>Information</h4>
+        <nav>
+          <a href="https://aqsh.co.jp" target="_blank" rel="noopener">運営会社 (Aqsh株式会社)</a>
+          <a href="/privacy">プライバシーポリシー</a>
+          <a href="https://x.com/Aqsh_Inc" target="_blank" rel="noopener">X (Twitter)</a>
+        </nav>
+      </div>
+    </div>
+    <div class="gf-bottom">
+      <p>&copy; 2026 Aqsh Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('termSearch');
+      const termCards = document.querySelectorAll('.term-card');
+      const categoryBlocks = document.querySelectorAll('.term-category-block');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+
+      if(searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          let totalVisible = 0;
+
+          categoryBlocks.forEach(block => {
+            const cardsInBlock = block.querySelectorAll('.term-card');
+            let blockVisibleCount = 0;
+
+            cardsInBlock.forEach(card => {
+              const title = card.querySelector('.term-card-title')?.textContent.toLowerCase() || '';
+              const furi = card.querySelector('.term-card-furigana')?.textContent.toLowerCase() || '';
+              const desc = card.querySelector('.term-card-desc')?.textContent.toLowerCase() || '';
+
+              if(title.includes(query) || furi.includes(query) || desc.includes(query)) {
+                card.style.display = 'flex';
+                blockVisibleCount++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            if(blockVisibleCount === 0) {
+              block.style.display = 'none';
+            } else {
+              block.style.display = 'block';
+            }
+            totalVisible += blockVisibleCount;
+          });
+
+          if(totalVisible === 0 && query !== '') {
+            noResultsMsg.style.display = 'block';
+          } else {
+            noResultsMsg.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

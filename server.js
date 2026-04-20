@@ -302,8 +302,10 @@ app.get('/terms', (req, res) => {
   
   // Build HTML
   let contentHtml = '';
+  let categoryNavHtml = '<div class="index-group">';
   const sortedCategories = Object.keys(grouped).sort();
   sortedCategories.forEach(cat => {
+    categoryNavHtml += `<a href="#${cat}" class="index-badge">${cat}</a>`;
     contentHtml += `<div class="term-category-block" id="${cat}">`;
     contentHtml += `<h2 class="category-title">${cat}</h2>`;
     contentHtml += `<div class="terms-grid">`;
@@ -323,8 +325,10 @@ app.get('/terms', (req, res) => {
     
     contentHtml += `</div></div>`;
   });
+  categoryNavHtml += '</div>';
   
   let template = fs.readFileSync(path.join(__dirname, 'views', 'terms-index.html'), 'utf-8');
+  template = template.replace(/\{\{categoryNav\}\}/g, categoryNavHtml);
   template = template.replace(/\{\{content\}\}/g, contentHtml || '<p>用語がありません。</p>');
   res.send(template);
 });
