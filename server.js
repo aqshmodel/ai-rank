@@ -582,6 +582,11 @@ app.get('/c', createExpressHandler(certHandler));
 // Serve static files from root directory (index.html, style.css, assets/, scripts.js etc)
 app.use(express.static(__dirname));
 
+// Custom explicit routes for specific pages
+app.get('/diagnosis', (req, res) => {
+  res.sendFile(path.join(__dirname, 'diagnosis.html'));
+});
+
 // Fallback
 app.get('*', (req, res) => {
   // If the request is for a file (has an extension), don't return HTML
