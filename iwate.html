@@ -67,28 +67,78 @@
     body { background-color: var(--lp-bg); }
     
     .local-hero {
-      padding: clamp(140px, 15vw, 200px) 24px clamp(80px, 10vw, 120px);
-      text-align: center;
+      padding: clamp(140px, 15vw, 180px) 24px clamp(80px, 10vw, 120px);
       background: var(--lp-bg);
       position: relative;
+      overflow: hidden;
     }
-    .local-hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    .hero-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+    }
+    .hero-left {
+      text-align: left;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(139, 37, 20, 0.08); border: 1px solid rgba(139, 37, 20, 0.2);
+      padding: 6px 16px; border-radius: 50px;
+      font-size: 0.85rem; color: var(--accent); font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero-badge .mono { font-size: 0.8rem; }
+    .hero-left h1 {
+      font-size: clamp(2.5rem, 4vw, 4rem);
       font-weight: 800;
-      line-height: 1.2;
+      line-height: 1.25;
       color: var(--ink);
       margin-bottom: 24px;
       font-family: var(--font-ja);
       letter-spacing: -0.02em;
     }
-    .local-hero h1 span { color: var(--accent); }
-    .local-hero p {
-      font-size: clamp(1rem, 2vw, 1.125rem);
+    .hero-left h1 span { color: var(--accent); }
+    .hero-left p {
+      font-size: clamp(1rem, 1.2vw, 1.125rem);
       color: var(--ink-soft);
-      line-height: 2;
-      max-width: 720px;
-      margin: 0 auto 48px;
-      text-align: left;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 580px;
+    }
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hero-stat-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 32px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .hero-stat-card:hover { transform: translateY(-4px); }
+    .stat-val {
+      font-family: var(--font-en); font-size: clamp(3rem, 4vw, 4rem); font-weight: 800; color: var(--ink); line-height: 1;
+      margin-bottom: 8px; letter-spacing: -0.03em;
+    }
+    .stat-val span { font-size: 1.8rem; color: var(--ink-muted); margin-left: 4px; }
+    .stat-desc { font-size: 1rem; color: var(--ink-soft); font-weight: 700; }
+    .stat-sub { font-size: 0.85rem; color: var(--ink-muted); margin-top: 6px; line-height: 1.5; }
+    
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-left { text-align: center; }
+      .hero-left p { margin-left: auto; margin-right: auto; text-align: left; }
     }
     
     .section-header {
@@ -118,10 +168,10 @@
     /* Pain Section */
     .pain-section {
       background: var(--ink);
-      color: var(--bg);
+      color: #FFFFFF;
       padding: var(--section-pad);
     }
-    .pain-section h2, .pain-section p, .pain-section li { color: var(--bg); }
+    .pain-section h2, .pain-section p, .pain-section li { color: #FFFFFF; }
     .pain-list {
       max-width: 800px;
       margin: 0 auto;
@@ -291,25 +341,42 @@
 
   <!-- Hero Section -->
   <section class="local-hero">
-    <div class="chapter-marker" style="margin-bottom: 32px;">
-      <span class="mono">—— FOR IWATE / TOHOKU ——</span>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <span class="mono">AUTHORITY</span>
+          <span>世界標準のスキル測定基盤から地方へ</span>
+        </div>
+        <h1>ただツールを入れるだけの<br/><span>AI導入</span>は、もうやめにしませんか。</h1>
+        <p>
+          「ChatGPTを入れてみたが、一部の若手しか使っていない」「自社の業務にどう組み込めばいいか分からない」—。<br/>
+          Aqsh株式会社は、岩手県の地域企業に対して、本当に現場が回る「個社専用のAIエージェント開発」と「全社員のAI研修」をセットにした本質的なトランスフォーメーションを提供します。
+        </p>
+        <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="hero-cta primary" style="display:inline-flex; flex-direction:row; align-items:center; justify-content:center; gap:12px; width:auto; text-decoration:none;">
+          <span class="mono" style="margin:0; font-size:16px;">▸</span>
+          <span style="font-size:1.05rem; line-height:1;">導入の無料相談・お問い合わせ</span>
+        </a>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat-card">
+          <div class="stat-val">300<span>+</span></div>
+          <div class="stat-desc">AIスキル評価データ蓄積</div>
+          <div class="stat-sub">THE AI RANK 法人版を通じた定量的な分析実績</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="stat-val">100<span>%</span></div>
+          <div class="stat-desc">現場への泥臭い伴走コミット</div>
+          <div class="stat-sub">上流のレポート作成ではなく、社内エージェントの運用・定着まで徹底サポート</div>
+        </div>
+      </div>
     </div>
-    <h1>ただツールを入れるだけの<br/>AI導入は、もうやめにしませんか。</h1>
-    <p>
-      「ChatGPTを入れてみたが、一部の社員しか使っていない」「自社の業務にどう組み込めばいいか分からない」—。<br/>
-      私たちAqsh株式会社は、岩手県の地域企業に対して、本当に現場が回る「AIエージェント開発」と「全社研修」をセットにした本質的なAIトランスフォーメーション伴走支援を提供します。
-    </p>
-    <a href="#contact" class="cta-button" style="text-decoration:none;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return false;">
-      <span class="mono">▸</span>
-      <span>導入の無料相談・お問い合わせ</span>
-    </a>
   </section>
 
   <!-- Pain Section -->
   <section class="pain-section">
     <div class="section-header">
       <span class="sub">Pain Points</span>
-      <h2 style="color:var(--bg)">生成AI時代、地方企業が直面する壁</h2>
+      <h2 style="color:#FFFFFF">生成AI時代、地方企業が直面する壁</h2>
     </div>
     <ul class="pain-list">
       <li>人手不足への対策としてDXやAIを推進したいが、社内にリードできる人材・IT担当者がいない。</li>
