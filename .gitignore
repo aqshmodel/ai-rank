@@ -5,3 +5,9 @@ node_modules
 *.log
 /tmp
 .favicon-backup/
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key

@@ -5,14 +5,14 @@
 
 const I18N = {
   ja: {
-    "masthead.brand": "AI 格付けランク · by CHAEN",
+    "masthead.brand": "AI 格付けランク · by Aqsh株式会社",
     "nav.diag": "無 料 診 断",
     "nav.contact": "お 問 い 合 わ せ",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
-    "hero.sub1": "— <em>AI 格付けランク</em> · by CHAEN —",
-    "hero.sub2": "THE AI RANK — A 9-LEVEL CLASSIFICATION BY CHAEN",
+    "hero.sub1": "— <em>AI 格付けランク</em> · by Aqsh株式会社 —",
+    "hero.sub2": "THE AI RANK — A 9-LEVEL CLASSIFICATION BY AQSH",
 
     "stat.levels": "LEVELS",
     "stat.range":  "BEGINNER → SINGULARIAN",
@@ -53,7 +53,7 @@ const I18N = {
     "ent.marker2": "法 人 向 け",
     "ent.title1":  "BRING THE AI RANK",
     "ent.title2":  "TO YOUR ORGANIZATION.",
-    "ent.sub":     "THE AI RANK を <em>法人向け診断ツール</em> として提供予定。<br>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を診断します。",
+    "ent.sub":     "THE AI RANK を基盤とした <em>法人向けAIレベル診断・研修サービス</em> をAqsh株式会社にて提供しています。<br>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を一目で診断します。",
 
     "pr.marker1": "—— PRINCIPLES ——",
     "pr.marker2": "四 原 則",
@@ -62,13 +62,13 @@ const I18N = {
   },
 
   en: {
-    "masthead.brand": "THE AI RANK · by CHAEN",
+    "masthead.brand": "THE AI RANK · by AQSH",
     "nav.diag": "D I A G N O S E",
     "nav.contact": "C O N T A C T",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
-    "hero.sub1": "— <em>THE AI RANK</em> · by CHAEN —",
+    "hero.sub1": "— <em>THE AI RANK</em> · by Aqsh株式会社 —",
     "hero.sub2": "A 9-LEVEL GLOBAL STANDARD FOR AI LITERACY",
 
     "stat.levels": "LEVELS",
@@ -110,7 +110,7 @@ const I18N = {
     "ent.marker2": "FOR ORGANIZATIONS",
     "ent.title1":  "BRING THE AI RANK",
     "ent.title2":  "TO YOUR ORGANIZATION.",
-    "ent.sub":     "THE AI RANK is coming as an <em>enterprise diagnostic tool</em>.<br>Measure each employee's AI level and reveal your <em>organization-wide AI maturity</em>.",
+    "ent.sub":     "Aqsh Inc. currently offers an <em>enterprise diagnostic toolkit and training program</em> based on THE AI RANK.<br>Measure each employee's AI level and reveal your <em>organization-wide AI maturity</em>.",
 
     "pr.marker1": "—— PRINCIPLES ——",
     "pr.marker2": "THE FOUR CANONS",

@@ -7,9 +7,9 @@ THE AI RANK の脆弱性報告受付窓口です。
 脆弱性を発見された場合は、**公開イシューを作成せず**、以下のいずれかの方法でご連絡ください：
 
 1. **GitHub Security Advisory**（推奨）
-   [https://github.com/chaenmasahiro0425/the-ai-rank/security/advisories/new](https://github.com/chaenmasahiro0425/the-ai-rank/security/advisories/new)
+   [https://github.com/aqshmodel/the-ai-rank/security/advisories/new](https://github.com/aqshmodel/the-ai-rank/security/advisories/new)
 2. **X (DM)**
-   [@masahirochaen](https://x.com/masahirochaen)
+   [https://aqsh.co.jp/contact](https://aqsh.co.jp/contact)
 
 ## What to include
 
@@ -27,7 +27,7 @@ THE AI RANK の脆弱性報告受付窓口です。
 ## Scope
 
 対象：
-- `https://ai-rank.org` およびサブドメイン
+- `https://ai-rank.aqsh.co.jp` およびサブドメイン
 - `the-ai-rank.vercel.app`
 - このリポジトリに含まれる全コード／設定
 

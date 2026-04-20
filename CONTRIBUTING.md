@@ -75,7 +75,7 @@ Discuss in an Issue first. Not all proposals will be accepted, but all will get 
 
 ## 🔒 Security
 
-If you find a security issue, please **DO NOT** open a public issue. DM via X ([@masahirochaen](https://x.com/masahirochaen)) instead.
+If you find a security issue, please **DO NOT** open a public issue. Contact Aqsh Inc. instead.
 
 ---
 
@@ -90,7 +90,7 @@ If you find a security issue, please **DO NOT** open a public issue. DM via X ([
 
 ## 🙏 Attribution
 
-All contributors are listed automatically on the [Contributors page](https://github.com/chaenmasahiro0425/the-ai-rank/graphs/contributors). Significant contributions may also be credited in the LP footer and release notes.
+All contributors are listed automatically on the [Contributors page](https://github.com/aqshmodel/the-ai-rank/graphs/contributors). Significant contributions may also be credited in the LP footer and release notes.
 
 ---
 
@@ -102,4 +102,4 @@ Be kind, be curious, be precise. Debate the idea, not the person. AI literacy is
 
 Thanks again. Let's build the universal AI literacy standard together. 🎖️
 
-— CHAEN & contributors
+— Aqsh Inc. & contributors

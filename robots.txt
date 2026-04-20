@@ -1,5 +1,5 @@
 # THE AI RANK — robots.txt
-# https://ai-rank.org/
+# https://ai-rank.aqsh.co.jp/
 
 User-agent: *
 Allow: /
@@ -8,4 +8,4 @@ Disallow: /api/
 # Block AI training crawlers that opted out is respected
 # (add more if needed)
 
-Sitemap: https://ai-rank.org/sitemap.xml
+Sitemap: https://ai-rank.aqsh.co.jp/sitemap.xml

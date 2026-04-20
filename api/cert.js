@@ -34,7 +34,7 @@ export default function handler(req, res) {
   const rawName = String(req.query?.name || "").slice(0, 40).trim();
   const name = escapeHtml(rawName);
 
-  const ogImage = `https://ai-rank.org/og/rank-${rankNum}.png`;
+  const ogImage = `https://ai-rank.aqsh.co.jp/og/rank-${rankNum}.png`;
 
   const titlePrefix = name ? `${name} · ` : "";
   const pageTitle = `${titlePrefix}Lv.${numeral} ${level.en} — THE AI RANK`;
@@ -56,14 +56,14 @@ export default function handler(req, res) {
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://ai-rank.org/c?rank=${rankNum}${rawName ? `&name=${encodeURIComponent(rawName)}` : ""}" />
+<meta property="og:url" content="https://ai-rank.aqsh.co.jp/c?rank=${rankNum}${rawName ? `&name=${encodeURIComponent(rawName)}` : ""}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="THE AI RANK" />
 <meta property="og:locale" content="ja_JP" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@masahirochaen" />
-<meta name="twitter:creator" content="@masahirochaen" />
+<meta name="twitter:site" content="https://aqsh.co.jp" />
+<meta name="twitter:creator" content="https://aqsh.co.jp" />
 <meta name="twitter:title" content="${escapeHtml(pageTitle)}" />
 <meta name="twitter:description" content="${escapeHtml(pageDesc)}" />
 <meta name="twitter:image" content="${ogImage}" />
@@ -85,14 +85,14 @@ export default function handler(req, res) {
   .btn { display: inline-block; margin-top: 18px; padding: 14px 28px; background: #17130F; color: #F1ECE0; border: 1px solid #17130F; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; }
   .btn:hover { background: #8B2514; border-color: #8B2514; color: #F1ECE0; }
 </style>
-<meta http-equiv="refresh" content="4;url=https://ai-rank.org/" />
+<meta http-equiv="refresh" content="4;url=https://ai-rank.aqsh.co.jp/" />
 </head>
 <body>
 <div class="wrap">
   <img src="${ogImage}" alt="${escapeHtml(pageTitle)}" width="1200" height="630" />
   <h1>${escapeHtml(pageTitle)}</h1>
   <p>${escapeHtml(pageDesc)}</p>
-  <a class="btn" href="https://ai-rank.org/">診断してランクを知る →</a>
+  <a class="btn" href="https://ai-rank.aqsh.co.jp/">診断してランクを知る →</a>
 </div>
 </body>
 </html>`;

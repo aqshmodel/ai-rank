@@ -555,7 +555,7 @@ function el(tag, attrs = {}, ...children) {
     if (nmRaw) certParams.set("name", nmRaw);
     const url = `${location.origin}/c?${certParams.toString()}`;
     const hashtags = "TheAIRank,AI格付けランク";
-    const via = "masahirochaen";
+    const via = "";
     const params = new URLSearchParams({ text, url, hashtags, via });
     window.open(`https://twitter.com/intent/tweet?${params.toString()}`, "_blank", "noopener");
   }
@@ -751,7 +751,7 @@ function el(tag, attrs = {}, ...children) {
       ctx.fillText("ISSUED BY", 200, footY - 40);
       ctx.font = '700 44px "Bricolage Grotesque", sans-serif';
       ctx.fillStyle = INK;
-      ctx.fillText("CHAEN", 200, footY + 10);
+      ctx.fillText("Aqsh株式会社", 200, footY + 10);
       ctx.font = '400 13px "JetBrains Mono", monospace';
       ctx.fillStyle = INK_MUTED;
       ctx.fillText("AI 格付けランク · MMXXVI", 200, footY + 40);
@@ -769,7 +769,7 @@ function el(tag, attrs = {}, ...children) {
       ctx.fillText(dateTxt, W - 200, footY + 30);
 
       // Colophon mark bottom
-      drawCenter("THE AI RANK · © 2026 CHAEN · NO. 0001", 1840,
+      drawCenter("THE AI RANK · © 2026 Aqsh Inc. · NO. 0001", 1840,
         '400 13px "JetBrains Mono", monospace', INK_GHOST, 4);
 
       // Export → JPEG blob → download
@@ -985,12 +985,7 @@ function closeModal() {
   }
 
   document.getElementById("openEnterpriseForm")?.addEventListener("click", openEnt);
-  // Header shortcut: scroll to enterprise section + open form
-  document.getElementById("openEnterpriseFromHeader")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    document.getElementById("enterprise")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    setTimeout(openEnt, 450);
-  });
+
   modal.addEventListener("click", (e) => { if (e.target.closest("[data-close-ent]")) closeEnt(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeEnt(); });
 

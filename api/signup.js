@@ -13,11 +13,11 @@
 //   - Vercel Dashboard → Logs（常時）
 //   - 任意: 環境変数 SIGNUP_FORWARD_URL
 
-import { supabase, supabaseEnabled } from "./_supabase.js";
+import { pool, dbEnabled } from "./_db.js";
 
 const ALLOWED_ORIGINS = new Set([
-  "https://ai-rank.org",
-  "https://www.ai-rank.org",
+  "https://ai-rank.aqsh.co.jp",
+  "https://www.ai-rank.aqsh.co.jp",
   "https://the-ai-rank.vercel.app",
   "http://localhost:4173",
   "http://localhost:3000",
@@ -187,18 +187,24 @@ export default async function handler(req, res) {
       ip_present: Boolean(ip && ip !== "unknown"),
     }));
 
-    // 2) Supabase — primary persistent store
-    if (supabaseEnabled) {
+    // 2) PostgreSQL — primary persistent store
+    if (dbEnabled) {
       try {
-        const { error } = await supabase.from("signups").insert(record);
-        if (error) {
-          console.error("[AIRANK:supabase_insert_failed]", error.message || error);
-        }
+        const query = `
+          INSERT INTO signups
+          (name, email, company, rank, client_at, url, referrer, user_agent, ip)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        `;
+        const values = [
+          record.name, record.email, record.company, record.rank,
+          record.client_at, record.url, record.referrer, record.user_agent, record.ip
+        ];
+        await pool.query(query, values);
       } catch (e) {
-        console.error("[AIRANK:supabase_exception]", e?.message || e);
+        console.error("[AIRANK:db_exception]", e?.message || e);
       }
     } else {
-      console.warn("[AIRANK:supabase_not_configured] set SUPABASE_URL & SUPABASE_SERVICE_ROLE_KEY");
+      console.warn("[AIRANK:db_not_configured] set PostgreSQL connection variables");
     }
 
     // 3) Optional external forwarding (Slack / Google Sheets / Notion etc.)

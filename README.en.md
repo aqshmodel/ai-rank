@@ -6,7 +6,7 @@
 
 > 🇬🇧 **This is the English version.** 日本語で読みたい方は 👉 **[README.md — Japanese version (primary) →](./README.md)**
 >
-> 🌐 **Live site:** [ai-rank.org](https://ai-rank.org) (2-minute diagnostic, free)
+> 🌐 **Live site:** [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp) (2-minute diagnostic, free)
 
 ![THE AI RANK OG Image](./assets/og-image.png)
 
@@ -43,7 +43,7 @@ In 2026, AI has passed the "can you use it" phase. The real differentiator is **
 
 **THE AI RANK** proposes a **common language** for this gap: nine clearly defined levels, from Beginner to Singularian. Take a 10-question diagnostic and receive a **personalized certificate** with your level.
 
-This repository is an **open, community-driven project** hosted as a single-creator initiative by **[CHAEN](https://x.com/masahirochaen)**.
+This repository is an **open, community-driven project** hosted as a single-creator initiative by **[Aqsh Inc.](https://aqsh.co.jp)**.
 The goal: grow it into the **strongest universal AI literacy standard**, with input from contributors around the world.
 
 > New grads / business roles: **Lv.III+** / Knowledge workers: **Lv.IV+** / AI-related roles: **Lv.VI+** / AI engineers & founders: **Lv.VII** / Monetizing an AI product: **Lv.VIII** / The future peak: **Lv.IX**
@@ -66,7 +66,7 @@ From bottom to top:
 | **VIII** | **THE AI ALCHEMIST**   | Converts AI into actual revenue ★ **Commercial summit** | AWS / GCP / Azure / Stripe / Vercel / custom LLM APIs / fine-tuning |
 | **IX**   | **THE SINGULARIAN**    | AI runs the company itself, including revenue | AGI-class models / custom inference stack |
 
-Full descriptions are also at [ai-rank.org](https://ai-rank.org).
+Full descriptions are also at [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp).
 
 ---
 
@@ -359,7 +359,7 @@ Count items you've **actually done**:
 - [ ] AI-built services are **making real revenue** — in-market or internal core … **Lv.VIII**
 - [ ] AI **runs the company itself** and **revenue is automated** … **Lv.IX** (post-AGI future picture)
 
-The highest level you can check is your current rank. Take the full diagnostic in 2 minutes at [ai-rank.org](https://ai-rank.org).
+The highest level you can check is your current rank. Take the full diagnostic in 2 minutes at [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp).
 
 ---
 
@@ -380,7 +380,7 @@ This project is **meant to be built together**. We welcome:
 2. **Pull Requests** — code improvements, typo fixes, new features
 3. **GitHub Discussions** — philosophical & design-level debates
 
-All contributors are listed on the [Contributors page](https://github.com/chaenmasahiro0425/the-ai-rank/graphs/contributors).
+All contributors are listed on the [Contributors page](https://github.com/aqshmodel/the-ai-rank/graphs/contributors).
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
@@ -443,7 +443,7 @@ the-ai-rank/
 ### Run locally
 
 ```bash
-git clone https://github.com/chaenmasahiro0425/the-ai-rank.git
+git clone https://github.com/aqshmodel/the-ai-rank.git
 cd the-ai-rank
 npm install
 npx vercel dev          # runs static + /api/* handlers (recommended)
@@ -493,7 +493,7 @@ For organizations that want to measure their team's AI maturity:
 - Role-specific training programs
 - Executive summary reports
 
-Reach out via **[DM on X → @masahirochaen](https://x.com/masahirochaen)** to join the wait-list.
+Reach out via **[Aqsh Inc. Contact Form](https://aqsh.co.jp/contact/)** to join the wait-list.
 
 ---
 
@@ -506,9 +506,9 @@ Reach out via **[DM on X → @masahirochaen](https://x.com/masahirochaen)** to j
 
 ## 📣 Links
 
-- 🌐 **Website:** https://ai-rank.org
-- 🐦 **X (Twitter):** [@masahirochaen](https://x.com/masahirochaen)
-- 👤 **Creator:** CHAEN — individual project
+- 🌐 **Website:** https://ai-rank.aqsh.co.jp
+- 🐦 **URL:** [Aqsh Inc.](https://aqsh.co.jp)
+- 👤 **Creator:** Takahiro Tsukada — Aqsh Inc.
 - 🇯🇵 **Japanese README:** [README.md](./README.md) (primary)
 
 ---
@@ -521,4 +521,4 @@ Built from scratch in 2026, informed by decades of prior thinking about skill ev
 
 *Let's build the universal AI literacy standard together.*
 
-— **[CHAEN](https://x.com/masahirochaen)** · MMXXVI
+— **[Aqsh Inc.](https://aqsh.co.jp)** · MMXXVI

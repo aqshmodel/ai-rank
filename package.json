@@ -5,11 +5,16 @@
   "description": "THE AI RANK — 9-level global AI literacy classification",
   "type": "module",
   "scripts": {
-    "dev": "npx --yes vercel dev",
-    "start": "npx --yes vercel dev",
+    "dev": "node server.js",
+    "start": "node server.js",
     "deploy": "npx --yes vercel --prod"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.4"
+    "express": "^4.21.0",
+    "pg": "^8.12.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "marked": "^14.0.0",
+    "gray-matter": "^4.0.3"
   }
 }

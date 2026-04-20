@@ -85,7 +85,7 @@ select rank, count(*) from signups group by rank order by rank;
 
 現状の `api/signup.js` は以下をデフォルトで実施：
 
-- ✅ **Origin チェック** — `ai-rank.org` / `the-ai-rank.vercel.app` / localhost からのみ受付
+- ✅ **Origin チェック** — `ai-rank.aqsh.co.jp` / `the-ai-rank.vercel.app` / localhost からのみ受付
 - ✅ **Referer チェック** — 別サイトからの POST をブロック
 - ✅ **ハニーポット** — 隠しフィールド `hp` にボットが入力すると無言でスルー
 - ✅ **IPレートリミット** — 同一IPから1分間に5回超えでブロック

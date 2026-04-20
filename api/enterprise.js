@@ -8,11 +8,11 @@
 //   - Strict field validation with max lengths
 //   - PII-masked logging only
 
-import { supabase, supabaseEnabled } from "./_supabase.js";
+import { pool, dbEnabled } from "./_db.js";
 
 const ALLOWED_ORIGINS = new Set([
-  "https://ai-rank.org",
-  "https://www.ai-rank.org",
+  "https://ai-rank.aqsh.co.jp",
+  "https://www.ai-rank.aqsh.co.jp",
   "https://the-ai-rank.vercel.app",
   "http://localhost:4173",
   "http://localhost:3000",
@@ -177,16 +177,27 @@ export default async function handler(req, res) {
       ip_present: Boolean(ip && ip !== "unknown"),
     }));
 
-    if (supabaseEnabled) {
+    if (dbEnabled) {
       // Let exceptions propagate to the outer catch so we return 5xx and the
       // client can retry. Swallowing here would ACK leads we failed to store.
-      const { error } = await supabase.from("enterprise_inquiries").insert(record);
-      if (error) {
+      const query = `
+        INSERT INTO enterprise_inquiries
+        (company, contact_name, job_title, email, employee_count, budget_range, timeline, interests, consultation_pref, message, client_at, url, referrer, user_agent, ip)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+      `;
+      const values = [
+        record.company, record.contact_name, record.job_title, record.email, record.employee_count,
+        record.budget_range, record.timeline, JSON.stringify(record.interests), record.consultation_pref,
+        record.message, record.client_at, record.url, record.referrer, record.user_agent, record.ip
+      ];
+      try {
+        await pool.query(query, values);
+      } catch (error) {
         console.error("[AIRANK:enterprise:insert_failed]", error.message || error);
         return res.status(502).json({ error: "storage error" });
       }
     } else {
-      console.warn("[AIRANK:enterprise:supabase_not_configured]");
+      console.warn("[AIRANK:enterprise:db_not_configured]");
     }
 
     return res.status(200).json({ ok: true });

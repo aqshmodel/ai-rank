@@ -1,4 +1,4 @@
-# 🌐 ai-rank.org のDNS設定手順
+# 🌐 ai-rank.aqsh.co.jp のDNS設定手順
 
 **現状:** ドメインは Vercel プロジェクト `the-ai-rank` にエイリアス済み。SSL証明書の発行を待機中。
 **必要:** ドメインを購入した**レジストラ側でDNSを Vercel に向ける**設定。
@@ -24,7 +24,7 @@ ns2.vercel-dns.com
 5. 反映待ち（通常15分〜48時間、多くは30分以内）
 6. Vercel Dashboard → `the-ai-rank` → Settings → Domains で緑色の「Valid Configuration」になれば完了
 
-完了後は、`https://ai-rank.org` でLPが開きます（SSL自動発行）。
+完了後は、`https://ai-rank.aqsh.co.jp` でLPが開きます（SSL自動発行）。
 
 ---
 
@@ -36,7 +36,7 @@ ns2.vercel-dns.com
 
 | タイプ | ホスト | 値 | TTL |
 |:---|:---|:---|:---:|
-| A | @ （または空欄／ai-rank.org） | `76.76.21.21` | Auto |
+| A | @ （または空欄／ai-rank.aqsh.co.jp） | `76.76.21.21` | Auto |
 | CNAME | www | `cname.vercel-dns.com.` | Auto |
 
 - 既存の A/AAAA/CNAME レコードがあれば削除（Vercel側と衝突します）
@@ -50,15 +50,15 @@ ns2.vercel-dns.com
 
 ```bash
 # DNS反映チェック
-dig ai-rank.org +short
+dig ai-rank.aqsh.co.jp +short
 # → 76.76.21.21 が返ればOK
 
-dig www.ai-rank.org +short
+dig www.ai-rank.aqsh.co.jp +short
 # → cname.vercel-dns.com. → Vercel IP が返ればOK
 ```
 
 または：
-- https://ai-rank.org に直接アクセス → LPが開けばOK
+- https://ai-rank.aqsh.co.jp に直接アクセス → LPが開けばOK
 - Vercel Dashboard の Domains タブで `Valid Configuration` (緑) 表示
 
 ---
@@ -72,4 +72,4 @@ DNSが正しく向いた時点で、Vercelが Let's Encrypt から自動的に S
 
 ## 🎁 おまけ：www → apex のリダイレクト
 
-`www.ai-rank.org` → `ai-rank.org` に301リダイレクトしたい場合、Vercel Dashboard の Domains 画面で `www.ai-rank.org` を `Redirect to ai-rank.org` に設定してください。
+`www.ai-rank.aqsh.co.jp` → `ai-rank.aqsh.co.jp` に301リダイレクトしたい場合、Vercel Dashboard の Domains 画面で `www.ai-rank.aqsh.co.jp` を `Redirect to ai-rank.aqsh.co.jp` に設定してください。

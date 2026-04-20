@@ -1,7 +1,7 @@
 # THE AI RANK — X 投稿文案
 
-URL: **https://ai-rank.org**
-Repo: **https://github.com/chaenmasahiro0425/the-ai-rank**
+URL: **https://ai-rank.aqsh.co.jp**
+Repo: **https://github.com/aqshmodel/the-ai-rank**
 
 ---
 
@@ -20,7 +20,7 @@ Repo: **https://github.com/chaenmasahiro0425/the-ai-rank**
 ✓ 採用・社内育成にそのまま使える
 
 I. ビギナー → IX. シンギュラリアン
-https://ai-rank.org
+https://ai-rank.aqsh.co.jp
 
 👇あなたのランク教えてください
 ```
@@ -38,8 +38,8 @@ https://ai-rank.org
 この世に存在しなかったので、作りました。
 
 ─── THE AI RANK ───
-9段階のAI格付けランク · by CHAEN
-https://ai-rank.org
+9段階のAI格付けランク · by Aqsh Inc.
+https://ai-rank.aqsh.co.jp
 
 オープンソースで、完全無料で公開します。
 🧵続きます👇
@@ -124,7 +124,7 @@ https://ai-rank.org
 MITライセンスでOSS公開。
 企業内で自由に配布・改変して使ってください。
 
-https://ai-rank.org
+https://ai-rank.aqsh.co.jp
 ```
 
 ### 7/7 — Call for contribution
@@ -136,7 +136,7 @@ https://ai-rank.org
 現場感・反証・追加レベルなど、
 意見があればどんどん GitHub へ👇
 
-github.com/chaenmasahiro0425/the-ai-rank
+github.com/aqshmodel/the-ai-rank
 
 みんなで "AIスキルの世界共通言語" を作りたい。
 賛同してくれる方、診断して
@@ -157,7 +157,7 @@ THE AI RANK
 → 採用／社内研修／自己評価にどうぞ
 → 意見はGitHubへ。みんなで育てたい
 
-https://ai-rank.org
+https://ai-rank.aqsh.co.jp
 
 あなたのランク、コメント・引用RTで教えてください🎖️
 ```
