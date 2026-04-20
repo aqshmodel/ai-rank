@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   THE AI RANK · i18n (JP / EN)
+   THE AI RANK いわて · i18n (JP / EN)
    All source strings are authored by the project — no user input is ever interpolated.
    ═══════════════════════════════════════════════════════════ */
 
@@ -12,7 +12,7 @@ const I18N = {
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
     "hero.sub1": "— <em>AI 格付けランク</em> · by Aqsh株式会社 —",
-    "hero.sub2": "THE AI RANK — A 9-LEVEL CLASSIFICATION BY AQSH",
+    "hero.sub2": "THE AI RANK いわて — A 9-LEVEL CLASSIFICATION BY AQSH",
 
     "stat.levels": "LEVELS",
     "stat.range":  "BEGINNER → SINGULARIAN",
@@ -51,9 +51,9 @@ const I18N = {
 
     "ent.marker1": "—— FOR ENTERPRISE ——",
     "ent.marker2": "法 人 向 け",
-    "ent.title1":  "BRING THE AI RANK",
+    "ent.title1":  "BRING THE AI RANK いわて",
     "ent.title2":  "TO YOUR ORGANIZATION.",
-    "ent.sub":     "THE AI RANK を基盤とした <em>法人向けAIレベル診断・研修サービス</em> をAqsh株式会社にて提供しています。<br>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を一目で診断します。",
+    "ent.sub":     "THE AI RANK いわて を基盤とした <em>法人向けAIレベル診断・研修サービス</em> をAqsh株式会社にて提供しています。<br>社員一人ひとりのAIレベルを可視化し、<em>組織としてのAI成熟度</em> を一目で診断します。",
 
     "pr.marker1": "—— PRINCIPLES ——",
     "pr.marker2": "四 原 則",
@@ -62,13 +62,13 @@ const I18N = {
   },
 
   en: {
-    "masthead.brand": "THE AI RANK · by AQSH",
+    "masthead.brand": "THE AI RANK いわて · by AQSH",
     "nav.diag": "D I A G N O S E",
     "nav.contact": "C O N T A C T",
 
     "hero.kicker1": "AN OFFICIAL CLASSIFICATION",
     "hero.kicker2": "EST. TOKYO / 2026",
-    "hero.sub1": "— <em>THE AI RANK</em> · by Aqsh株式会社 —",
+    "hero.sub1": "— <em>THE AI RANK いわて</em> · by Aqsh株式会社 —",
     "hero.sub2": "A 9-LEVEL GLOBAL STANDARD FOR AI LITERACY",
 
     "stat.levels": "LEVELS",
@@ -108,9 +108,9 @@ const I18N = {
 
     "ent.marker1": "—— FOR ENTERPRISE ——",
     "ent.marker2": "FOR ORGANIZATIONS",
-    "ent.title1":  "BRING THE AI RANK",
+    "ent.title1":  "BRING THE AI RANK いわて",
     "ent.title2":  "TO YOUR ORGANIZATION.",
-    "ent.sub":     "Aqsh Inc. currently offers an <em>enterprise diagnostic toolkit and training program</em> based on THE AI RANK.<br>Measure each employee's AI level and reveal your <em>organization-wide AI maturity</em>.",
+    "ent.sub":     "Aqsh Inc. currently offers an <em>enterprise diagnostic toolkit and training program</em> based on THE AI RANK いわて.<br>Measure each employee's AI level and reveal your <em>organization-wide AI maturity</em>.",
 
     "pr.marker1": "—— PRINCIPLES ——",
     "pr.marker2": "THE FOUR CANONS",

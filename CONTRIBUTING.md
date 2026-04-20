@@ -1,4 +1,4 @@
-# Contributing to THE AI RANK
+# Contributing to THE AI RANK いわて
 
 Thanks for your interest in contributing! This is an open, community-driven project and we welcome all kinds of help — from typo fixes to re-thinking entire levels.
 

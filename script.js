@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   THE AI RANK · Interactive Layer
+   THE AI RANK いわて · Interactive Layer
    ═══════════════════════════════════════════════════════════ */
 
 /* ─── CONFIG ─── */
@@ -545,7 +545,7 @@ function el(tag, attrs = {}, ...children) {
 `🎖️ 私のAIランクは Lv.${num}「${lvlJa}」でした。
 
 9段階で AI活用スキルを格付けする
-"THE AI RANK" で診断してみました📊
+"THE AI RANK いわて" で診断してみました📊
 
 ▶ ${lvlEn}
 
@@ -656,7 +656,7 @@ function el(tag, attrs = {}, ...children) {
       };
 
       // Header
-      drawCenter("── CERTIFICATE OF THE AI RANK ──", 200,
+      drawCenter("── CERTIFICATE OF THE AI RANK いわて ──", 200,
         '400 22px "JetBrains Mono", monospace', INK, 3);
       drawCenter("認 定 証 / OFFICIAL RECORD", 240,
         '400 18px "JetBrains Mono", monospace', INK_GHOST, 2);
@@ -769,7 +769,7 @@ function el(tag, attrs = {}, ...children) {
       ctx.fillText(dateTxt, W - 200, footY + 30);
 
       // Colophon mark bottom
-      drawCenter("THE AI RANK · © 2026 Aqsh Inc. · NO. 0001", 1840,
+      drawCenter("THE AI RANK いわて · © 2026 Aqsh Inc. · NO. 0001", 1840,
         '400 13px "JetBrains Mono", monospace', INK_GHOST, 4);
 
       // Export → JPEG blob → download

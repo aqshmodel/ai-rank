@@ -1,4 +1,4 @@
-# THE AI RANK — robots.txt
+# THE AI RANK いわて — robots.txt
 # https://ai-rank.aqsh.co.jp/
 
 User-agent: *

@@ -1,4 +1,4 @@
--- THE AI RANK — Supabase schema for signups
+-- THE AI RANK いわて — Supabase schema for signups
 -- Run this in: Supabase Dashboard → SQL Editor → New query → Run
 
 -- 1. Table ---------------------------------------------------------------

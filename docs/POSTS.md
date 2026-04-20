@@ -1,4 +1,4 @@
-# THE AI RANK — X 投稿文案
+# THE AI RANK いわて — X 投稿文案
 
 URL: **https://ai-rank.aqsh.co.jp**
 Repo: **https://github.com/aqshmodel/the-ai-rank**
@@ -12,7 +12,7 @@ Repo: **https://github.com/aqshmodel/the-ai-rank**
 
 社内研修と採用の基準が属人化していたので、
 個人のAI活用スキルを測る世界共通の尺度
-「THE AI RANK」を作りました。
+「THE AI RANK いわて」を作りました。
 
 ✓ 10問・2分で無料診断
 ✓ 認定証JPEG発行
@@ -37,7 +37,7 @@ https://ai-rank.aqsh.co.jp
 「個人のAI活用スキル」を測る世界共通の物差しが
 この世に存在しなかったので、作りました。
 
-─── THE AI RANK ───
+─── THE AI RANK いわて ───
 9段階のAI格付けランク · by Aqsh Inc.
 https://ai-rank.aqsh.co.jp
 
@@ -152,7 +152,7 @@ github.com/aqshmodel/the-ai-rank
 ──この質問が曖昧すぎるので、
 9段階で測れる物差しを作りました。
 
-THE AI RANK
+THE AI RANK いわて
 → 10問・2分・完全無料・OSS
 → 採用／社内研修／自己評価にどうぞ
 → 意見はGitHubへ。みんなで育てたい

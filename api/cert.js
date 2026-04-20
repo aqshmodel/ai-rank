@@ -37,7 +37,7 @@ export default function handler(req, res) {
   const ogImage = `https://ai-rank.aqsh.co.jp/og/rank-${rankNum}.png`;
 
   const titlePrefix = name ? `${name} · ` : "";
-  const pageTitle = `${titlePrefix}Lv.${numeral} ${level.en} — THE AI RANK`;
+  const pageTitle = `${titlePrefix}Lv.${numeral} ${level.en} — THE AI RANK いわて`;
   const pageDesc = name
     ? `${name} の AI ランクは Lv.${numeral}「${level.ja}」。あなたのランクは？ 9 段階の公式 AI 格付けで診断してみよう。`
     : `Lv.${numeral}「${level.ja}」— 9 段階の公式 AI 格付けで、あなたのランクを診断してみよう。`;
@@ -58,7 +58,7 @@ export default function handler(req, res) {
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://ai-rank.aqsh.co.jp/c?rank=${rankNum}${rawName ? `&name=${encodeURIComponent(rawName)}` : ""}" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="THE AI RANK" />
+<meta property="og:site_name" content="THE AI RANK いわて" />
 <meta property="og:locale" content="ja_JP" />
 
 <meta name="twitter:card" content="summary_large_image" />

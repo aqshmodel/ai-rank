@@ -15,7 +15,7 @@ import certHandler from './api/cert.js';
 const authorMaster = {
   "tsukada": {
     name: "塚田 崇博",
-    title: "Aqsh株式会社 代表取締役 兼 「THE AI RANK」AIアルケミスト",
+    title: "Aqsh株式会社 代表取締役 兼 「THE AI RANK いわて」AIアルケミスト",
     avatar: "/assets/authors/tsukada.webp",
     description: "人材業界に24年間従事し、累計1万人超の面談経験を持つ。京都出身・岩手県八幡平市に移住し、同地を拠点に採用コンサルティングや組織構築の一気通貫支援を展開。ソシオニクス（ENTp型）など各種性格診断プロファイリングの知見を有し、さらにChatGPTやClaudeなど各種AIモデルを業務レベルで駆使するプロンプトエンジニアリングの実践者として、地域企業の現場に寄り添うAI導入伴走を行っている。"
   }
@@ -159,7 +159,7 @@ app.get('/articles/:slug', (req, res) => {
     const schemaData = {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": data.title || 'THE AI RANK Article',
+      "headline": data.title || 'THE AI RANK いわて Article',
       "image": [finalImage],
       "datePublished": data.date ? new Date(data.date.replace(/\./g, '-')).toISOString() : new Date().toISOString(),
       "description": data.description || '',
@@ -189,7 +189,7 @@ app.get('/articles/:slug', (req, res) => {
        "itemListElement": [{
          "@type": "ListItem",
          "position": 1,
-         "name": "THE AI RANK",
+         "name": "THE AI RANK いわて",
          "item": "https://ai-rank.aqsh.co.jp/"
        },{
          "@type": "ListItem",
@@ -258,7 +258,7 @@ app.get('/articles/:slug', (req, res) => {
 
     // Replace markers
     template = template.replace(/\{\{slug\}\}/g, slug);
-    template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK Article');
+    template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK いわて Article');
     template = template.replace(/\{\{description\}\}/g, data.description || '');
     template = template.replace(/\{\{ogImage\}\}/g, data.coverImage || 'https://ai-rank.aqsh.co.jp/assets/og-image.png');
     template = template.replace(/\{\{date\}\}/g, data.date || '');
@@ -366,7 +366,7 @@ app.get('/terms/:slug', (req, res) => {
        "itemListElement": [{
          "@type": "ListItem",
          "position": 1,
-         "name": "THE AI RANK",
+         "name": "THE AI RANK いわて",
          "item": "https://ai-rank.aqsh.co.jp/"
        },{
          "@type": "ListItem",

@@ -2,7 +2,7 @@
   "name": "the-ai-rank",
   "version": "1.0.0",
   "private": true,
-  "description": "THE AI RANK — 9-level global AI literacy classification",
+  "description": "THE AI RANK いわて — 9-level global AI literacy classification",
   "type": "module",
   "scripts": {
     "dev": "node server.js",

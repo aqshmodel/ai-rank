@@ -1,6 +1,6 @@
 # Security Policy
 
-THE AI RANK の脆弱性報告受付窓口です。
+THE AI RANK いわて の脆弱性報告受付窓口です。
 
 ## Reporting a vulnerability
 

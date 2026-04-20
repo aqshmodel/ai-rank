@@ -1,4 +1,4 @@
--- THE AI RANK — Supabase schema (canonical, idempotent)
+-- THE AI RANK いわて — Supabase schema (canonical, idempotent)
 -- Run this in: Supabase Dashboard → SQL Editor → New query → Run
 -- This consolidates all migrations under supabase/migrations/ and is safe to re-run.
 

@@ -1,4 +1,4 @@
-# THE AI RANK 🎖️
+# THE AI RANK いわて 🎖️
 
 > **個人の AI 活用スキルを 9 段階で格付けする、世界共通のオープンな基準。**
 >
@@ -8,7 +8,7 @@
 >
 > 🌐 **Live site:** [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp) （約 2 分で診断・無料）
 
-![THE AI RANK OG Image](./assets/og-image.png)
+![THE AI RANK いわて OG Image](./assets/og-image.png)
 
 ![License](https://img.shields.io/badge/license-MIT-8B2514)
 ![Status](https://img.shields.io/badge/status-live-brightgreen)
@@ -42,7 +42,7 @@
 2026 年、AI は「使えるかどうか」ではなく、**「どこまで使いこなしているか」** で人と組織の差が決まる時代になりました。
 カジュアルな ChatGPT ユーザーと、自律型エージェント群を動かすエンジニアの差は、いまや **10 倍以上** にまで広がっています。
 
-THE AI RANK は、この **"AI 熟達度"** を誰でも共通言語で語れるように設計した、**9 段階の格付けシステム** です。
+THE AI RANK いわて は、この **"AI 熟達度"** を誰でも共通言語で語れるように設計した、**9 段階の格付けシステム** です。
 10 問の診断を受けると、あなたの現在地が刻まれた **パーソナライズド認定証** が発行されます。
 
 - **発案・監修**：[塚田崇博](https://aqsh.co.jp)（Aqsh株式会社）
@@ -508,7 +508,7 @@ vercel --prod
 ## 🪪 ライセンス
 
 **MIT License** — コピー・改変・商用利用すべて自由。
-ただし、**「THE AI RANK」** の名前は登録商標として保護予定です（混同回避のため）。派生格付けを作る場合は、別名をお使いください。
+ただし、**「THE AI RANK いわて」** の名前は登録商標として保護予定です（混同回避のため）。派生格付けを作る場合は、別名をお使いください。
 
 ---
 

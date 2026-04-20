@@ -1,4 +1,4 @@
-# THE AI RANK 🎖️
+# THE AI RANK いわて 🎖️
 
 > **A 9-level global standard for measuring an individual's AI literacy.**
 >
@@ -8,7 +8,7 @@
 >
 > 🌐 **Live site:** [ai-rank.aqsh.co.jp](https://ai-rank.aqsh.co.jp) (2-minute diagnostic, free)
 
-![THE AI RANK OG Image](./assets/og-image.png)
+![THE AI RANK いわて OG Image](./assets/og-image.png)
 
 ![License](https://img.shields.io/badge/license-MIT-8B2514)
 ![Status](https://img.shields.io/badge/status-live-brightgreen)
@@ -18,7 +18,7 @@
 
 ## 📖 Table of Contents
 
-- [What is THE AI RANK?](#what-is-the-ai-rank)
+- [What is THE AI RANK いわて?](#what-is-the-ai-rank)
 - [The 9 Levels](#the-9-levels)
 - [Level Details](#level-details)
   - [Lv.I The Beginner](#lvi-the-beginner--one-who-has-touched-ai)
@@ -37,11 +37,11 @@
 
 ---
 
-## What is THE AI RANK?
+## What is THE AI RANK いわて?
 
 In 2026, AI has passed the "can you use it" phase. The real differentiator is **how far you actually use it** — and the gap between casual ChatGPT users and engineers running autonomous agent fleets has grown **10× or more**.
 
-**THE AI RANK** proposes a **common language** for this gap: nine clearly defined levels, from Beginner to Singularian. Take a 10-question diagnostic and receive a **personalized certificate** with your level.
+**THE AI RANK いわて** proposes a **common language** for this gap: nine clearly defined levels, from Beginner to Singularian. Take a 10-question diagnostic and receive a **personalized certificate** with your level.
 
 This repository is an **open, community-driven project** hosted as a single-creator initiative by **[Aqsh Inc.](https://aqsh.co.jp)**.
 The goal: grow it into the **strongest universal AI literacy standard**, with input from contributors around the world.
@@ -500,7 +500,7 @@ Reach out via **[Aqsh Inc. Contact Form](https://aqsh.co.jp/contact/)** to join 
 ## 🪪 License
 
 **MIT** — copy, modify, commercial use are all free.
-"THE AI RANK" is being trademark-registered to avoid brand confusion; please use a different name if you derive a separate ranking system.
+"THE AI RANK いわて" is being trademark-registered to avoid brand confusion; please use a different name if you derive a separate ranking system.
 
 ---
 
