@@ -1,9 +1,10 @@
 ---
 title: "岩手県・盛岡市の企業向け：AIエージェント開発と導入コンサルティング事例"
 description: "岩手県内でAI導入や社内AI研修を検討している企業様へ向けた、最新のAIエージェント開発による業務効率化（AIX）のポイントを解説します。"
-coverImage: "https://ai-rank.aqsh.co.jp/assets/og-image.png"
+coverImage: "/assets/articles/iwate-ai-consulting/cover.png"
 date: "2026.04.20"
 tags: ["AI導入", "事例", "地方企業"]
+author: "tsukada"
 ---
 
 ## 人手が消えゆく地方都市で本当に必要なテクノロジーとは

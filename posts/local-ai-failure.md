@@ -1,9 +1,10 @@
 ---
 title: "地方企業が生成AI導入で失敗する3つのパターンの考察"
 description: "「とりあえずSaaSを契約した」だけのDXがなぜ地方で通用しないのか。THE AI RANKのデータから見えてきた、属人化解消のための本当に必要なアプローチ。"
-coverImage: "/assets/og_manga_failure.webp"
+coverImage: "/assets/articles/local-ai-failure/cover.webp"
 date: "2026.04.19"
 tags: ["DX", "考察", "地方企業"]
+author: "tsukada"
 ---
 
 流行病のように生成AIという言葉が日本中を駆け巡ってから数年が経過した。

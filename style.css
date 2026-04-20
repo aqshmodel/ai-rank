@@ -1965,3 +1965,54 @@ body { padding-top: 70px; }
   color: var(--ink-muted);
   pointer-events: none;
 }
+
+/* ─── Author Profile Component (E-E-A-T) ─── */
+.author-profile-box {
+  margin-top: 64px;
+  padding: 40px;
+  background: var(--lp-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.author-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+.author-title {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+.author-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.author-desc {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .author-profile-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+  }
+}

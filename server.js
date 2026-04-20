@@ -11,6 +11,16 @@ import signupHandler from './api/signup.js';
 import enterpriseHandler from './api/enterprise.js';
 import certHandler from './api/cert.js';
 
+// Author Master configurations for E-E-A-T
+const authorMaster = {
+  "tsukada": {
+    name: "塚田 崇博",
+    title: "Aqsh株式会社 代表取締役 兼 「THE AI RANK」AIアルケミスト",
+    avatar: "/assets/authors/tsukada.webp",
+    description: "人材業界に24年間従事し、累計1万人超の面談経験を持つ。京都出身・岩手県八幡平市に移住し、同地を拠点に採用コンサルティングや組織構築の一気通貫支援を展開。ソシオニクス（ENTp型）など各種性格診断プロファイリングの知見を有し、さらにChatGPTやClaudeなど各種AIモデルを業務レベルで駆使するプロンプトエンジニアリングの実践者として、地方企業の泥臭いAI導入伴走を行っている。"
+  }
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -171,6 +181,22 @@ app.get('/articles/:slug', (req, res) => {
       ? tagsArr.map(t => `<span class="article-tag">${t}</span>`).join('') 
       : '';
 
+    // Build Author HTML (E-E-A-T Profile)
+    let authorHtml = '';
+    if (data.author && authorMaster[data.author]) {
+      const author = authorMaster[data.author];
+      authorHtml = `
+        <div class="author-profile-box">
+          <img src="${author.avatar}" alt="${author.name}" class="author-avatar" loading="lazy" />
+          <div class="author-info">
+            <span class="author-title">${author.title}</span>
+            <div class="author-name">${author.name}</div>
+            <p class="author-desc">${author.description}</p>
+          </div>
+        </div>
+      `;
+    }
+
     // Replace markers
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || 'THE AI RANK Article');
@@ -178,6 +204,7 @@ app.get('/articles/:slug', (req, res) => {
     template = template.replace(/\{\{ogImage\}\}/g, data.coverImage || 'https://ai-rank.aqsh.co.jp/assets/og-image.png');
     template = template.replace(/\{\{date\}\}/g, data.date || '');
     template = template.replace(/\{\{tags\}\}/g, tagsHtml);
+    template = template.replace(/\{\{authorProfile\}\}/g, authorHtml);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);
