@@ -2112,18 +2112,7 @@ body { padding-top: 70px; }
  }
 
 
-/* ─── SERVICE 4 AREAS (Added for Enterprise) ─── */
-.service-4areas {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 5%;
-}
-@media (max-width: 768px) {
-  .service-4areas { grid-template-columns: 1fr; }
-}
+
 
 .svc-card {
   border-radius: 12px;
@@ -2165,16 +2154,100 @@ html.dark .svc-title { font-weight: 600; }
 }
 
 /* Specific colors matching the provided image */
-.svc-blue   { border-color: #0E4DB4; }
-.svc-blue   .svc-title { background-color: #0E4DB4; }
-.svc-green  { border-color: #26A567; }
-.svc-green  .svc-title { background-color: #26A567; }
-.svc-orange { border-color: #F18A1D; }
-.svc-orange .svc-title { background-color: #F18A1D; }
-.svc-purple { border-color: #8C28A1; }
-.svc-purple .svc-title { background-color: #8C28A1; }
+
+
+
+
+
+
+
+
 
 .ent-sub-heading {
-  font-family: 'Shippori Mincho B1', serif;
+  font-family: 'Bricolage Grotesque', 'Shippori Mincho B1', sans-serif;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 60px 0 24px;
 }
+html.dark .ent-sub-heading {
+  color: #fff;
+}
+
+
+
+/* ─── SERVICE 4 AREAS (Refined) ─── */
+.service-4areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+@media (max-width: 768px) {
+  .service-4areas { grid-template-columns: 1fr; }
+}
+
+.svc-card {
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  background: var(--color-paper);
+  border: 1px solid var(--color-border);
+  border-top-width: 6px; /* Thick accent border on top */
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+}
+html.dark .svc-card {
+  background: #14110E; /* Deep dark background matching the dark mode body */
+  border-color: #2A241E; /* Subtle border */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.svc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+html.dark .svc-card:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+}
+
+.svc-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  letter-spacing: 0.5px;
+}
+
+.svc-val {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Accent colors applied to top border and title text */
+.svc-blue { border-top-color: #3B82F6; }
+.svc-blue .svc-title { color: #2563EB; }
+html.dark .svc-blue { border-top-color: #60A5FA; }
+html.dark .svc-blue .svc-title { color: #60A5FA; }
+
+.svc-green { border-top-color: #10B981; }
+.svc-green .svc-title { color: #059669; }
+html.dark .svc-green { border-top-color: #34D399; }
+html.dark .svc-green .svc-title { color: #34D399; }
+
+.svc-orange { border-top-color: #F59E0B; }
+.svc-orange .svc-title { color: #D97706; }
+html.dark .svc-orange { border-top-color: #FBBF24; }
+html.dark .svc-orange .svc-title { color: #FBBF24; }
+
+.svc-purple { border-top-color: #8B5CF6; }
+.svc-purple .svc-title { color: #7C3AED; }
+html.dark .svc-purple { border-top-color: #A78BFA; }
+html.dark .svc-purple .svc-title { color: #A78BFA; }
 

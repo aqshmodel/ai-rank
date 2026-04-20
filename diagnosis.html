@@ -155,31 +155,6 @@
     <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
   </div>
 
-  <!-- ─── CROSSROADS ─── -->
-  <section class="crossroads" id="crossroads">
-    <div class="chapter-marker">
-      <span class="mono" data-i18n="cr.marker1">—— CROSSROADS ——</span>
-      <span class="mono dim" data-i18n="cr.marker2">分 岐 点</span>
-    </div>
-    <h2 class="section-title"><span data-i18n="cr.title1">TWO PATHS,</span><br/><em data-i18n="cr.title2">ONE SUMMIT.</em></h2>
-    <p class="section-sub" data-i18n-html="cr.sub">エンジニア／非エンジニアで、現実的な到達ラインは異なる。<br/>だが、最終地点は一つ。</p>
-
-    <div class="crossroads-table">
-      <div class="cr-row cr-head">
-        <div class="cr-cell mono">LV</div>
-        <div class="cr-cell mono">非エンジニア</div>
-        <div class="cr-cell mono">エンジニア</div>
-      </div>
-      <div class="cr-row"><div class="cr-cell cr-lv">I — III</div><div class="cr-cell">共通（業務固定化まで）</div><div class="cr-cell">共通</div></div>
-      <div class="cr-row star"><div class="cr-cell cr-lv">IV</div><div class="cr-cell"><em>★ 最初のゴール</em>：Artifactsで顧客に価値提供</div><div class="cr-cell">通過点</div></div>
-      <div class="cr-row"><div class="cr-cell cr-lv">V</div><div class="cr-cell">社内ツール／簡易SaaS を自分で作る</div><div class="cr-cell">現場のスタンダード</div></div>
-      <div class="cr-row star"><div class="cr-cell cr-lv">VI</div><div class="cr-cell"><em>★ 現実的な最終到達ライン</em>：業務24h無人化</div><div class="cr-cell">通過点</div></div>
-      <div class="cr-row"><div class="cr-cell cr-lv">VII</div><div class="cr-cell">プロダクトリードとして到達</div><div class="cr-cell"><em>★ 技術的本丸</em>：Claude Code / MCPを制す</div></div>
-      <div class="cr-row gold"><div class="cr-cell cr-lv">VIII</div><div class="cr-cell">ビジョン＋UX＋ドメインで<em>AIを価値に錬成</em></div><div class="cr-cell"><em>★ 商業的本丸</em>：AIプロダクトで収益化</div></div>
-      <div class="cr-row final"><div class="cr-cell cr-lv">IX</div><div class="cr-cell">AGI時代の起業家として到達</div><div class="cr-cell">最終地点：AIインフラ提供者</div></div>
-    </div>
-  </section>
-
   <!-- ─── DIAGNOSIS (Multi-step) ─── -->
   <section class="diagnosis" id="diagnosis">
     <div class="chapter-marker">
@@ -383,7 +358,7 @@
       <div class="ent-pricing-block primary">
         <p class="mono small dim">ENTERPRISE</p>
         <p class="ent-pricing-title">法人診断・活用研修</p>
-        <p class="ent-pricing-price">有料提供</p>
+        <p class="ent-pricing-price">個別お見積もり</p>
         <p class="ent-pricing-note mono small dim">社員数・機能に応じた価格体系<br/>お問い合わせ受付中</p>
       </div>
     </div>
@@ -429,6 +404,41 @@
       <dt style="font-weight: bold; margin-bottom: 8px; color: #17130F;">Q. 法人で社員全体のAIスキルをまとめてテストすることは可能ですか？</dt>
       <dd style="margin-left: 0; margin-bottom: 24px;">A. はい。企業や自治体向けに、社内・組織全体のレベルを可視化する「法人向け専用アカウント」と研修プログラムを提供可能です。ご興味がある方はページ下部やお問い合わせフォームよりご相談ください。</dd>
     </dl>
+  </section>
+
+  
+  <!-- ─── FOR ENTERPRISE (Shortened for Diagnosis Page) ─── -->
+  <section class="enterprise" id="enterprise" style="padding-top:0;">
+    <h2 class="ent-sub-heading">法人向けサービス・支援領域</h2>
+    <p class="section-sub" style="font-size:15px; margin-bottom:48px;">
+      THE AI RANK いわて を運営するAqsh株式会社では、岩手県内および全国の企業・自治体様向けに、生成AIの組織導入から現場定着までを伴走支援する以下のサービスを提供しています。
+    </p>
+
+    <div class="service-4areas">
+      <div class="svc-card svc-blue">
+        <h3 class="svc-title">AIコンサルティング</h3>
+        <p class="svc-val">生成AI導入戦略〜定着支援</p>
+      </div>
+      <div class="svc-card svc-green">
+        <h3 class="svc-title">システム開発</h3>
+        <p class="svc-val">Claude Code活用の高速開発</p>
+      </div>
+      <div class="svc-card svc-orange">
+        <h3 class="svc-title">研修講師派遣</h3>
+        <p class="svc-val">経営層〜現場まで対応</p>
+      </div>
+      <div class="svc-card svc-purple">
+        <h3 class="svc-title">業務自動化</h3>
+        <p class="svc-val">RPA / ワークフロー自動化</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 56px; margin-bottom: 40px;">
+      <button class="cta-btn primary" onclick="if(window.openModal) window.openModal('enterprise')">
+        <span>法人プランの無料相談はこちら</span>
+        <span class="mono">→</span>
+      </button>
+    </div>
   </section>
 
   <footer class="global-footer">
