@@ -164,24 +164,18 @@
   <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
 
   <!-- ─── running masthead ─── -->
-  <header class="masthead" role="banner">
-    <div class="masthead-col left">
-      <span class="mono small" data-i18n="masthead.brand">AI 格付けランク · by Aqsh株式会社</span>
-    </div>
-    <div class="masthead-col center">
-      <nav class="masthead-nav" aria-label="Primary">
-        <a href="#diagnosis" class="masthead-link mono small" data-i18n="nav.diag">無料診断</a>
-        <span class="masthead-sep mono small dim">/</span>
-        <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="masthead-link mono small" data-i18n="nav.contact">お問い合わせ</a>
-      </nav>
-    </div>
-    <div class="masthead-col right">
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" class="lang-btn" data-lang="ja" aria-pressed="true">JP</button>
-        <span class="lang-sep">/</span>
-        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    <!-- Global Header -->
+  <header class="global-header">
+    <div class="gh-container">
+      <div class="gh-left">
+        <a href="/" class="gh-logo">THE AI RANK</a>
       </div>
-      <span class="mono small folio" id="folioDisplay">00 / IX</span>
+      <nav class="gh-right">
+        <a href="/#diagnosis" class="gh-link">AIスキル診断</a>
+        <a href="/articles/local-ai-failure" class="gh-link">ブログ・事例</a>
+        <a href="/iwate.html" class="gh-link">岩手・法人向け</a>
+        <a href="https://aqsh.co.jp/contact/" target="_blank" rel="noopener" class="gh-btn">お問い合わせ</a>
+      </nav>
     </div>
   </header>
 
@@ -1216,63 +1210,32 @@
   </section>
 
   <!-- ─── COLOPHON ─── -->
-  <footer class="colophon" id="colophon">
-    <div class="chapter-marker">
-      <span class="mono">—— COLOPHON ——</span>
-      <span class="mono dim">奥 付</span>
-    </div>
-
-    <div class="colophon-grid">
-      <div class="col-block">
-        <p class="mono small dim">PUBLISHED BY</p>
-        <p class="col-value">Aqsh株式会社</p>
+    <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="gf-container">
+      <div class="gf-col">
+        <h4>THE AI RANK</h4>
+        <p>AIスキル測定システム</p>
       </div>
-      <div class="col-block">
-        <p class="mono small dim">EDITION</p>
-        <p class="col-value">MMXXVI · VOL. I</p>
+      <div class="gf-col">
+        <h4>Menu</h4>
+        <nav>
+          <a href="/">診断トップ</a>
+          <a href="/iwate.html">法人向け（岩手特化）</a>
+          <a href="/articles/local-ai-failure">ブログ・導入事例</a>
+        </nav>
       </div>
-      <div class="col-block">
-        <p class="mono small dim">TYPESET IN</p>
-        <p class="col-value mono-small">BRICOLAGE GROTESQUE · INSTRUMENT SANS · SHIPPORI MINCHO B1 · JETBRAINS MONO</p>
-      </div>
-      <div class="col-block">
-        <p class="mono small dim">CITATION</p>
-        <p class="col-value mono-small">"AI 格付けランク by Aqsh株式会社 — 9 Levels from Beginner to Singularian."</p>
+      <div class="gf-col">
+        <h4>Information</h4>
+        <nav>
+          <a href="https://aqsh.co.jp" target="_blank" rel="noopener">運営会社 (Aqsh Inc.)</a>
+          <a href="/privacy">プライバシーポリシー</a>
+          <a href="https://x.com/Aqsh_Inc" target="_blank" rel="noopener">X (Twitter)</a>
+        </nav>
       </div>
     </div>
-
-    <div class="colophon-sign">
-      <p class="sign-quote">—— AIは、分類するためではなく、<em>超えていくため</em> にある。</p>
-      <p class="sign-author mono">Aqsh株式会社 · 2026</p>
-    </div>
-
-    <!-- ─── ABOUT THE CREATOR (REMOVED) ─── -->
-
-    <div class="colophon-mark">
-      <span class="mono small dim">END · 了</span>
-      <span class="mono small dim">THE AI RANK © 2026 Aqsh Inc.</span>
-      <span class="mono small dim">NO. 0001</span>
-    </div>
-
-    <style>
-      .colophon-legal {
-        margin-top: 28px; padding-top: 20px;
-        border-top: 1px solid var(--line);
-        display: flex; flex-wrap: wrap; gap: 18px 32px; justify-content: center;
-        font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em;
-        text-transform: uppercase; color: var(--ink-ghost);
-      }
-      .colophon-legal a {
-        color: var(--ink-muted);
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.2s var(--easing), color 0.2s var(--easing);
-      }
-      .colophon-legal a:hover { color: var(--accent); border-color: var(--accent); }
-    </style>
-    <div class="colophon-legal">
-      <a href="/privacy">Privacy Policy · 個人情報保護方針</a>
-      <a href="https://github.com/aqshmodel/the-ai-rank" target="_blank" rel="noopener">GitHub · OSS</a>
-      <a href="/.well-known/security.txt">Security.txt</a>
+    <div class="gf-bottom">
+      <p>&copy; 2026 Aqsh Inc. All rights reserved.</p>
     </div>
   </footer>
 

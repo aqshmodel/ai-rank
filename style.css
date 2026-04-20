@@ -1672,3 +1672,69 @@ strong { font-weight: 600; color: var(--ink); }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .grain { display: none; }
 }
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL HEADER & FOOTER
+   ═══════════════════════════════════════════════════════════ */
+.global-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+  background: rgba(244, 241, 237, 0.85); /* var(--lp-bg) based */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 var(--gutter);
+}
+.gh-container {
+  max-width: var(--max-w); margin: 0 auto;
+  height: 70px; display: flex; align-items: center; justify-content: space-between;
+}
+.gh-logo {
+  font-family: var(--font-display); font-weight: 700; font-size: 20px;
+  letter-spacing: 0.05em; color: var(--ink); text-decoration: none;
+}
+.gh-right {
+  display: flex; align-items: center; gap: 24px;
+}
+.gh-link {
+  font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  color: var(--ink-soft); text-decoration: none; transition: color 0.2s;
+}
+.gh-link:hover { color: var(--accent); }
+.gh-btn {
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  background: var(--ink); color: var(--paper) !important;
+  padding: 8px 16px; border-radius: 4px; text-decoration: none;
+  transition: background 0.2s;
+}
+.gh-btn:hover { background: var(--accent); }
+
+@media (max-width: 800px) {
+  .gh-right { gap: 12px; }
+  .gh-link { display: none; } /* モバイル時はCTAボタンのみ表示等の簡略化 */
+}
+
+/* Base adjustment for fixed header */
+body { padding-top: 70px; }
+
+/* Global Footer */
+.global-footer {
+  background: var(--ink); color: var(--paper);
+  padding: 80px var(--gutter) 40px; font-family: var(--font-body);
+}
+.gf-container {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px;
+  margin-bottom: 24px;
+}
+.gf-col h4 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 600;
+  margin-bottom: 16px; letter-spacing: 0.1em; color: var(--brass-soft);
+}
+.gf-col p { font-size: 14px; color: var(--ink-ghost); }
+.gf-col nav { display: flex; flex-direction: column; gap: 12px; }
+.gf-col nav a {
+  font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.gf-col nav a:hover { color: var(--paper); }
+.gf-bottom { text-align: center; font-size: 12px; color: rgba(255,255,255,0.4); }
