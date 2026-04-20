@@ -128,7 +128,6 @@
   <div class="container">
     <div class="tabs">
       <button class="tab active" onclick="switchTab('signups')">個人診断 登録者</button>
-      <button class="tab" onclick="switchTab('enterprise')">法人お問い合わせ</button>
     </div>
 
     <!-- Signups Section -->
@@ -155,52 +154,18 @@
       </div>
     </div>
 
-    <!-- Enterprise Section -->
-    <div id="enterprise-section" style="display:none;">
-      <div class="section-header">
-        <h2>法人お問い合わせ リスト</h2>
-        <a href="/api/admin/csv/enterprise" class="btn">⬇ CSVダウンロード</a>
-      </div>
-      <div style="overflow-x:auto;">
-        <table>
-          <thead>
-            <tr>
-              <th>送信日時</th>
-              <th>企業名</th>
-              <th>担当者名</th>
-              <th>メールアドレス</th>
-              <th>従業員規模</th>
-              <th>要望・メッセージ</th>
-            </tr>
-          </thead>
-          <tbody id="enterprise-tbody">
-            <tr><td colspan="6">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
 
   <script>
     async function loadData() {
       try {
-        const [resSignups, resEnt] = await Promise.all([
-          fetch('/api/admin/signups'),
-          fetch('/api/admin/enterprise')
-        ]);
-        
+        const resSignups = await fetch('/api/admin/signups');
         if(resSignups.ok) {
           const signups = await resSignups.json();
           renderSignups(signups);
         } else {
           document.getElementById('signups-tbody').innerHTML = '<tr><td colspan="5">Failed to load data</td></tr>';
-        }
-        
-        if(resEnt.ok) {
-          const enterprises = await resEnt.json();
-          renderEnterprise(enterprises);
-        } else {
-          document.getElementById('enterprise-tbody').innerHTML = '<tr><td colspan="6">Failed to load data</td></tr>';
         }
       } catch(err) {
         console.error(err);
@@ -230,24 +195,6 @@
       `).join('');
     }
 
-    function renderEnterprise(data) {
-      const tbody = document.getElementById('enterprise-tbody');
-      if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6">データがありません。</td></tr>';
-        return;
-      }
-      tbody.innerHTML = data.map(row => `
-        <tr>
-          <td class="date-col">${formatDate(row.created_at)}</td>
-          <td><b>${escapeHtml(row.company)}</b></td>
-          <td>${escapeHtml(row.contact_name)}<br><small style="color:gray;">${escapeHtml(row.job_title||'')}</small></td>
-          <td><a href="mailto:${escapeHtml(row.email)}" style="color:var(--primary);">${escapeHtml(row.email)}</a></td>
-          <td>${escapeHtml(row.employee_count || '-')}</td>
-          <td style="max-width:300px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${escapeHtml(row.message || '')}">${escapeHtml(row.message || '-')}</td>
-        </tr>
-      `).join('');
-    }
-
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
@@ -261,14 +208,10 @@
     function switchTab(tab) {
       document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
       document.getElementById('signups-section').style.display = 'none';
-      document.getElementById('enterprise-section').style.display = 'none';
 
       if (tab === 'signups') {
         document.querySelector('.tab:nth-child(1)').classList.add('active');
         document.getElementById('signups-section').style.display = 'block';
-      } else {
-        document.querySelector('.tab:nth-child(2)').classList.add('active');
-        document.getElementById('enterprise-section').style.display = 'block';
       }
     }
 

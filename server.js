@@ -85,23 +85,11 @@ app.get('/api/admin/signups', authMiddleware, async (req, res) => {
   }
 });
 
-// Admin API Route (Enterprise)
-app.get('/api/admin/enterprise', authMiddleware, async (req, res) => {
-  if (!dbEnabled) return res.status(500).json({ error: 'DB not configured' });
-  try {
-    const result = await pool.query('SELECT * FROM enterprise_inquiries ORDER BY created_at DESC');
-    res.json(result.rows);
-  } catch (err) {
-    console.error('[AIRANK:admin_api_error]', err);
-    res.status(500).json({ error: 'Failed to fetch enterprise inquiries' });
-  }
-});
-
 // Admin CSV Download
 app.get('/api/admin/csv/:type', authMiddleware, async (req, res) => {
   if (!dbEnabled) return res.status(500).send('DB not configured');
   try {
-    const table = req.params.type === 'enterprise' ? 'enterprise_inquiries' : 'signups';
+    const table = 'signups'; // Only signups requested anymore
     const result = await pool.query(`SELECT * FROM ${table} ORDER BY created_at DESC`);
     if (result.rows.length === 0) return res.send('No data available');
     
