@@ -1,7 +1,7 @@
 ---
 title: "若手が次々と辞めていく地方企業の病理。DXの前に人間の解像度を上げろ"
 description: "若手社員の離職率に悩む経営者へ。どれだけ高価なSaaSを入れて残業を減らしても人が辞める本当の理由と、ソシオニクスを用いた泥臭いエンゲージメントの構築方法を語ります。"
-coverImage: "/assets/articles/dx-before-team-building/cover.png"
+coverImage: "/assets/articles/dx-before-team-building/cover.webp"
 date: "2026.04.22"
 tags: ["マネジメント", "考察", "地方企業"]
 author: "tsukada"
