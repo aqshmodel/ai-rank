@@ -121,6 +121,41 @@
     .related-card:hover h4 {
       color: var(--accent);
     }
+
+    /* Table of Contents */
+    .article-toc {
+      background: var(--highlight, rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-bottom: 48px;
+    }
+    .article-toc .toc-label {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-family: var(--font-ja);
+    }
+    .article-toc ol {
+      list-style: decimal;
+      padding-left: 20px;
+      margin: 0;
+    }
+    .article-toc li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .article-toc a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .article-toc a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
@@ -166,6 +201,7 @@
           {{tags}}
         </div>
       </header>
+      {{toc}}
       <div class="md-body">
         {{content}}
       </div>

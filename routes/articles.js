@@ -68,7 +68,36 @@ router.get('/articles/:slug', (req, res) => {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data, content } = matter(fileContent);
-    const htmlContent = marked.parse(content);
+
+    // --- TOC: h2見出しを抽出 ---
+    const headings = [];
+    const headingRegex = /^## (.+)$/gm;
+    let headingMatch;
+    while ((headingMatch = headingRegex.exec(content)) !== null) {
+      const text = headingMatch[1].trim();
+      const id = text.replace(/\s+/g, '-').replace(/[^\w\u3000-\u9FFF\u30A0-\u30FF\uFF00-\uFFEF-]/g, '').toLowerCase();
+      headings.push({ text, id });
+    }
+    let tocHtml = '';
+    if (headings.length >= 2) {
+      tocHtml = '<nav class="article-toc" aria-label="目次"><p class="toc-label">目次</p><ol>';
+      headings.forEach(h => {
+        tocHtml += `<li><a href="#${h.id}">${h.text}</a></li>`;
+      });
+      tocHtml += '</ol></nav>';
+    }
+
+    // --- marked: カスタムrendererでh2にid付与 ---
+    const renderer = new marked.Renderer();
+    renderer.heading = function({ tokens, depth }) {
+      const text = this.parser.parseInline(tokens);
+      if (depth === 2) {
+        const id = text.replace(/<[^>]*>/g, '').replace(/\s+/g, '-').replace(/[^\w\u3000-\u9FFF\u30A0-\u30FF\uFF00-\uFFEF-]/g, '').toLowerCase();
+        return `<h2 id="${id}">${text}</h2>\n`;
+      }
+      return `<h${depth}>${text}</h${depth}>\n`;
+    };
+    const htmlContent = marked.parse(content, { renderer });
     let template = fs.readFileSync(path.join(__dirname, '../views', 'article-template.html'), 'utf-8');
     
     const tagsArr = data.tags || [];
@@ -171,6 +200,7 @@ router.get('/articles/:slug', (req, res) => {
     template = template.replace(/\{\{authorProfile\}\}/g, authorHtml);
     template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
     template = template.replace(/\{\{relatedArticles\}\}/g, relatedHtml);
+    template = template.replace(/\{\{toc\}\}/g, tocHtml);
     template = template.replace(/\{\{content\}\}/g, htmlContent);
 
     res.send(template);
