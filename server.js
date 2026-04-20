@@ -17,7 +17,7 @@ const authorMaster = {
     name: "塚田 崇博",
     title: "Aqsh株式会社 代表取締役 兼 「THE AI RANK」AIアルケミスト",
     avatar: "/assets/authors/tsukada.webp",
-    description: "人材業界に24年間従事し、累計1万人超の面談経験を持つ。京都出身・岩手県八幡平市に移住し、同地を拠点に採用コンサルティングや組織構築の一気通貫支援を展開。ソシオニクス（ENTp型）など各種性格診断プロファイリングの知見を有し、さらにChatGPTやClaudeなど各種AIモデルを業務レベルで駆使するプロンプトエンジニアリングの実践者として、地方企業の泥臭いAI導入伴走を行っている。"
+    description: "人材業界に24年間従事し、累計1万人超の面談経験を持つ。京都出身・岩手県八幡平市に移住し、同地を拠点に採用コンサルティングや組織構築の一気通貫支援を展開。ソシオニクス（ENTp型）など各種性格診断プロファイリングの知見を有し、さらにChatGPTやClaudeなど各種AIモデルを業務レベルで駆使するプロンプトエンジニアリングの実践者として、地域企業の現場に寄り添うAI導入伴走を行っている。"
   }
 };
 
@@ -476,6 +476,10 @@ app.use(express.static(__dirname));
 
 // Fallback
 app.get('*', (req, res) => {
+  // If the request is for a file (has an extension), don't return HTML
+  if (req.path.includes('.')) {
+    return res.status(404).send('Not Found');
+  }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
