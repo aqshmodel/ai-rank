@@ -68,6 +68,9 @@ export default function handler(req, res) {
 <meta name="twitter:image" content="${ogImage}" />
 
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="mask-icon" href="/assets/favicon.svg" color="#C9A14A" />
 
 <style>
   body {
