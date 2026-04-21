@@ -7,12 +7,12 @@
 
 1. **タイトルの13文字最適化**
    長すぎたタイトルを削除し、ガイドラインに沿った短くキャッチーな見出しへ一新しました。
-   - `dify-rag-failure-reality.md` → **「絶望を呼ぶDifyの罠」**
-   - `dx-before-team-building.md` → **「若手が辞める本当の理由」**
-   - `end-of-prompt-engineering.md` → **「プロンプト職人の終焉」**
-   - `iwate-ai-consulting.md` → **「岩手法人向けAIコンサル」**
-   - `karpathy-ai-coding-guidelines.md` → **「AIの暴走を防ぐ4原則」**
-   - `local-ai-failure.md` → **「生成AI導入の失敗法則」**
+   - `dify-rag-failure-reality.md` → 「**絶望を呼ぶDifyの罠**」
+   - `dx-before-team-building.md` → 「**若手が辞める本当の理由**」
+   - `end-of-prompt-engineering.md` → 「**プロンプト職人の終焉**」
+   - `iwate-ai-consulting.md` → 「**岩手法人向けAIコンサル**」
+   - `karpathy-ai-coding-guidelines.md` → 「**AIの暴走を防ぐ4原則**」
+   - `local-ai-failure.md` → 「**生成AI導入の失敗法則**」
 
 2. **メタデータの欠落補完**
    - 複数の記事から欠落していた `category` 属性（`AI・DX推進` または `AI組織論・ケーススタディ`）を付与しました。
