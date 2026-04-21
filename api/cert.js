@@ -1,4 +1,4 @@
-// Vercel Serverless Function — Certificate share page
+// Express Route Handler — Certificate share page
 // GET /api/cert?rank=N[&name=...]
 // Returns an HTML page with rank-specific OG tags for X/Twitter preview.
 

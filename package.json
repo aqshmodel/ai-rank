@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js",
-    "deploy": "npx --yes vercel --prod"
+    "start": "node server.js"
   },
   "dependencies": {
     "canvas": "^3.2.3",

@@ -1,5 +1,5 @@
-// Vercel Serverless Function
-// POST /api/enterprise — 法人お問い合わせを Supabase に保存
+// Express Route Handler
+// POST /api/enterprise — 法人お問い合わせを PostgreSQL に保存
 //
 // 設計は api/signup.js と同じセキュリティモデル:
 //   - Origin / Referer allowlist
@@ -13,7 +13,6 @@ import { pool, dbEnabled } from "./_db.js";
 const ALLOWED_ORIGINS = new Set([
   "https://ai-rank.aqsh.co.jp",
   "https://www.ai-rank.aqsh.co.jp",
-  "https://the-ai-rank.vercel.app",
   "http://localhost:4173",
   "http://localhost:3000",
   "http://localhost:5173",

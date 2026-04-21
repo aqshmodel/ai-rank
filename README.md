@@ -394,7 +394,7 @@ AI 熟達度は国境を越える普遍的な指標です。
 
 ## 🧰 技術スタック
 
-シンプルな静的 LP + Vercel Serverless Functions。
+シンプルな静的 LP + Express.js API Routes。
 
 ```
 the-ai-rank/
@@ -403,7 +403,6 @@ the-ai-rank/
 ├── CONTRIBUTING.md        # 貢献ガイドライン
 ├── LICENSE                # MIT
 ├── package.json
-├── vercel.json            # Vercel 設定（ヘッダー・キャッシュ・リライト）
 │
 ├── index.html             # メインページ（JP 基軸・JP/EN トグル付き）
 ├── privacy.html           # プライバシーポリシー（/privacy で公開）
@@ -421,8 +420,8 @@ the-ai-rank/
 │   ├── apple-touch-icon.png
 │   └── icon-192.png / -512.png / -512-maskable.png
 │
-├── api/                   # Vercel Serverless Functions
-│   ├── _supabase.js       #   Supabase クライアント（service_role キー利用）
+├── api/                   # Express API Routes
+│   ├── _db.js             #   PostgreSQL クライアント
 │   ├── signup.js          #   登録データを受けるエンドポイント
 │   └── cert.js            #   シェア可能な証明書 URL（ランク別 OG タグ付き）
 │
@@ -431,15 +430,9 @@ the-ai-rank/
 │   ├── preview.html       #   デフォルト OG 画像の生成元 HTML
 │   └── cert-template.html #   ランク別証明書 OG 画像のテンプレート
 │
-├── supabase/              # Supabase スキーマ・CLI 設定
-│   ├── schema.sql         #   signups テーブル定義（Dashboard 貼り付け用）
-│   ├── config.toml        #   Supabase CLI 標準設定
-│   └── migrations/        #   マイグレーション履歴
-│
 ├── docs/                  # セットアップ・運用ドキュメント
 │   ├── DATA_STORAGE.md    #   登録データの保管先
 │   ├── DNS_SETUP.md       #   カスタムドメインの DNS 設定
-│   ├── SUPABASE_SETUP.md  #   Supabase 連携手順
 │   └── POSTS.md           #   X／ブログ投稿用文面
 │
 └── .well-known/
@@ -452,17 +445,14 @@ the-ai-rank/
 git clone https://github.com/aqshmodel/the-ai-rank.git
 cd the-ai-rank
 npm install
-npx vercel dev          # /api/* も含めてローカル起動（推奨）
-# → http://localhost:3000
+npm run dev
+# → http://localhost:3333
 ```
 
-静的ファイルだけ確認したい場合は `python3 -m http.server 4173` でも開けるが、`/api/*` エンドポイントは動かないため登録フォームが失敗する。
+### VPS にデプロイ
 
-### Vercel にデプロイ
-
-```bash
-vercel --prod
-```
+GitHub Actions 経由で VPS (PM2) へデプロイし、自己ホストされた PostgreSQL へ接続する構成になっています。
+設定は `.github/workflows/deploy.yml` に記載されています。
 
 ---
 

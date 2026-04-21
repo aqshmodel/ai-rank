@@ -467,8 +467,8 @@
             <tr><th>保管先</th><th>用途 / 保持期間</th></tr>
           </thead>
           <tbody>
-            <tr><td class="k">Supabase (Postgres)</td><td class="v">登録データのメイン保存先。運営継続中は保持。ユーザーの削除申請時、または THE AI RANK いわて のサービス終了時に削除</td></tr>
-            <tr><td class="k">Vercel Logs</td><td class="v">技術監査・障害対応のためのサーバーログ。プラットフォーム仕様により <em>7〜30日</em> で自動削除</td></tr>
+            <tr><td class="k">Self-hosted PostgreSQL</td><td class="v">登録データのメイン保存先。運営継続中は保持。ユーザーの削除申請時、または THE AI RANK いわて のサービス終了時に削除</td></tr>
+            <tr><td class="k">Server Logs</td><td class="v">技術監査・障害対応のためのサーバーログ。定期的にローテーションされ、最小限の期間保存されます</td></tr>
             <tr><td class="k">外部転送（任意）</td><td class="v">運営側のチャネル通知（Slack 等）に転送する場合があります。転送先は運営が管理する信頼された宛先のみ</td></tr>
           </tbody>
         </table>
@@ -490,7 +490,7 @@
         <ul>
           <li><strong>Legal</strong>法令に基づく開示請求（裁判所命令、捜査機関からの適法な照会等）</li>
           <li><strong>Vital</strong>本人または第三者の生命・身体・財産の保護に必要な場合</li>
-          <li><strong>Processor</strong>運営目的のために業務委託した処理事業者（Supabase・Vercel 等のインフラ事業者）に対し、必要最小限の範囲で取り扱いを委託する場合</li>
+          <li><strong>Processor</strong>運営目的のために業務委託した処理事業者（クラウド・VPSインフラ事業者など）に対し、必要最小限の範囲で取り扱いを委託する場合</li>
         </ul>
         <p>
           処理事業者は <em>守秘義務・セキュリティ基準</em> を満たすものに限定し、運営側が監督責任を負います。
@@ -512,7 +512,7 @@
           <li><strong>Origin</strong>登録APIは許可オリジンからのリクエストのみ受付。クロスオリジン不正送信を拒否</li>
           <li><strong>Rate-limit</strong>IP単位のレート制限・ボット向けハニーポット・使い捨てメール遮断</li>
           <li><strong>Headers</strong>Content-Security-Policy、X-Frame-Options 等により XSS・クリックジャッキングを防御</li>
-          <li><strong>DB</strong>Supabase の Row Level Security (RLS) 有効化。Service Role Key は環境変数で暗号化管理</li>
+          <li><strong>DB</strong>PostgreSQLのアクセス制御を有効化し、データベース接続情報は環境変数で安全に管理</li>
           <li><strong>Access</strong>個人情報へのアクセスは管理者のみ。第三者がログイン可能な管理画面は未提供</li>
         </ul>
       </div>
@@ -559,9 +559,9 @@
         </p>
         <ul>
           <li><strong>localStorage</strong>再訪時の自動入力用に、氏名・メールなどを <em>ブラウザ側</em> に保存。サーバーは読み取りません</li>
-          <li><strong>Vercel Analytics</strong>PV・リファラ等の匿名集計指標を取得（個人識別情報は記録されません）</li>
+          <li><strong>Server Analytics</strong>PV・リファラ等の匿名集計指標を取得（個人識別情報は記録されません）</li>
           <li><strong>Speed Insights</strong>ページ速度指標（LCP/CLS/INP）を匿名で収集し、体験改善に利用</li>
-          <li><strong>Server Logs</strong>Vercel プラットフォームが保持する技術ログ。7〜30日で自動削除</li>
+          <li><strong>Server Logs</strong>VPS プラットフォームが保持する技術ログ。定期的にローテーションされ削除されます</li>
         </ul>
         <p>
           サードパーティ広告タグ、Google Analytics、Meta Pixel 等の <em>クロスサイト追跡ツールは使用していません</em>。

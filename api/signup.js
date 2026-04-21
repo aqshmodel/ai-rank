@@ -1,5 +1,5 @@
-// Vercel Serverless Function
-// POST /api/signup — 登録データを Supabase に保存（+ ログ + 任意で外部転送）
+// Express Route Handler
+// POST /api/signup — 登録データを PostgreSQL に保存（+ ログ）
 //
 // セキュリティ:
 //   - Origin / Referer の制限（クロスオリジンを拒否）
@@ -9,16 +9,14 @@
 //   - 最大文字数制限
 //
 // 保存先:
-//   - Supabase `signups` テーブル（SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY が設定されていれば）
-//   - Vercel Dashboard → Logs（常時）
-//   - 任意: 環境変数 SIGNUP_FORWARD_URL
+//   - PostgreSQL `signups` テーブル
+//   - Console Logs（常時）
 
 import { pool, dbEnabled } from "./_db.js";
 
 const ALLOWED_ORIGINS = new Set([
   "https://ai-rank.aqsh.co.jp",
   "https://www.ai-rank.aqsh.co.jp",
-  "https://the-ai-rank.vercel.app",
   "http://localhost:4173",
   "http://localhost:3000",
   "http://localhost:5173",
@@ -172,7 +170,7 @@ export default async function handler(req, res) {
       ip,
     };
 
-    // 1) Vercel Logs — minimal, non-PII log line for observability only.
+    // 1) Console Logs — minimal, non-PII log line for observability only.
     //    Never log raw email/name/company/UA. Use hashed/masked fields instead
     //    so ops can diagnose issues without leaking personal data into log retention.
     const emailDomain = email.split("@")[1] || "";

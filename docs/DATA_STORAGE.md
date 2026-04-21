@@ -4,11 +4,11 @@
 
 登録フォーム（氏名・メール・会社名・ランク等）から送信されたデータは、以下に保存されます：
 
-1. **Supabase の `signups` テーブル**（永続・メイン保存先）
-2. **Vercel Serverless Function のログ**（`console.log` — **PII をマスクした最小情報のみ**、7〜30日で自動削除）
+1. **PostgreSQL の `signups` テーブル**（永続・メイン保存先）
+2. **Node.js (PM2) ログ**（`console.log` — **PII をマスクした最小情報のみ**）
 3. **ユーザーのブラウザ**（`localStorage` — 再訪時のオートフィル用のみ）
 
-セットアップ手順は [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md)、テーブル定義は [`supabase/schema.sql`](../supabase/schema.sql) を参照。
+テーブル定義は [`schema.sql`](../schema.sql) を参照。
 
 ---
 
@@ -21,45 +21,33 @@
       │
       │  POST /api/signup
       ▼
-[ Vercel Serverless Function ]
+[ Express Route Handler ]
       │
       ├─ Origin / Referer / Rate limit / Honeypot
       │
-      ├─ console.log('[AIRANK:signup]', {masked}) ──> [ Vercel Logs (7-30d) · PII はマスク済 ]
+      ├─ console.log('[AIRANK:signup]', {masked}) ──> [ Node.js Logs · PII はマスク済 ]
       │
-      ├─ supabase.from('signups').insert(record) ────> [ Supabase Postgres ✅ ]
-      │
-      └─ (optional) fetch(SIGNUP_FORWARD_URL) ───────> [ Slack/Sheets/etc ]
+      └─ pool.query(...) ─────────────────────────────> [ PostgreSQL ✅ ]
 ```
 
-- `SUPABASE_URL` と `SUPABASE_SERVICE_ROLE_KEY` が未設定の場合、Supabase 書き込みはスキップされ警告ログのみ出る（フォーム自体は成功応答を返す）
+- 環境変数による PostgreSQL 接続 (`DATABASE_URL` または `PGHOST` 等) が未設定の場合、DB書き込みはスキップされ警告ログが出ます。
 - `hp`（ハニーポット）や異常値は自動で弾かれます
 
 ---
 
 ## 🔍 データの閲覧
 
-### 一覧・検索・CSV出力
-Supabase Dashboard → **Table Editor** → `signups`
+PostgreSQL クライアントツール（psql、DBeaver、PgAdmin 等）を使用して接続し閲覧します。
 
 ### SQL集計
-Supabase Dashboard → **SQL Editor**
-
 ```sql
 -- 最新10件
-select created_at, name, email, company, rank 
-from signups order by created_at desc limit 10;
-
--- 日別登録数
-select date_trunc('day', created_at) as day, count(*) 
-from signups group by day order by day desc;
+select client_at, name, email, company, rank 
+from signups order by id desc limit 10;
 
 -- ランク分布
 select rank, count(*) from signups group by rank order by rank;
 ```
-
-### API 経由
-`@supabase/supabase-js` で別アプリから読み取り可能（anon key + RLSポリシー設定要）
 
 ---
 
@@ -91,11 +79,11 @@ select rank, count(*) from signups group by rank order by rank;
 - ✅ **IPレートリミット** — 同一IPから1分間に5回超えでブロック
 - ✅ **メール厳密検証** — 正規表現 + 使い捨てメールドメインをブロック
 - ✅ **最大文字数制限** — name 100 / email 200 / company 200
-- ✅ **Row Level Security** — Supabase テーブルはRLS有効、クライアント直読み不可
-- ✅ **service_role キー** — Vercel 環境変数のみに格納、フロント非公開
+- ✅ **Row Level Security** — DB側で制御されている場合、PostgreSQLの権限設定が適用されます
+- ✅ **環境変数** — `DATABASE_URL` などはバックエンド環境変数のみに格納され、フロント非公開
 - ✅ **Cache-Control: no-store** — キャッシュ汚染防止
 - ✅ **X-Robots-Tag: noindex** — 検索エンジンにクロールされない
-- ✅ **ログ側の PII マスク** — Vercel Logs には `email_masked` / `email_domain` / `ip_present` 等のみ出力し、氏名・会社名・生のメール・User-Agent はログに残さない
+- ✅ **ログ側の PII マスク** — サーバーログには `email_masked` / `email_domain` / `ip_present` 等のみ出力し、氏名・会社名・生のメール・User-Agent はログに残さない
 
 ---
 
@@ -105,7 +93,7 @@ select rank, count(*) from signups group by rank order by rank;
 2. 未登録なら → **登録モーダルが開く**
 3. 氏名・メール・会社名を入力
 4. 「登録して続ける」押下 → `completeAuth()`
-   - 1. `POST /api/signup` → **Supabase に保存**（サーバー確定が最優先）
+   - 1. `POST /api/signup` → **PostgreSQL に保存**（サーバー確定が最優先）
    - 2. localStorage に保存（再訪 autofill 用。サーバー成功後のみ）
    - 3. モーダル閉じる
 5. X の投稿画面に `/c?rank=N&name=X` の URL が含まれる
@@ -117,10 +105,10 @@ select rank, count(*) from signups group by rank order by rank;
 
 ## 🛠 トラブルシュート
 
-### データがSupabaseに来ない
-1. Vercel Dashboard → Logs で `[AIRANK:signup]` を検索
-2. `[AIRANK:supabase_not_configured]` が出ている → 環境変数未登録 → [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md) step 4
-3. `[AIRANK:supabase_insert_failed]` が出ている → テーブル未作成 or RLS問題 → SQL再実行
+### データが来ない・エラーになる
+1. サーバーのログ（VPS上の `pm2 logs` など）で `[AIRANK:signup]` を検索
+2. `[AIRANK:db_not_configured]` が出ている → 環境変数が不足しています
+3. DBインサートエラーが出ている → テーブルが存在しないかスキーマが異なります。 `schema.sql` を確認してください。
 4. 何もログに出ていない → フロント側の問題。DevTools Network で `/api/signup` を確認
 
 ### 「Origin not allowed」 が返る
@@ -129,9 +117,8 @@ select rank, count(*) from signups group by rank order by rank;
 ### 「Too many requests」 が返る
 同一IPから連投。60秒で解除。本番で緩めたい場合は `RATE_LIMIT_MAX` を調整
 
-### Supabase を使わず外部転送のみにしたい
-- `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` を未設定にする
-- `SIGNUP_FORWARD_URL` を設定 → その URL に JSON がPOSTされる（Google Sheets/Slack/Notion等）
+### DBを使用せず外部転送のみにしたい
+- カスタムロジックで外部の Webhook へ送信するように `api/signup.js` 全体を改修してください。
 
 ---
 

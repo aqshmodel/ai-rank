@@ -388,7 +388,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## 🧰 Tech Stack
 
-Minimal by design — a static landing page plus a handful of Vercel serverless functions.
+Minimal by design — a static landing page plus Express.js API Routes.
 
 ```
 the-ai-rank/
@@ -397,7 +397,6 @@ the-ai-rank/
 ├── CONTRIBUTING.md        # Contribution guidelines
 ├── LICENSE                # MIT
 ├── package.json
-├── vercel.json            # Headers, rewrites, cache policy
 │
 ├── index.html             # Main page (JP primary, JP/EN toggle via i18n.js)
 ├── privacy.html           # Privacy policy (served at /privacy)
@@ -415,8 +414,8 @@ the-ai-rank/
 │   ├── apple-touch-icon.png
 │   └── icon-192.png / -512.png / -512-maskable.png
 │
-├── api/                   # Vercel Serverless Functions
-│   ├── _supabase.js       #   Supabase client (service_role key)
+├── api/                   # Express API Routes
+│   ├── _db.js             #   PostgreSQL client
 │   ├── signup.js          #   Sign-up data endpoint
 │   └── cert.js            #   Shareable certificate URL with rank-specific OG tags
 │
@@ -425,15 +424,9 @@ the-ai-rank/
 │   ├── preview.html       #   Source HTML rendered to og-image.png
 │   └── cert-template.html #   Template for per-rank certificate OG images
 │
-├── supabase/              # Supabase schema & CLI config
-│   ├── schema.sql         #   signups table definition (paste into Dashboard)
-│   ├── config.toml        #   Supabase CLI standard config
-│   └── migrations/        #   Migration history
-│
 ├── docs/                  # Setup & operations docs
 │   ├── DATA_STORAGE.md    #   How sign-up data is stored
 │   ├── DNS_SETUP.md       #   Custom-domain DNS setup notes
-│   ├── SUPABASE_SETUP.md  #   Supabase wiring guide
 │   └── POSTS.md           #   Draft copy for X / blog announcements
 │
 └── .well-known/
@@ -446,17 +439,14 @@ the-ai-rank/
 git clone https://github.com/aqshmodel/the-ai-rank.git
 cd the-ai-rank
 npm install
-npx vercel dev          # runs static + /api/* handlers (recommended)
-# open http://localhost:3000
+npm run dev
+# open http://localhost:3333
 ```
 
-If you only need to preview the static UI, `python3 -m http.server 4173` still works, but `/api/*` endpoints won't respond and signup/enterprise forms will fail.
+### Deploy to VPS
 
-### Deploy to Vercel
-
-```bash
-vercel --prod
-```
+Deployment to VPS via GitHub Actions (with PM2) and self-hosted PostgreSQL connection is configured.
+See `.github/workflows/deploy.yml` for details.
 
 ---
 

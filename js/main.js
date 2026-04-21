@@ -11,10 +11,10 @@ import { LEVELS, QUESTIONS } from './data/diagnosisData.js';
 // 例：
 //  - Google Apps Script Webhook URL
 //  - Formspree エンドポイント  (https://formspree.io/f/YOUR_ID)
-//  - Vercel / Cloudflare Serverless Function
-//  - Supabase / Airtable / Notion API 経由のプロキシ
+//  - Express API Route
+//  - PostgreSQL / Airtable / Notion API 経由のプロキシ
 //
-const SIGNUP_WEBHOOK = "/api/signup"; // Vercel Serverless Function (api/signup.js)
+const SIGNUP_WEBHOOK = "/api/signup"; // Express Route Handler (api/signup.js)
 
 /* ─── AUTH STORAGE (localStorage with TTL) ───
    Persist autofill/auth data for returning visitors. TTL ensures old

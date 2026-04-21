@@ -26,9 +26,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const createExpressHandler = (vercelHandler) => async (req, res) => {
+const createExpressHandler = (routeHandler) => async (req, res) => {
   try {
-    await vercelHandler(req, res);
+    await routeHandler(req, res);
   } catch (err) {
     console.error('[AIRANK:express_handler_error]', err);
     if (!res.headersSent) res.status(500).json({ error: 'Internal Server Error' });
