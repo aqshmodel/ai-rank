@@ -11,3 +11,6 @@ category: "データサイエンス"
 
 ## AIとの関係
 [機械学習](/terms/machine-learning) や [ディープラーニング](/terms/deep-learning) はデータサイエンスの中核的な手法であり、データサイエンティストは [データ前処理](/terms/data-preprocessing)、モデル構築、結果の可視化（[Matplotlib](/terms/matplotlib)）、ビジネスへの意思決定支援までを一貫して担当します。[Pandas](/terms/pandas)、[NumPy](/terms/numpy)、[Scikit-Learn](/terms/scikit-learn) が主要ツールです。
+
+## 実務での具体的なメリット
+単なるデータの集計にとどまらず、「この顧客は来月購入する可能性が高いか」などの予測モデルを構築し、データに基づいた経営判断（データドリブン経営）を可能にします。カンや経験に頼っていた属人的な意思決定を排除し、マーケティングの最適化やコスト削減といった明確な利益を生み出します。

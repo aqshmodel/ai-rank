@@ -10,4 +10,7 @@ category: "AI基礎概念"
 AIチップ（AI Accelerator / AIアクセラレータ）は、[ディープラーニング](/terms/deep-learning) に必要な膨大な行列演算に特化して設計された半導体チップの総称です。汎用的な [CPU](/terms/cpu) よりも圧倒的に高速・低消費電力でAI処理を実行できます。
 
 ## 代表例と競争
-NVIDIAの [GPU](/terms/gpu)（H100/B200シリーズ）、Googleの [TPU](/terms/tpu)、Appleの Neural Engine、Qualcommの AI Engine などが代表的です。AIの需要爆発に伴い、AIチップの性能と供給量がAI産業全体のボトルネックとなっており、各国が半導体戦略を打ち出す「AI半導体競争」が激化しています。
+NVIDIAの [GPU](/terms/gpu)（H100/B200シリーズ）、Googleの [TPU](/terms/tpu)、Appleの Neural Engine、Qualcommの AI Engineなどが代表的です。AIの需要爆発に伴い、AIチップの性能と供給量がAI産業全体のボトルネックとなっており、各国が半導体戦略を打ち出す「AI半導体競争」が激化しています。
+
+## AI導入における役割と課題
+自社のビジネスにAIをどう組み込むかを考える際、この「計算資源」の確保が死活問題となります。[クラウドAI](/terms/cloud-ai) を利用する場合でも、オンプレミスで機密データを扱う場合でも、AIモデルを効率的に動かすための基盤としてコスト性能比の要となります。現在はノートPC等の端末側（[AI PC](/terms/ai-pc)）にもAIチップの搭載が標準化しつつあります。
