@@ -1,0 +1,16 @@
+-[x] 1. フロントエンド参照パスとモジュール対応の修正
+    -[x] `js/main.js`内に、HTML内のインライン実行（onclick等やwindowアクセス）で必要な関数（`window.openModal`など）をエクスポート・登録する。
+    -[x] 全ての対象HTMLにおける `<script src="script.js">` を `<script type="module" src="/js/main.js">` に変更。
+-[x] 2. GA4トラッキング関数の用意
+    -[x] `js/main.js` の先頭等に、`gtag('event', ...)` を安全に呼び出すヘルパーラッパー関数を実装。
+-[x] 3. ページタイプ別「完読率スクロール深度」＆「診断ステップ」実装
+    -[x] **記事・用語集・その他**: 25%、50%、75%、100%スクロール時に `scroll_depth` イベントを送信。
+    -[x] **診断ページ**: 
+        -[x] 開始時 (`diagnosis_start`) 送信
+        -[x] ステップ進行時 (`diagnosis_step`, 例: `step_index: N`) 送信
+        -[x] 完了・結果描画時 (`diagnosis_complete`, 例: `rank_level`) 送信
+-[x] 4. CTAクリックトラッキングとシェア・DL
+    -[x] CTAボタン（内部/外部をパラメーターで区分けして）にイベントリスナーを追加。
+    -[x] シェアやダウンロード時に `share`, `download_certificate` を送信。
+-[x] 5. 動作検証
+    -[x] ローカルでビルドまたはプレビューし、コンソール上にイベント送信ログが出るか（またはgtagが正しく叩かれているか）確認。

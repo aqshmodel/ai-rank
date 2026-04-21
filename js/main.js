@@ -1,5 +1,40 @@
 import { LEVELS, QUESTIONS } from './data/diagnosisData.js';
 
+/* ─── GA4 TRACKING ─── */
+window.trackGa4Event = function(eventName, params) {
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params);
+  } else {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: eventName }, params));
+  }
+};
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button, a.gh-btn, a.cta-button, .hero-cta, .pyramid-cta-btn");
+  if (btn) {
+    let label = btn.textContent.replace(/\s+/g, ' ').trim().substring(0, 30);
+    let type = 'internal';
+    let isTrackTarget = false;
+
+    if (btn.tagName === "A" && btn.href) {
+       if (btn.href.includes("aqsh.co.jp/contact")) type = 'external';
+    }
+
+    if (btn.classList.contains("hero-cta") || btn.classList.contains("pyramid-cta-btn")) isTrackTarget = true;
+    else if (btn.classList.contains("gh-btn") || btn.classList.contains("cta-button")) isTrackTarget = true;
+    else if (btn.closest(".diag-nav") || btn.id === "beginBtn") isTrackTarget = true;
+
+    if (isTrackTarget) {
+      window.trackGa4Event('click_cta', {
+        cta_label: label,
+        cta_type: type,
+        location: window.location.pathname
+      });
+    }
+  }
+});
+
 /* ═══════════════════════════════════════════════════════════
    THE AI RANK いわて · Interactive Layer
    ═══════════════════════════════════════════════════════════ */
@@ -118,10 +153,20 @@ function el(tag, attrs = {}, ...children) {
   const bar = $("#scrollBar");
   const masthead = $(".masthead");
   const folio = $("#folioDisplay");
+  let scrollMarks = { 25: false, 50: false, 75: false, 100: false };
   function onScroll() {
     const max = document.documentElement.scrollHeight - innerHeight;
-    const pct = Math.min(100, (scrollY / max) * 100);
+    const pct = max <= 0 ? 100 : Math.min(100, (scrollY / max) * 100);
     if (bar) bar.style.width = pct + "%";
+
+    // Scroll Depth Tracking
+    [25, 50, 75, 100].forEach(mark => {
+      if (!scrollMarks[mark] && pct >= mark) {
+        scrollMarks[mark] = true;
+        window.trackGa4Event('scroll_depth', { depth: mark, page_path: window.location.pathname });
+      }
+    });
+
     if (masthead) {
       // Masthead always visible — user needs 無料診断 / お問い合わせ accessible at all times
       masthead.classList.add("visible");
@@ -337,6 +382,7 @@ function el(tag, attrs = {}, ...children) {
       wrapper.querySelector('.diag-step[data-step="0"]').setAttribute("data-active", "true");
       progress.classList.remove("active");
       nav.classList.remove("active");
+      window.trackGa4Event('diagnosis_start', { step_index: 0 });
     } else if (which === "final") {
       wrapper.querySelector('.diag-step[data-step="final"]').setAttribute("data-active", "true");
       progress.classList.remove("active");
@@ -351,6 +397,7 @@ function el(tag, attrs = {}, ...children) {
       stepTotal.textContent = String(QUESTIONS.length);
       progFill.style.width = ((which / QUESTIONS.length) * 100) + "%";
       nextBtn.disabled = answers[which - 1] === null;
+      window.trackGa4Event('diagnosis_step', { step_index: which });
       // Restore selected visual
       const prevSel = quizEl.querySelector(`.diag-step[data-step="${which}"] .diag-option.selected`);
       if (!prevSel && answers[which - 1] !== null) {
@@ -415,6 +462,7 @@ function el(tag, attrs = {}, ...children) {
     }
 
     try {
+      window.trackGa4Event('diagnosis_complete', { rank_level: rank, rank_name: certTitleEn.textContent });
       localStorage.setItem("airank:v2", JSON.stringify({
         name: nameVal, current: "final", answers, rank, bonus, at: Date.now(),
       }));
@@ -455,6 +503,7 @@ function el(tag, attrs = {}, ...children) {
     return !!(s && s.name && s.email && s.company);
   }
   function doShareX() {
+    window.trackGa4Event('share', { method: 'X', content_type: 'certificate' });
     const lvlEn = $("#certTitleEn")?.textContent || "";
     const lvlJa = $("#certTitleJa")?.textContent || "";
     const num = $("#certNumeral")?.textContent || "";
@@ -481,11 +530,13 @@ function el(tag, attrs = {}, ...children) {
     window.open(`https://twitter.com/intent/tweet?${params.toString()}`, "_blank", "noopener");
   }
   function doShareLinkedIn() {
+    window.trackGa4Event('share', { method: 'LinkedIn', content_type: 'certificate' });
     const url = location.href;
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, "_blank", "noopener");
   }
   /* Certificate → JPEG (native Canvas, no external dependency) */
   async function doDownload() {
+    window.trackGa4Event('download_certificate', {});
     try {
       toast("証明書を生成中…");
 
@@ -1035,3 +1086,9 @@ document.addEventListener("click", (e) => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 });
+
+/* ═══════════════════════════════════════════
+   10. GLOBAL EXPORTS
+   ═══════════════════════════════════════════ */
+window.openModal = typeof openModal !== "undefined" ? openModal : null;
+window.closeModal = typeof closeModal !== "undefined" ? closeModal : null;
