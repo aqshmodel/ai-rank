@@ -32,6 +32,7 @@
   - [Lv.IX The Singularian](#lvix-the-singularian--one-whose-ai-runs-the-company-itself)
 - [Design Philosophy](#design-philosophy)
 - [Self-Diagnostic Checklist](#self-diagnostic-checklist)
+- [Growth & Marketing Engine](#-growth--marketing-engine)
 - [Contribute](#-contribute--help-build-the-world-standard)
 - [Tech Stack](#-tech-stack)
 
@@ -43,7 +44,8 @@ In 2026, AI has passed the "can you use it" phase. The real differentiator is **
 
 **THE AI RANK いわて** proposes a **common language** for this gap: nine clearly defined levels, from Beginner to Singularian. Take a 10-question diagnostic and receive a **personalized certificate** with your level.
 
-This repository is an **open, community-driven project** hosted as a single-creator initiative by **[Aqsh Inc.](https://aqsh.co.jp)**.
+This repository is built upon the open-source "THE AI RANK" originated by **Masahiro Chaen** (CEO, Digirise Inc.).
+It has been forked, deployed as a web application, and extended with unique UI and automation engines by **[Aqsh Inc.](https://aqsh.co.jp)** (Takahiro Tsukada).
 The goal: grow it into the **strongest universal AI literacy standard**, with input from contributors around the world.
 
 > New grads / business roles: **Lv.III+** / Knowledge workers: **Lv.IV+** / AI-related roles: **Lv.VI+** / AI engineers & founders: **Lv.VII** / Monetizing an AI product: **Lv.VIII** / The future peak: **Lv.IX**
@@ -383,6 +385,15 @@ This project is **meant to be built together**. We welcome:
 All contributors are listed on the [Contributors page](https://github.com/aqshmodel/the-ai-rank/graphs/contributors).
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
+
+---
+
+## ✨ Growth & Marketing Engine
+
+This system is engineered not just as a diagnostic tool, but as a viral product and lead generation engine for businesses.
+
+- **Dynamic OGP (Viral Growth):** When a user shares their result on X or LinkedIn (`/c?rank=N&name=XXX`), the `/api/og-image.js` route dynamically generates a custom certificate image (using Canvas) that includes the user's name and level, maximizing timeline visibility and viral coefficient.
+- **Dual CTA Design (Lead Generation):** SEO landing pages (like glossary and articles) utilize a dual-CTA framework. It captures casual users through the "Free Diagnosis" funnel while offering a separate, high-intent track for "Corporate AI Consultation," ensuring no incoming traffic is wasted.
 
 ---
 
