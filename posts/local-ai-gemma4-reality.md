@@ -1,5 +1,5 @@
 ---
-title: "閉域網AI構築と組織の闇"
+title: "ローカルAI（閉域網AI）の現実と組織の闇"
 description: "クラウドは危ないから自社に閉じた環境にGemma 4を入れろ、という指示が、いかに現場をPoC貧乏と絶望の泥沼に突き落とすのか。高いGPUがただの文鎮になるまでのリアルな現場の悲鳴と、底なしの組織の闇について書きました。"
 coverImage: "/assets/articles/local-ai-gemma4-reality/cover.webp"
 date: "2026.04.21"
