@@ -40,3 +40,7 @@
 - [x] `pieces.md`: Pieces
 - [x] `phind.md`: Phind
 - [x] `codeium.md`: Codeium単体
+
+## Batch 7: 追加ご要望（生成AI・デザインエージェント）
+- [x] `seedance.md`: Seedance
+- [x] `lovart.md`: Lovart AI
