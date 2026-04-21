@@ -39,7 +39,8 @@ router.get('/terms', (req, res) => {
     contentHtml += `<div class="term-category-block" id="${cat}"><h2 class="category-title">${cat}</h2><div class="terms-grid">`;
     grouped[cat].sort((a,b) => (a.furigana || a.title).localeCompare(b.furigana || b.title));
     grouped[cat].forEach(t => {
-      contentHtml += `<a href="/terms/${t.slug}" class="term-card"><span class="term-card-furigana">${t.furigana}</span><h3 class="term-card-title">${t.title}</h3><p class="term-card-desc">${t.description}</p></a>`;
+      const furiganaText = t.furigana ? `読み方：${t.furigana}` : '';
+      contentHtml += `<a href="/terms/${t.slug}" class="term-card"><span class="term-card-furigana">${furiganaText}</span><h3 class="term-card-title">${t.title}</h3><p class="term-card-desc">${t.description}</p></a>`;
     });
     contentHtml += `</div></div>`;
   });
@@ -62,8 +63,9 @@ router.get('/terms/:slug', (req, res) => {
     let template = fs.readFileSync(path.join(__dirname, '../views', 'term-template.html'), 'utf-8');
     
     const termUrl = `https://ai-rank.aqsh.co.jp/terms/${slug}`;
+    const seoDesc = data.furigana ? `読み方：${data.furigana}。${data.description}` : data.description;
     const jsonLdScript = `
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"${data.title}","description":"${data.description}","url":"${termUrl}"}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":"${data.title}","description":"${seoDesc}","url":"${termUrl}"}</script>
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"THE AI RANK いわて","item":"https://ai-rank.aqsh.co.jp/"},{"@type":"ListItem","position":2,"name":"AI用語辞典","item":"https://ai-rank.aqsh.co.jp/terms"},{"@type":"ListItem","position":3,"name":"${data.title}","item":"${termUrl}"}]}</script>
     `;
 
@@ -87,10 +89,12 @@ router.get('/terms/:slug', (req, res) => {
       }
     }
 
+    const displayFurigana = data.furigana ? `読み方：${data.furigana}` : '';
+    
     template = template.replace(/\{\{slug\}\}/g, slug);
     template = template.replace(/\{\{title\}\}/g, data.title || '');
-    template = template.replace(/\{\{description\}\}/g, data.description || '');
-    template = template.replace(/\{\{furigana\}\}/g, data.furigana || '');
+    template = template.replace(/\{\{description\}\}/g, seoDesc || '');
+    template = template.replace(/\{\{furigana\}\}/g, displayFurigana);
     template = template.replace(/\{\{category\}\}/g, data.category || '');
     template = template.replace(/\{\{jsonLd\}\}/g, jsonLdScript);
     template = template.replace(/\{\{relatedTerms\}\}/g, relatedTermsHtml);
