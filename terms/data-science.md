@@ -1,0 +1,13 @@
+---
+title: "データサイエンス"
+description: "統計学・プログラミング・ドメイン知識を融合し、データから有益な知見を引き出す学際的分野です。"
+date: "2026.04.21"
+furigana: "でーたさいえんす"
+category: "データサイエンス"
+---
+
+## データサイエンスとは
+データサイエンス（Data Science）は、統計学、コンピュータサイエンス（[プログラミング](/terms/python)）、ドメイン知識（業務知識）を融合し、大量のデータから有益な知見やビジネス価値を引き出す学際的な分野です。[データ分析](/terms/data-analysis) を包含するより広い概念です。
+
+## AIとの関係
+[機械学習](/terms/machine-learning) や [ディープラーニング](/terms/deep-learning) はデータサイエンスの中核的な手法であり、データサイエンティストは [データ前処理](/terms/data-preprocessing)、モデル構築、結果の可視化（[Matplotlib](/terms/matplotlib)）、ビジネスへの意思決定支援までを一貫して担当します。[Pandas](/terms/pandas)、[NumPy](/terms/numpy)、[Scikit-Learn](/terms/scikit-learn) が主要ツールです。
