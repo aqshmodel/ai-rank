@@ -1,6 +1,6 @@
 ---
-title: "CursorやClaudeにコードを勝手に壊された夜。Andrej Karpathyから学ぶ、AIの暴走を防ぐ4つの黄金原則"
-date: "2026-04-21"
+title: "AIの暴走を防ぐ4原則"
+date: "2026.04.21"
 author: "tsukada"
 description: "AIアシスタントに勝手な推測や無駄な抽象化をさせ、テストを壊された経験はありませんか？Andrej Karpathy氏のガイドラインに基づく4つの行動原則を、開発現場の絶望感と泥臭い組織論と共にお届けします。"
 coverImage: "/assets/articles/karpathy-ai-coding-guidelines/cover.webp"

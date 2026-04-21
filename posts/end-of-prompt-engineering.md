@@ -1,9 +1,10 @@
 ---
-title: "魔法のプロンプトを買い漁る狂信者たち。プロンプトエンジニアリングの終焉とAIエージェントの夜明け"
+title: "プロンプト職人の終焉"
 description: "AIエージェントの普及により、長文でAIを調教するプロンプトエンジニアリングは死を迎えた。AIをツールとして使う側からシステムとして設計する側への圧倒的パラダイムシフトについて解説します。"
 coverImage: "/assets/articles/end-of-prompt-engineering/cover.webp"
 date: "2026.04.21"
 tags: ["テクノロジー", "オピニオン", "考察"]
+category: "AI・DX推進"
 author: "tsukada"
 ---
 

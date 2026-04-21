@@ -1,8 +1,9 @@
 ---
-title: "Difyなら簡単の嘘。地方企業が自社専用AIを作って絶望した、腐ったエクセルの山との死闘"
+title: "絶望を呼ぶDifyの罠"
 description: "DifyなどのノーコードAI開発ツールを導入したものの、実用化できず失敗する企業が後を絶たない理由。AI開発の9割を占める狂気のデータクレンジングと、真のDXコンサルの必要性を赤裸々に語ります。"
 coverImage: "/assets/articles/dify-rag-failure-reality/cover.webp"
 date: "2026.04.23"
+category: "AI・DX推進"
 tags: ["AI開発", "失敗事例", "RAG"]
 author: "tsukada"
 ---

@@ -1,9 +1,10 @@
 ---
-title: "地方企業が生成AI導入で失敗する絶望的な3つのパターンと現場のリアルな反発心理"
+title: "生成AI導入の失敗法則"
 description: "とりあえずSaaSを契約しただけのDXがなぜ地方で通用しないのか。経産省のデータとTHE AI RANK いわての知見から見えてきた、現場の強烈な反発の理由と属人化解消のための本当に必要なアプローチ。"
 coverImage: "/assets/articles/local-ai-failure/cover.webp"
 date: "2026.04.19"
 tags: ["DX", "考察", "地方企業"]
+category: "AI・DX推進"
 author: "tsukada"
 ---
 

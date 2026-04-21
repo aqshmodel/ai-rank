@@ -1,8 +1,9 @@
 ---
-title: "岩手県・盛岡市の企業向け：AIエージェント開発と導入コンサルティングの真実"
+title: "岩手法人向けAIコンサル"
 description: "岩手県内でAI導入や社内研修を検討している企業様へ。採用難と高齢化という絶望的なデータを覆す、最新AIエージェント開発による真の業務効率化ポイントを解説します。"
-coverImage: "/assets/articles/iwate-ai-consulting/cover.png"
+coverImage: "/assets/articles/iwate-ai-consulting/cover.webp"
 date: "2026.04.20"
+category: "AI・DX推進"
 tags: ["AI導入", "事例", "地方企業"]
 author: "tsukada"
 ---
