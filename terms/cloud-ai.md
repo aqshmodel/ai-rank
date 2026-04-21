@@ -11,3 +11,6 @@ category: "AI基礎概念"
 
 ## 主なサービス
 Google Cloud AI（[Vertex AI](/terms/vertex-ai)）、AWS SageMaker、Azure AI Studioが3大クラウドAIプラットフォームです。画像認識、[自然言語処理](/terms/nlp)、[音声認識](/terms/speech-recognition) などのAPIが提供されており、中小企業でも初期投資を抑えてAIを活用できます。対義語として端末側で処理を行う [エッジAI](/terms/edge-ai) があります。
+
+## 持たざるAI開発とROIの最大化
+企業が自社特有のインテリジェントなシステムを事業に組み込む際、高価なGPUサーバーを買い揃える「オンプレミス」の維持費は莫大な原価（サンクコスト）となります。クラウドAI（MaaS：Model as a Service）を利用することで多額の初期投資（CAPEX）を最小化し、事業のスケールに合わせて運用費（OPEX）を弾力的に調整できるため、事業撤退リスクを抑えつつ爆速で最先端のAIビジネスを立ち上げる「持たざるIT戦略」が2026年におけるROI最大化の鉄則です。
