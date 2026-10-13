@@ -10,8 +10,9 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 const adminPassword = process.env.ADMIN_PASSWORD;
+if (!adminPassword) throw new Error('ADMIN_PASSWORD must be configured');
 const authMiddleware = basicAuth({
-  users: { 'tsukada-t@aqsh.co.jp': adminPassword || 'changeme' },
+  users: { 'tsukada-t@aqsh.co.jp': adminPassword },
   challenge: true,
   realm: 'Aqsh Admin Area'
 });

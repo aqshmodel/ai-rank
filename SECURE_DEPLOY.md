@@ -1,0 +1,9 @@
+# 分離構成への自動デプロイ
+
+mainへの更新と手動実行を継続し、専用SSHアカウントへ成果物を標準入力で送ります。SSHは転送コマンドだけを受け付け、共有ユーザーのシェル、sudoパスワード、ポート転送を使いません。
+
+CIはNode 24.21.0でビルドし、commit・run ID・SHA-256・依存ロックのハッシュを記録します。環境ファイル、サービスアカウント鍵、リポジトリ内部情報は成果物から除外します。本番の秘密情報は既存のRoot管理ストアとsystemd資格情報マウントを引き続き使います。
+
+VPSはアプリ、ファイル種別、パス、権限、ハッシュを検証してからRoot所有のリリースに配置します。外部ネットワークを遮断した専用UIDのCanaryを実行し、既存のcurrent参照を切り替えます。起動、HTTP応答、UID、NoNewPrivileges、実効Capabilityを確認し、失敗時はコード参照を旧リリースへ戻して再起動します。
+
+必要なGitHub設定はISOLATED_DEPLOY_SSH_KEY、ISOLATED_DEPLOY_KNOWN_HOSTS、公開設定用PUBLIC_BUILD_ENV_JSONです。ホスト鍵は管理者が確認した値を固定し、CI内でssh-keyscanは実行しません。本番環境ファイルやDB接続情報をGitHubから配布しません。
