@@ -51,13 +51,21 @@ app.get('/c', createExpressHandler(certHandler));
 app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, 'privacy.html')));
 app.get('/diagnosis', (req, res) => res.sendFile(path.join(__dirname, 'diagnosis.html')));
 
-app.use(express.static(__dirname));
+const publicFiles = new Set(['index.html', 'diagnosis.html', 'privacy.html', 'iwate.html',
+  'i18n.js', 'script.legacy.js', 'style.css', 'robots.txt', 'site.webmanifest']);
+for (const directory of ['assets', 'js', 'css', 'og', '.well-known']) {
+  app.use('/' + directory, express.static(path.join(__dirname, directory), { dotfiles: 'deny', index: false }));
+}
+app.get('/:filename', (req, res, next) => {
+  if (!publicFiles.has(req.params.filename)) return next();
+  res.sendFile(path.join(__dirname, req.params.filename));
+});
 
 app.get('*', (req, res) => {
   if (req.path.includes('.')) return res.status(404).send('Not Found');
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '127.0.0.1', () => {
   console.log(`[AIRANK] Server listening on port ${PORT}`);
 });

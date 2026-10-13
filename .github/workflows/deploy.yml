@@ -1,43 +1,47 @@
 name: Deploy to VPS
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: isolated-deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
-
-      - name: Add StrictHostKeyChecking to SSH config
+          node-version: '24.21.0'
+      - run: sudo apt-get update && sudo apt-get install -y libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+      - run: npm ci --omit=dev
+      - run: node --test scripts/secure-release/static.test.mjs
+      - run: |
+          mkdir -p stage/web
+          cp -R server.js package.json package-lock.json api routes views posts terms assets js css og .well-known *.html *.css *.js robots.txt site.webmanifest node_modules stage/web/
+      - name: Package release
+        id: package
+        run: python3 scripts/secure-release/package_release.py --app airank --repository aqshmodel/ai-rank --component web=stage/web --lockfile package-lock.json=package-lock.json --output release.tar.gz
+      - name: Submit verified release through scoped SSH
+        if: github.event_name != 'pull_request'
+        env:
+          DEPLOY_KEY: ${{ secrets.ISOLATED_DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ vars.ISOLATED_DEPLOY_KNOWN_HOSTS }}
+          RELEASE: ${{ steps.package.outputs.release }}
+          SHA256: ${{ steps.package.outputs.sha256 }}
         run: |
+          set -euo pipefail
+          umask 077
           mkdir -p ~/.ssh
-          echo "StrictHostKeyChecking no" >> ~/.ssh/config
-
-      - name: Deploy via rsync
-        run: |
-          rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.github' ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:~/app/the-ai-rank/
-
-      - name: Configure .env on VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
-            echo 'DATABASE_URL=postgresql://airank_user:airank_pass@localhost:5432/airank' > ~/app/the-ai-rank/.env && \
-            echo 'ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}' >> ~/app/the-ai-rank/.env \
-          "
-
-      - name: Restart PM2 on VPS
-        run: |
-          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "\
-            rm -f ~/app/the-ai-rank/sitemap.xml && \
-            cd ~/app/the-ai-rank && \
-            npm install --production && \
-            pm2 restart the-ai-rank"
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/isolated_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          test -s ~/.ssh/known_hosts
+          trap 'rm -f ~/.ssh/isolated_key release.tar.gz' EXIT
+          ssh -T -i ~/.ssh/isolated_key -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o ConnectTimeout=20 aqsh-deploy-airank@162.43.31.17 "submit $RELEASE $SHA256" < release.tar.gz
