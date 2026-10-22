@@ -83,7 +83,7 @@ def main():
         raise ValueError('GitHub release identity is invalid')
     identity = {'app': args.app, 'repository': args.repository, 'commit': commit, 'run_id': run,
                 'run_attempt': attempt, 'release': release,
-                'runtimes': {'node': '24.21.0', **({'go': '1.27.2'} if args.go else {})}}
+                'runtimes': {'node': '24.22.1', **({'go': '1.27.2'} if args.go else {})}}
     package(dict(x.split('=', 1) for x in args.component), args.output, identity,
             dict(x.split('=', 1) for x in args.lockfile))
     with Path(args.output).open('rb') as stream:
