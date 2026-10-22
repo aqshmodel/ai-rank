@@ -59,7 +59,7 @@ def validate_manifest(manifest, config, release_id):
         raise ValueError('Unknown runtime declaration')
     if 'python' in runtimes and runtimes['python'] != '3.14.4':
         raise ValueError('Unsupported Python runtime')
-    if runtimes.get('node') != '24.21.0' or ('go' in runtimes and runtimes['go'] != '1.27.2'):
+    if runtimes.get('node') != '24.22.1' or ('go' in runtimes and runtimes['go'] != '1.27.2'):
         raise ValueError('Unsupported release runtime')
     if not isinstance(manifest['lockfiles'], dict):
         raise ValueError('Lockfile checksums required')
